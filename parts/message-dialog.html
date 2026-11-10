@@ -19,6 +19,7 @@
 <dialog
   class="msg"
   id="message-dialog"
+  data-mode="chat"
   aria-labelledby="msg-title" data-ta="data-words:msg.words"
  
 >
@@ -27,7 +28,8 @@
     <p class="msg__hello" aria-hidden="true"><span data-hello data-t="curtain.1"></span></p>
     <div class="msg__intro">
       <h2 id="msg-title" data-t="msg.title"></h2>
-      <p data-t="msg.intro"></p>
+      <p data-for="chat" data-t="msg.intro"></p>
+      <p data-for="brief" data-t="msg.intro_brief"></p>
     </div>
     <ul class="msg__meta">
       <li>
@@ -46,7 +48,7 @@
           <path
             d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6"
           /></svg
-        ><a class="u" data-ta="href:site.mailto" data-t="site.email"></a>
+        ><a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a>
       </li>
       <li>
         <svg
@@ -84,7 +86,7 @@
       </li>
     </ul>
     <p class="msg__avatar">
-      <span class="msg__initials"><span data-t="site.initials"></span><i></i></span><span data-t="site.name"></span>
+      <span class="msg__initials"><span data-t="@site.initials"></span><img class="msg__photo" alt="" width="88" height="88" hidden /><i></i></span><span data-t="site.name"></span>
     </p>
   </aside>
   <div class="msg__main">
@@ -104,15 +106,54 @@
         <path d="M6 6l12 12M18 6L6 18" />
       </svg>
     </button>
+    <div class="msg__tabs" role="tablist" data-ta="aria-label:msg.tabs_aria">
+      <button class="msg__tab" type="button" role="tab" id="msg-tab-chat" aria-controls="msg-panel-chat" aria-selected="true" data-msg-tab="chat" data-t="msg.tab_chat"></button>
+      <button class="msg__tab" type="button" role="tab" id="msg-tab-brief" aria-controls="msg-panel-brief" aria-selected="false" tabindex="-1" data-msg-tab="brief" data-t="msg.tab_brief"></button>
+    </div>
+    <section class="msg__panel msg__panel--chat" id="msg-panel-chat" role="tabpanel" aria-labelledby="msg-tab-chat" data-panel="chat">
+      <div class="chat__thread" data-thread aria-live="polite">
+        <p class="bubble bubble--them" data-t="chat.greeting"></p>
+      </div>
+      <form
+        class="chat__form"
+        data-chat-form
+        novalidate
+        data-ta="data-email:@links.email;data-subject:chat.subject;data-reply:chat.reply;data-reply-mail:chat.reply_mail;data-fail:msg.fail;data-sending:msg.sending"
+      >
+        <div class="chat__who">
+          <label class="chat__field"
+            ><span data-t="chat.name_label"></span
+            ><input name="name" type="text" required autocomplete="name" data-ta="placeholder:chat.name_placeholder;data-error:msg.step1_error"
+          /></label>
+          <label class="chat__field"
+            ><span data-t="chat.email_label"></span
+            ><input name="email" type="email" required autocomplete="email" data-ta="placeholder:msg.step2_placeholder;data-error:msg.step2_error"
+          /></label>
+        </div>
+        <div class="chat__compose">
+          <textarea
+            name="message"
+            required
+            rows="2"
+            maxlength="600"
+            data-ta="placeholder:chat.message_placeholder;aria-label:chat.message_label;data-error:chat.err_message"
+          ></textarea>
+          <button class="chat__send" type="submit" data-ta="aria-label:chat.send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg></button>
+        </div>
+        <p class="msg__error" role="alert" data-chat-error></p>
+        <p class="msg__status" role="status" data-chat-status></p>
+      </form>
+    </section>
+    <section class="msg__panel msg__panel--brief" id="msg-panel-brief" role="tabpanel" aria-labelledby="msg-tab-brief" data-panel="brief" hidden>
     <div class="msg__top">
-      <div class="msg__progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <p class="msg__count" aria-live="polite"><span data-t="msg.step_word"></span> <span data-current>1</span> <span data-t="msg.of_total"></span></p>
+      <div class="msg__progress" aria-hidden="true"></div>
+      <p class="msg__count" aria-live="polite"><span data-t="msg.step_word"></span> <span data-current>1</span> <span data-t="msg.of"></span> <span data-total></span></p>
     </div>
     <ul class="msg__trail" data-trail data-ta="aria-label:msg.answers_aria"></ul>
     <form
       class="msg__form"
       data-msg-form
-      novalidate data-ta="data-email:site.email;data-ok:msg.ok;data-ok-mail:msg.ok_mail;data-fail:msg.fail;data-sending:msg.sending;data-done-title:msg.done_title"
+      novalidate data-ta="data-email:@links.email;data-subject:msg.subject_brief;data-ok:msg.ok;data-ok-mail:msg.ok_mail;data-fail:msg.fail;data-sending:msg.sending;data-done-title:msg.done_title"
      
      
      
@@ -201,7 +242,7 @@
               aria-labelledby="mq5"
               aria-describedby="me5" data-ta="placeholder:msg.step5_placeholder"
             ></textarea
-            ><span class="msg__counter" data-counter>0/600</span>
+            ><span class="msg__counter" data-counter></span>
           </div>
           <p class="msg__error" id="me5" role="alert"></p>
         </div>
@@ -233,7 +274,7 @@
         <button
           class="btn solid msg__next"
           type="submit"
-          data-msg-next data-ta="data-label-next:msg.next;data-label-send:common.send_message"
+          data-msg-next data-ta="data-label-next:msg.next;data-label-send:common.project_request"
          
          
         >
@@ -256,6 +297,7 @@
       </div>
       <p class="msg__status" role="status" data-status></p>
     </form>
+    </section>
     <div class="msg__done" inert>
       <svg class="msg__check" viewBox="0 0 52 52" aria-hidden="true">
         <circle cx="26" cy="26" r="24" />

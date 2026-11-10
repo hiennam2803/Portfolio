@@ -1,31 +1,9 @@
-<!-- Experience: copy one <li data-reveal> block to add a job; add keys experience.N.* in languages.json -->
+<!-- Experience: generated from experience.N.* keys in languages.json (role, org, period, bullet.K) -->
 <section class="section" id="experience" aria-labelledby="experience-h">
   <div class="wrap grid">
     <h2 id="experience-h" class="rail" data-split data-t="nav.experience"></h2>
     <div class="body">
-      <ol class="timeline" data-stagger data-draw>
-        <li data-reveal>
-          <span class="period" data-t="experience.1.period"></span>
-          <div>
-            <h3 data-t="experience.1.role"></h3>
-            <p class="org" data-t="experience.1.org"></p>
-            <ul>
-              <li data-t="experience.1.bullet.1"></li>
-              <li data-t="experience.1.bullet.2"></li>
-            </ul>
-          </div>
-        </li>
-        <li data-reveal>
-          <span class="period" data-t="experience.2.period"></span>
-          <div>
-            <h3 data-t="experience.2.role"></h3>
-            <p class="org" data-t="experience.2.org"></p>
-            <ul>
-              <li data-t="experience.2.bullet.1"></li>
-            </ul>
-          </div>
-        </li>
-      </ol>
+      <ol class="timeline" data-stagger data-draw data-render="experience"></ol>
     </div>
   </div>
 </section>

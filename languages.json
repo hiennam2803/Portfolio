@@ -1,28 +1,8 @@
 {
   "_site": "=== Thông tin cá nhân dùng chung (đổi một chỗ, áp dụng toàn trang) ===",
   "site.name": {
-    "vi": "Your Name",
-    "en": "Your Name"
-  },
-  "site.initials": {
-    "vi": "YN",
-    "en": "YN"
-  },
-  "site.email": {
-    "vi": "hello@example.com",
-    "en": "hello@example.com"
-  },
-  "site.mailto": {
-    "vi": "mailto:{{site.email}}",
-    "en": "mailto:{{site.email}}"
-  },
-  "site.github": {
-    "vi": "https://github.com/your-handle",
-    "en": "https://github.com/your-handle"
-  },
-  "site.linkedin": {
-    "vi": "https://linkedin.com/in/your-handle",
-    "en": "https://linkedin.com/in/your-handle"
+    "vi": "Võ Văn Hiền",
+    "en": "Vo Van Hien"
   },
   "social.github": {
     "vi": "GitHub",
@@ -33,8 +13,8 @@
     "en": "LinkedIn"
   },
   "site.city": {
-    "vi": "[Thành phố, Quốc gia]",
-    "en": "[City, Country]"
+    "vi": "Hồ Chí Minh, Việt Nam",
+    "en": "Ho Chi Minh City, Vietnam"
   },
   "_common": "=== Chữ dùng chung nhiều nơi ===",
   "common.close": {
@@ -82,19 +62,6 @@
     "vi": "Liên hệ",
     "en": "Contact"
   },
-  "_lang": "=== Nút chuyển ngôn ngữ ===",
-  "lang.switch_code": {
-    "vi": "en",
-    "en": "vi"
-  },
-  "lang.switch_aria": {
-    "vi": "English",
-    "en": "Tiếng Việt"
-  },
-  "lang.switch_label": {
-    "vi": "EN",
-    "en": "VI"
-  },
   "_curtain": "=== Màn chào lúc mở trang ===",
   "curtain.1": {
     "vi": "Xin chào",
@@ -114,12 +81,12 @@
   },
   "_meta": "=== Tiêu đề trang + mô tả SEO ===",
   "meta.title": {
-    "vi": "[Họ tên] — Portfolio lập trình viên",
-    "en": "[Your Name] — Developer Portfolio"
+    "vi": "Võ Văn Hiền — Portfolio cá nhân",
+    "en": "Vo Van Hien — Personal Portfolio"
   },
   "meta.description": {
-    "vi": "[Một câu mô tả bạn xây dựng gì.]",
-    "en": "[One-sentence description of what you build.]"
+    "vi": "Portfolio của Võ Văn Hiền - nơi giới thiệu về bản thân và các dự án đã thực hiện",
+    "en": "Portfolio of Vo Van Hien - showcasing personal information and completed projects"
   },
   "_header": "=== Header (khung trang) ===",
   "header.skip": {
@@ -140,24 +107,24 @@
     "en": "Home"
   },
   "hero.hello": {
-    "vi": "[Lời chào ngắn]",
-    "en": "[Short greeting]"
+    "vi": "“Code chưa chắc chạy, nhưng tôi chắc chắn đẹp trai.”",
+    "en": "“Code may not run, but I am definitely handsome.”"
   },
   "hero.h1_line1": {
-    "vi": "Họ",
-    "en": "Your"
+    "vi": "Vo Van",
+    "en": "Vo Van"
   },
   "hero.h1_line2": {
-    "vi": "Tên.",
-    "en": "Name."
+    "vi": "Hien",
+    "en": "Hien"
   },
   "hero.role": {
-    "vi": "[Vai trò, ví dụ: Lập trình viên Frontend]",
-    "en": "[Your role, e.g. Frontend Developer]"
+    "vi": "CEO của những ý tưởng lúc 2 giờ sáng",
+    "en": "CEO of 2 AM ideas"
   },
   "hero.intro": {
-    "vi": "[Hai câu về những gì bạn xây dựng và điều bạn quan tâm.]",
-    "en": "[Two sentences about what you build and what you care about.]"
+    "vi": "Tôi tạo ra sản phẩm công nghệ, đôi khi tạo luôn sự cố.",
+    "en": "I create tech products, and sometimes I create bugs too."
   },
   "hero.view_projects": {
     "vi": "Xem dự án",
@@ -179,29 +146,13 @@
     "vi": "Sẵn sàng làm việc",
     "en": "Available for work"
   },
-  "hero.portrait_hint": {
-    "vi": "images/portrait.webp",
-    "en": "images/portrait.webp"
-  },
-  "hero.stat_years_value": {
-    "vi": "00+",
-    "en": "00+"
-  },
-  "hero.stat_projects_value": {
-    "vi": "00",
-    "en": "00"
-  },
-  "hero.stat_tech_value": {
-    "vi": "00",
-    "en": "00"
-  },
   "hero.stat_years": {
     "vi": "Năm kinh nghiệm",
     "en": "Years of experience"
   },
   "hero.stat_projects": {
-    "vi": "Dự án hoàn thành",
-    "en": "Projects shipped"
+    "vi": "Dự án",
+    "en": "Projects"
   },
   "hero.stat_tech": {
     "vi": "Công nghệ",
@@ -213,12 +164,12 @@
   },
   "_about": "=== about ===",
   "about.lead": {
-    "vi": "[Đoạn một: bạn là ai và cách bạn làm việc.]",
-    "en": "[Paragraph one: who you are and how you work.]"
+    "vi": "Tôi biến ý tưởng thành sản phẩm, bug thành tính năng và deadline thành áp lực sinh tồn.",
+    "en": "I turn ideas into products, bugs into features, and deadlines into survival pressure."
   },
   "about.text": {
-    "vi": "[Đoạn hai: bạn đang tìm kiếm hoặc khám phá điều gì.]",
-    "en": "[Paragraph two: what you are looking for or currently exploring.]"
+    "vi": "Tìm kiếm công nghệ mới, ý tưởng điên rồ và lý do khiến code không chạy.",
+    "en": "Always on the lookout for new technologies, crazy ideas, and reasons why code doesn't run."
   },
   "about.location_label": {
     "vi": "Nơi ở",
@@ -229,8 +180,8 @@
     "en": "Focus"
   },
   "about.focus_value": {
-    "vi": "[Lĩnh vực]",
-    "en": "[Your focus]"
+    "vi": "Định hướng Lập trình Full-stack",
+    "en": "Aspiring Full-stack Developer"
   },
   "about.languages_label": {
     "vi": "Ngôn ngữ",
@@ -254,36 +205,36 @@
     "en": "Tools"
   },
   "skills.lang.1": {
-    "vi": "[Ngôn ngữ] 1",
-    "en": "[Language] 1"
+    "vi": "Python",
+    "en": "Python"
   },
   "skills.lang.2": {
-    "vi": "[Ngôn ngữ] 2",
-    "en": "[Language] 2"
+    "vi": "Kotlin",
+    "en": "Kotlin"
   },
   "skills.lang.3": {
-    "vi": "[Ngôn ngữ] 3",
-    "en": "[Language] 3"
+    "vi": "C++",
+    "en": "C++"
   },
   "skills.fw.1": {
-    "vi": "[Framework] 1",
-    "en": "[Framework] 1"
+    "vi": "Jetpack Compose",
+    "en": "Jetpack Compose"
   },
   "skills.fw.2": {
-    "vi": "[Framework] 2",
-    "en": "[Framework] 2"
+    "vi": "Electron.js",
+    "en": "Electron.js"
   },
   "skills.tools.1": {
-    "vi": "[Công cụ] 1",
-    "en": "[Tool] 1"
+    "vi": "Android Studio",
+    "en": "Android Studio"
   },
   "skills.tools.2": {
-    "vi": "[Công cụ] 2",
-    "en": "[Tool] 2"
+    "vi": "Visual Studio Code",
+    "en": "Visual Studio Code"
   },
   "skills.tools.3": {
-    "vi": "[Công cụ] 3",
-    "en": "[Tool] 3"
+    "vi": "GitHub",
+    "en": "GitHub"
   },
   "_projects": "=== Danh sách dự án (nội dung từng dự án: project.N.*; số liệu / link / công nghệ: projects.json) ===",
   "projects.view_details": {
@@ -634,53 +585,45 @@
   },
   "_experience": "=== Kinh nghiệm ===",
   "experience.1.period": {
-    "vi": "[Bắt đầu – Hiện tại]",
-    "en": "[Start – Present]"
+    "vi": "2023 – Hiện tại",
+    "en": "2023 – Present"
   },
   "experience.1.role": {
-    "vi": "[Chức danh]",
-    "en": "[Job title]"
+    "vi": "Sinh Viên CNTT",
+    "en": "Computer Science Student"
   },
   "experience.1.org": {
-    "vi": "[Công ty]",
-    "en": "[Company]"
+    "vi": "Trường Đại học Giao thông vận tải TP.HCM",
+    "en": "Ho Chi Minh City University of Transport"
   },
   "experience.1.bullet.1": {
-    "vi": "[Thành tựu hoặc trách nhiệm]",
-    "en": "[Achievement or responsibility]"
-  },
-  "experience.1.bullet.2": {
-    "vi": "[Thành tựu hoặc trách nhiệm]",
-    "en": "[Achievement or responsibility]"
-  },
-  "experience.2.period": {
-    "vi": "[Bắt đầu – Kết thúc]",
-    "en": "[Start – End]"
-  },
-  "experience.2.role": {
-    "vi": "[Chức danh]",
-    "en": "[Job title]"
-  },
-  "experience.2.org": {
-    "vi": "[Công ty]",
-    "en": "[Company]"
-  },
-  "experience.2.bullet.1": {
-    "vi": "[Thành tựu hoặc trách nhiệm]",
-    "en": "[Achievement or responsibility]"
+    "vi": "GPA: 3.31/4.0",
+    "en": "GPA: 3.31/4.0"
   },
   "_education": "=== Học vấn ===",
   "education.1.period": {
-    "vi": "[Bắt đầu – Kết thúc]",
-    "en": "[Start – End]"
+    "vi": "2020 - 2023",
+    "en": "2020 - 2023"
   },
   "education.1.degree": {
-    "vi": "[Bằng cấp]",
-    "en": "[Degree]"
+    "vi": "Trung học phổ thông",
+    "en": "High School"
   },
   "education.1.school": {
-    "vi": "[Trường đại học]",
-    "en": "[University]"
+    "vi": "Trường THPT Lấp Vò 2",
+    "en": "Lap Vo 2 High School"
+  },
+  "education.2.period": {
+    "vi": "2023 - Hiện tại",
+    "en": "2023 - Present"
+  },
+  "education.2.degree": {
+    "vi": "Đại Học",
+    "en": "University"
+  },
+  "education.2.school": {
+    "vi": "Trường Đại học Giao thông vận tải TP.HCM",
+    "en": "Ho Chi Minh City University of Transport"
   },
   "_certificates": "=== Chứng chỉ ===",
   "certificates.1.name": {
@@ -701,8 +644,8 @@
   },
   "_contact": "=== contact ===",
   "contact.lead": {
-    "vi": "Bạn có dự án hoặc vị trí muốn trao đổi? Hãy viết cho tôi.",
-    "en": "Have a project or a role in mind? Write to me."
+    "vi": "Có ý tưởng hay? Đừng giữ trong đầu, kể tôi nghe!",
+    "en": "Got a great idea? Don't keep it in your head, tell me about it!"
   },
   "contact.copied": {
     "vi": "Đã sao chép",
@@ -714,8 +657,8 @@
   },
   "_footer": "=== footer ===",
   "footer.cta": {
-    "vi": "Bạn có dự án muốn trao đổi?",
-    "en": "Have a project in mind?"
+    "vi": "Có dự án thú vị? Cùng tôi biến ý tưởng thành hiện thực nhé!",
+    "en": "Got an interesting project? Let's turn the idea into reality together!"
   },
   "footer.nav_aria": {
     "vi": "Điều hướng chân trang",
@@ -730,8 +673,8 @@
     "en": "Connect"
   },
   "footer.copyright": {
-    "vi": "© 2026 {{site.name}}. Bảo lưu mọi quyền.",
-    "en": "© 2026 {{site.name}}. All rights reserved."
+    "vi": "© {{year}} {{site.name}}. Bảo lưu mọi quyền.",
+    "en": "© {{year}} {{site.name}}. All rights reserved."
   },
   "footer.back_to_top": {
     "vi": "Lên đầu trang",
@@ -747,20 +690,20 @@
     "en": "Let's make something worth remembering."
   },
   "msg.intro": {
-    "vi": "[Một hai câu về cách bạn làm việc cùng khách hàng.]",
-    "en": "[One or two lines about how you work with clients.]"
+    "vi": "Không hứa hoàn hảo, chỉ hứa sửa đến khi chạy.",
+    "en": "No promises of perfection, just promises to fix it until it runs."
   },
   "msg.reply_time": {
-    "vi": "Thường phản hồi trong [24 giờ]",
-    "en": "Usually replies within [24 hours]"
+    "vi": "Thường phản hồi trong 24 giờ",
+    "en": "Usually replies within 24 hours"
   },
   "msg.step_word": {
     "vi": "Bước",
     "en": "Step"
   },
-  "msg.of_total": {
-    "vi": "trên 5",
-    "en": "of 5"
+  "msg.of": {
+    "vi": "trên",
+    "en": "of"
   },
   "msg.answers_aria": {
     "vi": "Câu trả lời của bạn",
@@ -799,8 +742,8 @@
     "en": "What's your name?"
   },
   "msg.step1_placeholder": {
-    "vi": "[Họ tên của bạn]",
-    "en": "[Your name]"
+    "vi": "Họ và tên của bạn",
+    "en": "Your full name"
   },
   "msg.step2_error": {
     "vi": "Vui lòng nhập email hợp lệ.",
@@ -855,20 +798,20 @@
     "en": "Budget"
   },
   "msg.step4_q": {
-    "vi": "Ngân sách và thời gian dự kiến?",
-    "en": "Budget and timeline?"
+    "vi": "Ngân sách dự kiến của bạn?",
+    "en": "What's your estimated budget?"
   },
   "msg.tier_1": {
-    "vi": "[Mức 1]",
-    "en": "[Tier 1]"
+    "vi": "Sinh viên tiết kiệm",
+    "en": "Student Budget"
   },
   "msg.tier_2": {
-    "vi": "[Mức 2]",
-    "en": "[Tier 2]"
+    "vi": "Ngân sách ổn áp",
+    "en": "Comfortable Budget"
   },
   "msg.tier_3": {
-    "vi": "[Mức 3]",
-    "en": "[Tier 3]"
+    "vi": "Tiền không thành vấn đề",
+    "en": "Money Is No Object"
   },
   "msg.opt_unsure": {
     "vi": "Chưa rõ",
@@ -879,20 +822,20 @@
     "en": "Optional"
   },
   "msg.step5_label": {
-    "vi": "Tin nhắn",
-    "en": "Message"
+    "vi": "Hướng đi",
+    "en": "Direction"
   },
   "msg.step5_error": {
-    "vi": "Hãy viết vài dòng về dự án của bạn.",
-    "en": "Please write a few lines about your project."
+    "vi": "Hãy mô tả hướng đi của dự án.",
+    "en": "Please describe the direction of the project."
   },
   "msg.step5_q": {
-    "vi": "Kể mình nghe thêm về dự án nhé.",
-    "en": "Tell me a little about the project."
+    "vi": "Bạn muốn dự án đi theo hướng nào?",
+    "en": "Which direction should the project take?"
   },
   "msg.step5_placeholder": {
-    "vi": "[Mục tiêu, thời hạn, link tham khảo…]",
-    "en": "[Goals, deadline, reference links…]"
+    "vi": "Mục tiêu, người dùng, thời hạn, link tham khảo…",
+    "en": "Goals, users, deadline, reference links…"
   },
   "msg.back": {
     "vi": "Quay lại",
@@ -913,5 +856,73 @@
   "msg.again": {
     "vi": "Gửi tin nhắn khác",
     "en": "Send another message"
+  },
+  "common.project_request": {
+    "vi": "Gửi yêu cầu dự án",
+    "en": "Send a project brief"
+  },
+  "msg.tabs_aria": {
+    "vi": "Loại tin nhắn",
+    "en": "Message type"
+  },
+  "msg.tab_chat": {
+    "vi": "Nhắn tin",
+    "en": "Chat"
+  },
+  "msg.tab_brief": {
+    "vi": "Yêu cầu dự án",
+    "en": "Project brief"
+  },
+  "msg.intro_brief": {
+    "vi": "Trả lời vài câu hỏi ngắn, mình sẽ xem và gửi lại hướng triển khai cùng báo giá.",
+    "en": "Answer a few short questions and I will reply with an approach and a quote."
+  },
+  "msg.subject_brief": {
+    "vi": "Yêu cầu dự án từ {name}",
+    "en": "Project brief from {name}"
+  },
+  "chat.greeting": {
+    "vi": "Chào bạn! Cứ nhắn mình bất cứ điều gì: một câu hỏi, lời mời hợp tác, hay chỉ là câu chào.",
+    "en": "Hi there! Message me anything: a question, a collaboration, or just a hello."
+  },
+  "chat.name_label": {
+    "vi": "Tên của bạn",
+    "en": "Your name"
+  },
+  "chat.name_placeholder": {
+    "vi": "Họ và tên",
+    "en": "Full name"
+  },
+  "chat.email_label": {
+    "vi": "Email của bạn",
+    "en": "Your email"
+  },
+  "chat.message_placeholder": {
+    "vi": "Nhập tin nhắn…",
+    "en": "Type a message…"
+  },
+  "chat.message_label": {
+    "vi": "Tin nhắn",
+    "en": "Message"
+  },
+  "chat.send": {
+    "vi": "Gửi",
+    "en": "Send"
+  },
+  "chat.err_message": {
+    "vi": "Hãy viết điều bạn muốn nói.",
+    "en": "Please write what you want to say."
+  },
+  "chat.subject": {
+    "vi": "Tin nhắn từ {name}",
+    "en": "Message from {name}"
+  },
+  "chat.reply": {
+    "vi": "Cảm ơn {name}! Mình đã nhận được và sẽ trả lời qua email sớm nhất có thể.",
+    "en": "Thanks {name}! Got it, I will reply by email as soon as I can."
+  },
+  "chat.reply_mail": {
+    "vi": "Cảm ơn {name}! Ứng dụng thư đã mở, bấm Gửi trong đó để tin nhắn đến được với mình nhé.",
+    "en": "Thanks {name}! Your mail app is open. Press Send there so the message reaches me."
   }
 }

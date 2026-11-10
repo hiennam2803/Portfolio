@@ -5,18 +5,34 @@
     <div class="body">
       <p class="lead" data-split data-t="contact.lead"></p>
       <p class="mail" data-reveal>
-        <a class="u" data-ta="href:site.mailto" data-t="site.email"></a
+        <a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a
         ><button
           class="copy"
           type="button"
          
          
-          aria-live="polite" data-ta="data-copy:site.email;data-copied:contact.copied" data-t="contact.copy"
+          aria-live="polite" data-ta="data-copy:@links.email;data-copied:contact.copied" data-t="contact.copy"
         ></button>
       </p>
       <p class="contact-cta" data-reveal>
-        <button class="btn solid" type="button" data-message-open data-magnetic>
+        <button class="btn solid" type="button" data-message-open="chat" data-magnetic>
           <span data-t="common.send_message"></span><svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+        <button class="btn" type="button" data-message-open="brief" data-magnetic>
+          <span data-t="common.project_request"></span><svg
             width="18"
             height="18"
             viewBox="0 0 24 24"
@@ -34,7 +50,7 @@
       </p>
       <ul class="social" data-stagger>
         <li data-reveal>
-          <a rel="noopener" target="_blank" data-ta="href:site.github">
+          <a rel="noopener" target="_blank" data-ta="href:@links.github">
             <svg
               width="20"
               height="20"
@@ -55,7 +71,7 @@
           </a>
         </li>
         <li data-reveal>
-          <a rel="noopener" target="_blank" data-ta="href:site.linkedin">
+          <a rel="noopener" target="_blank" data-ta="href:@links.linkedin">
             <svg
               width="20"
               height="20"

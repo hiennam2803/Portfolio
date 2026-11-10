@@ -2,7 +2,7 @@
 
 Một trang duy nhất, thiết kế như **bộ bản vẽ kỹ thuật**: mỗi mục là một "tờ" có khung viền bản vẽ. Giao diện sáng là giấy can, giao diện tối là bản thiết kế xanh (blueprint). Có tiếng Việt và tiếng Anh.
 
-- `index.html` — **chỉ chứa khung HTML, không có chữ nào**. Toàn bộ chữ và danh sách dự án được trình duyệt nạp từ `languages.json` + `projects.json` mỗi khi mở trang.
+- `index.html` — **chỉ chứa khung HTML, không có chữ nào**. Dữ liệu được trình duyệt nạp từ 3 file JSON mỗi khi mở trang: `languages.json` (chỉ chữ), `projects.json` (dự án, đường dẫn ảnh, link) và `config.json` (không phải chữ: ngày bắt đầu sự nghiệp, email/GitHub/LinkedIn, ảnh chân dung).
 - Đổi ngôn ngữ: nút VI/EN ở header, hoặc `index.html?lang=en`. Lựa chọn được nhớ lại. (`en/index.html` chỉ là trang chuyển hướng cho link cũ.)
 
 > **Phải mở qua web server**, không bấm đúp file (trình duyệt chặn đọc JSON từ `file://`). Ví dụ: `npx serve`, `python3 -m http.server`, hoặc tiện ích Live Server của VS Code. Khi đưa lên hosting thì chạy bình thường.
@@ -11,7 +11,7 @@ Một trang duy nhất, thiết kế như **bộ bản vẽ kỹ thuật**: mỗ
 
 | Bạn muốn sửa                               | Làm gì                                                | Cần build? |
 | ------------------------------------------ | ----------------------------------------------------- | ---------- |
-| Chữ (mọi thứ), dự án, link, số liệu         | sửa `languages.json` / `projects.json`, tải lại trang | **Không**  |
+| Chữ, dự án, ảnh, link, ngày bắt đầu sự nghiệp | sửa `languages.json` / `projects.json` / `config.json`, tải lại trang | **Không**  |
 | Cấu trúc HTML (`parts/`), CSS, JS (`src/`) | sửa file rồi chạy `node build.mjs`                    | Có         |
 
 ```
@@ -31,17 +31,27 @@ Mỗi dòng là `"tên_biến": { "vi": "tiếng Việt", "en": "English" }`. Tr
 ```
 
 - Các dòng bắt đầu bằng `_` (ví dụ `"_hero"`) chỉ là tiêu đề ngăn cách để dễ tìm.
-- `site.*` (tên, chữ viết tắt, email, GitHub, LinkedIn, thành phố) dùng chung toàn trang. Trong một đoạn chữ có thể viết `{{site.name}}`.
+- **Chỉ để chữ trong `languages.json`.** Đường dẫn ảnh, URL, email, ngày tháng, con số thì không phải chữ:
+  - `config.json`: `careerStart` (ngày bắt đầu đi làm), `links.email|github|linkedin`, `images.portrait` (đường dẫn ảnh chân dung). HTML đọc bằng `data-t="@links.email"` (tiền tố `@`).
+  - `projects.json`: `cover` (ảnh trong danh sách) và `gallery` (danh sách ảnh trong dialog) là **đường dẫn tới file ảnh bất kỳ**, đặt tên gì cũng được.
+- **Những con số do code tự đếm**, không gõ tay:
+  - số năm kinh nghiệm = từ `careerStart` đến hôm nay; số dự án = số phần tử trong `projects.json`; số công nghệ = số biến `skills.*.N`;
+  - số bước và thanh tiến trình của hộp thoại tin nhắn = số `.msg__step`; bộ đếm ký tự = `maxlength` của ô nhập;
+  - số điểm nổi bật / số liệu của từng dự án = số biến `project.N.highlight.K` / `project.N.metric.K.value`; số ảnh = độ dài `gallery`;
+  - mục kinh nghiệm, học vấn, chứng chỉ = số nhóm biến `experience.N.*`, `education.N.*`, `certificates.N.*`; thêm nhóm `N` mới là thêm một mục;
+  - năm trong bản quyền: viết `{{year}}`; chữ viết tắt của logo lấy từ `site.name`; nút VI/EN lấy từ mã ngôn ngữ (tên ngôn ngữ do trình duyệt tự dịch).
+- `site.*` (tên, thành phố) dùng chung toàn trang. Trong một đoạn chữ có thể viết `{{site.name}}`.
 - Thiếu biến hoặc thiếu bản dịch: `node build.mjs` có cảnh báo, và console trình duyệt báo `missing key`.
-- **Thêm ngôn ngữ:** thêm giá trị ngôn ngữ mới (ví dụ `"ja"`) vào từng biến. Nút chuyển ngôn ngữ tự xoay vòng theo thứ tự trong `meta.title`; với hơn 2 ngôn ngữ nhớ viết nhãn `lang.switch_*` cho ngôn ngữ kế tiếp.
-- Danh sách kỹ năng (`skills.lang.N`, `skills.fw.N`, `skills.tools.N`) và dải chữ chạy dưới phần đầu trang tự sinh từ các biến này: thêm `skills.lang.4` là có thêm một mục.
+- **Thêm ngôn ngữ:** thêm giá trị ngôn ngữ mới (ví dụ `"ja"`) vào từng biến. Nút chuyển ngôn ngữ tự xoay vòng theo thứ tự trong `meta.title`.
+- Danh sách kỹ năng (`skills.lang.N`, `skills.fw.N`, `skills.tools.N`) và dải chữ chạy dưới phần đầu trang tự sinh từ các biến này.
 - SEO: chữ được nạp bằng JavaScript nên công cụ tìm kiếm có thể chỉ thấy khung trống ở lần đọc đầu.
 
 ## Cấu trúc
 
 ```
 languages.json              toàn bộ chữ, mỗi biến có bản vi + en (nạp lúc chạy)
-projects.json               dữ liệu dự án không phải chữ (năm, công nghệ, link, số ảnh ...) (nạp lúc chạy)
+projects.json               dữ liệu dự án không phải chữ (năm, công nghệ, đường dẫn ảnh, link) (nạp lúc chạy)
+config.json                 ngày bắt đầu sự nghiệp, email/GitHub/LinkedIn, ảnh chân dung (nạp lúc chạy)
 parts/                      HTML khung, không có chữ: layout · header · hero · marquee · about · skills ·
                             projects · experience · education · certificates · contact · footer · message-dialog
 src/css/
@@ -75,13 +85,14 @@ Tìm các chỗ có dấu `[...]` (placeholder) trong `languages.json` và thay 
 
 | Việc                                          | File                                                                                      |
 | --------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Tên, chữ viết tắt, email, GitHub, LinkedIn    | nhóm `site.*` trong `languages.json`                                                      |
+| Tên, thành phố                                | `site.name`, `site.city` trong `languages.json` (chữ viết tắt tự lấy từ tên)              |
+| Email, GitHub, LinkedIn, ngày bắt đầu đi làm  | `config.json`                                                                             |
 | Tiêu đề trang, mô tả SEO                      | `meta.title`, `meta.description` trong `languages.json`                                   |
 | Mọi chữ khác (hero, giới thiệu, kỹ năng ...)  | `languages.json`                                                                          |
 | Thêm / sửa dự án                              | `projects.json` + nhóm `project.N.*` trong `languages.json` (xem bên dưới)                 |
-| Thêm mục kinh nghiệm / chứng chỉ              | sao chép một khối `<li data-reveal>` trong `parts/experience.html` / `certificates.html`, thêm biến vào `languages.json` và đổi `data-t` cho khớp, rồi `node build.mjs` |
-| Ảnh chân dung (4:5)                           | `images/portrait.webp` (hoặc đổi `src` trong `parts/hero.html`)                           |
-| Ảnh dự án (16:10)                             | `images/projects/project-N.webp` (ảnh trong danh sách), `project-N-1.webp`, `project-N-2.webp` ... (ảnh trong dialog) |
+| Thêm mục kinh nghiệm / học vấn / chứng chỉ    | thêm nhóm `experience.N.*` / `education.N.*` / `certificates.N.*` vào `languages.json`    |
+| Ảnh chân dung (4:5)                           | `images.portrait` trong `config.json` (đường dẫn tới file ảnh)                            |
+| Ảnh dự án (16:10)                             | `cover` và `gallery` trong `projects.json` (đường dẫn tới file ảnh, tên tùy ý)            |
 
 ### Thêm một dự án
 
@@ -89,11 +100,13 @@ Tìm các chỗ có dấu `[...]` (placeholder) trong `languages.json` và thay 
 
 ```json
 { "id": 4, "year": "2026", "status": "done", "tech": ["React", "Node.js"],
-  "images": 3, "highlights": 3, "metrics": 3, "live": "https://...", "repo": "https://..." }
+  "cover": "images/projects/shop.webp",
+  "gallery": ["images/projects/shop-home.webp", "images/projects/shop-cart.webp"],
+  "live": "https://...", "repo": "https://..." }
 ```
 
    - `status`: `done` hoặc `progress` (đổi chữ ở `dialog.status_*`). `live` / `repo` để `""` thì nút tương ứng tự ẩn.
-   - `images`, `highlights`, `metrics`: số ảnh, số điểm nổi bật, số ô số liệu (đặt `0` để ẩn mục đó).
+   - Không cần khai báo số ảnh, số điểm nổi bật, số ô số liệu: code tự đếm. Muốn bớt mục nào thì xoá biến tương ứng (ví dụ xoá `project.4.metric.*` là ẩn ô số liệu).
 
 2. Sao chép nhóm `project.3.*` trong `languages.json` thành `project.4.*` rồi viết nội dung: `title`, `summary`, `overview`, `problem`, `solution`, `result`, `role`, `duration`, `team`, `highlight.N`, `metric.N.value|label`, `caption.N`.
 3. Tải lại trang (không cần build). Danh sách, dialog, nút chuyển dự án trước/sau và số thứ tự `01 / 04` đều tự cập nhật.
@@ -106,9 +119,13 @@ Tìm các chỗ có dấu `[...]` (placeholder) trong `languages.json` và thay 
 - Thư viện ảnh: vuốt (cảm ứng), kéo chuột, nút, ảnh thu nhỏ, phím ← →. Ảnh chưa có thì hiện khung giữ chỗ.
 - Giao diện: `src/css/widgets/project-dialog.css` · logic: `src/js/project-dialog.js` · mẫu HTML: `src/js/projects-render.js`.
 
-### Hộp thoại gửi tin nhắn (`parts/*/message-dialog.html`)
+### Hộp thoại gửi tin nhắn (`parts/message-dialog.html`)
 
-- Mở bằng phần tử có `data-message-open` (nút trên header, huy hiệu quay ở ảnh chân dung, nút ở mục Liên hệ, nút nổi). Mục Liên hệ không còn form riêng, chỉ có nút này.
-- Sửa câu hỏi / lựa chọn trong nhóm `msg.*` của `languages.json` (mỗi bước là một `.msg__step` trong `parts/message-dialog.html`, gắn chữ bằng `data-t` / `data-ta`). Thêm / bớt bước thì đổi số ô trong `.msg__progress` cho khớp.
-- Gửi trực tiếp: thêm `data-endpoint="https://formspree.io/f/XXXX"` vào `<form data-msg-form>` trong `parts/message-dialog.html`; để trống thì mở ứng dụng thư của khách với nội dung đã điền sẵn.
+Có **hai chế độ** (hai tab ở đầu hộp thoại):
+
+- **Nhắn tin**: chat bình thường, chỉ gồm tên, email và một tin nhắn (Enter để gửi, Shift+Enter xuống dòng). Chữ nằm ở nhóm `chat.*` trong `languages.json`.
+- **Yêu cầu dự án**: 5 bước (tên, email, nhu cầu, ngân sách, hướng đi của dự án), mỗi bước là một `.msg__step`. Chữ nằm ở nhóm `msg.*`. Thêm / bớt bước thì số ô tiến trình tự khớp.
+- Mở bằng phần tử có `data-message-open` (mặc định mở tab Nhắn tin) hoặc `data-message-open="brief"` (mở thẳng tab Yêu cầu dự án). Mục Liên hệ có sẵn một nút cho mỗi chế độ.
+- Gửi trực tiếp: thêm `data-endpoint="https://formspree.io/f/XXXX"` vào `<form data-msg-form>` (yêu cầu dự án) và/hoặc `<form data-chat-form>` (nhắn tin; nếu bỏ trống sẽ dùng endpoint của form kia). Để trống cả hai thì mở ứng dụng thư của khách với nội dung điền sẵn.
+- **Avatar** dưới cột trái: thử lần lượt `images.avatar` (ảnh bạn tự đặt) → Gravatar của email (nếu `images.gravatar` là `true` và email có đăng ký Gravatar) → `images.portrait` → chữ viết tắt. Google không cho lấy ảnh Gmail từ địa chỉ email, nên cách chắc chắn nhất là đặt ảnh vào `images/avatar.webp`.
 - Giao diện: `src/css/widgets/message-dialog.css` · logic: `src/js/message-dialog.js`.

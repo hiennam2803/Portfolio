@@ -1,0 +1,13 @@
+{
+  "careerStart": "2022-09-01",
+  "links": {
+    "email": "vhdt283@gmail.com",
+    "github": "https://github.com/hiennam2803",
+    "linkedin": "https://linkedin.com/in/your-handle"
+  },
+  "images": {
+    "portrait": "images/portrait.webp",
+    "avatar": "images/avatar.webp",
+    "gravatar": true
+  }
+}

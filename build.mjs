@@ -110,7 +110,7 @@ function checkKeys(html) {
   for (const [, spec] of html.matchAll(/data-ta="([^"]+)"/g))
     for (const pair of spec.split(';')) used.add(pair.slice(pair.indexOf(':') + 1));
   for (const key of used)
-    if (!dict[key]) console.warn(`warning: parts/ uses "${key}" but languages.json has no such key`);
+    if (!key.startsWith('@') && !dict[key]) console.warn(`warning: parts/ uses "${key}" but languages.json has no such key`);
   for (const [key, entry] of Object.entries(dict)) {
     if (key.startsWith('_') || typeof entry !== 'object') continue;
     for (const lang of langs) if (!entry[lang]) console.warn(`warning: "${key}" has no "${lang}" text`);

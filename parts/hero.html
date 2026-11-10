@@ -32,8 +32,8 @@
       <figure class="portrait">
         <div class="photo">
           <!-- Portrait (4:5): save your photo as images/portrait.webp (or .jpg and change src). Until the file exists, the placeholder shows. -->
-          <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg><small data-t="hero.portrait_hint"></small></span>
-          <img src="images/portrait.webp" width="640" height="800" fetchpriority="high" decoding="async" onerror="this.remove()" data-ta="alt:hero.alt_portrait" />
+          <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg><small data-t="@images.portrait"></small></span>
+          <img width="640" height="800" fetchpriority="high" decoding="async" onerror="this.remove()" data-ta="alt:hero.alt_portrait;src:@images.portrait" />
         </div>
         <button class="badge" type="button" data-message-open data-ta="aria-label:common.send_message">
           <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -63,15 +63,15 @@
     </div>
     <dl class="stats">
       <div>
-        <dd data-count data-t="hero.stat_years_value"></dd>
+        <dd data-count data-stat="years"></dd>
         <dt data-t="hero.stat_years"></dt>
       </div>
       <div>
-        <dd data-count data-t="hero.stat_projects_value"></dd>
+        <dd data-count data-stat="projects"></dd>
         <dt data-t="hero.stat_projects"></dt>
       </div>
       <div>
-        <dd data-count data-t="hero.stat_tech_value"></dd>
+        <dd data-count data-stat="tech"></dd>
         <dt data-t="hero.stat_tech"></dt>
       </div>
     </dl>

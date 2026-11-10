@@ -1764,6 +1764,9 @@ html:not(.seen) .hero .chip {
   transform: rotate(45deg);
 }
 .contact-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
   margin-top: var(--s-5);
 }
 #contact .social {
@@ -1860,15 +1863,19 @@ footer.panel {
 }
 .foot-mark {
   margin: var(--s-6) 0 0;
-  overflow: hidden;
+  overflow: visible;
   color: transparent;
-  font: 900 clamp(4rem, 1rem + 19vw, 21rem) / 0.82 var(--font-display);
+  font: 900 clamp(2rem, 1rem + 19vw, 21rem) / 0.82 var(--font-display);
   font-variation-settings: 'wdth' 62;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   white-space: nowrap;
-  -webkit-text-stroke: 1px var(--line);
+  -webkit-text-stroke: 2px var(--line);
   user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  transform: scaleX(0.9);
+  transform-origin: left center;
 }
 .foot-bottom {
   display: flex;
@@ -2716,6 +2723,10 @@ html.modal-open {
 .msg__intro p {
   color: var(--panel-mute);
 }
+.msg[data-mode='chat'] [data-for='brief'],
+.msg[data-mode='brief'] [data-for='chat'] {
+  display: none;
+}
 .msg__meta {
   display: grid;
   gap: var(--s-3);
@@ -2749,6 +2760,17 @@ html.modal-open {
   color: var(--panel-on-accent);
   font: 700 0.95rem var(--font-display);
 }
+.msg__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.msg__photo[hidden] {
+  display: none;
+}
 .msg__initials i {
   position: absolute;
   right: -1px;
@@ -2764,12 +2786,200 @@ html.modal-open {
 .msg__main {
   position: relative;
   display: grid;
-  grid-template-rows: auto auto 1fr;
-  gap: var(--s-4);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--s-5);
   min-width: 0;
   padding: var(--s-7) var(--s-7) var(--s-6);
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+/* ---- tabs: chat | project brief ---- */
+.msg__tabs {
+  display: flex;
+  gap: var(--s-5);
+  padding-right: 3.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.msg__tab {
+  position: relative;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--mute);
+  font: 600 var(--step-0) var(--font-body);
+  cursor: pointer;
+  transition: color var(--d-fast);
+}
+.msg__tab::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--d-base) var(--ease-out);
+}
+.msg__tab:hover,
+.msg__tab[aria-selected='true'] {
+  color: var(--ink);
+}
+.msg__tab[aria-selected='true']::after {
+  transform: none;
+}
+.msg__tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.msg__panel {
+  display: grid;
+  gap: var(--s-4);
+  min-width: 0;
+  min-height: 0;
+}
+.msg__panel[hidden] {
+  display: none;
+}
+.msg__panel--brief {
+  grid-template-rows: auto auto 1fr;
+  animation: msg-rise 0.5s var(--ease-out) both;
+}
+
+/* ---- chat: a plain message ---- */
+.msg__panel--chat {
+  grid-template-rows: minmax(0, 1fr) auto;
+  animation: msg-rise 0.5s var(--ease-out) both;
+}
+.chat__thread {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--s-3);
+  min-height: 9rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.bubble {
+  max-width: 85%;
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--s-4);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  animation: msg-chip 0.45s var(--ease-soft) both;
+}
+.bubble--them {
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.bubble--me {
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.chat__form {
+  display: grid;
+  gap: var(--s-3);
+}
+.chat__who {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+.chat__field {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--mute);
+  font-size: var(--step--1);
+}
+.chat__field input,
+.chat__compose textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--line);
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font: 500 var(--step-0) / 1.4 var(--font-body);
+  transition: border-color var(--d-fast);
+}
+.chat__field input {
+  padding: 0.45rem 0;
+}
+.chat__field input:focus,
+.chat__compose textarea:focus {
+  border-color: var(--accent);
+}
+.chat__field input[aria-invalid='true'],
+.chat__compose textarea[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+.chat__compose {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-3);
+}
+.chat__compose textarea {
+  flex: 1;
+  min-height: 3.25rem;
+  padding: 0.6rem 0;
+  resize: none;
+}
+.chat__compose textarea::placeholder,
+.chat__field input::placeholder {
+  color: color-mix(in srgb, var(--mute) 70%, transparent);
+}
+.chat__send {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  transition:
+    transform var(--d-base) var(--ease-soft),
+    opacity var(--d-fast);
+}
+.chat__send:hover {
+  transform: translateX(3px);
+}
+.chat__send:active {
+  transform: scale(var(--press));
+}
+.chat__send:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.chat__send:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.chat__form .msg__error,
+.chat__form .msg__status {
+  min-height: 0;
+}
+.chat__form .msg__error:empty,
+.chat__form .msg__status:empty {
+  display: none;
+}
+
+@media (min-width: 48.01rem) {
+  .msg__main {
+    min-height: 40rem; /* same height in both tabs, so the dialog does not jump */
+  }
 }
 .msg__close {
   position: absolute;
@@ -3213,6 +3423,13 @@ html.modal-open {
   }
   .msg__steps {
     min-height: 13rem;
+  }
+  .chat__who {
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+  }
+  .chat__thread {
+    max-height: 11rem;
   }
   .msg__hint {
     display: none;

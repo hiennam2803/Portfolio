@@ -12,25 +12,91 @@ const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(sel
 
 /* ===== i18n ===== */
 /**
- * All text lives in languages.json (and project data in projects.json). index.html holds structure only:
- *   data-t="key"                       -> element text
- *   data-ta="attr:key;attr2:key2"      -> attributes
- *   data-list="skills.lang"            -> <li> per key skills.lang.1, .2 ...
- *   data-marquee                       -> every skill, for the scrolling band
- *   data-project-list                  -> project rows + dialogs (renderProjects)
+ * Everything on the page comes from three JSON files, index.html holds structure only:
+ *   languages.json  text only, per language          "key": { "vi": "...", "en": "..." }
+ *   projects.json   projects: year, status, tech, cover + gallery image paths, links
+ *   config.json     not text: career start date, contact links, portrait image path
+ * Markers in the HTML:
+ *   data-t="key"                    element text          (key starting with @ reads config.json, e.g. @links.email)
+ *   data-ta="attr:key;attr2:key2"   attributes
+ *   data-list="skills.lang"         <li> per key skills.lang.1, .2 ...
+ *   data-render="experience"        timeline / certificates built from experience.N.* / education.N.* / certificates.N.*
+ *   data-stat="years|projects|tech" numbers computed by code (never typed)
  * Language: ?lang=en  >  last choice (localStorage)  >  first language in the file.
  */
-const I18N = { dict: {}, lang: 'vi', langs: [], projects: [] };
+const I18N = { dict: {}, cfg: {}, lang: 'vi', langs: [], projects: [] };
+
+const cfgGet = (path) => path.split('.').reduce((obj, k) => obj?.[k], I18N.cfg);
+const initialsOf = (name) => {
+  const words = name.trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return '';
+  const first = Array.from(words[0])[0];
+  return (first + (words.length > 1 ? Array.from(words[words.length - 1])[0] : '')).toUpperCase();
+};
+/** Values that are worked out by code instead of being typed. */
+const COMPUTED = {
+  'links.mailto': () => `mailto:${cfgGet('links.email')}`,
+  'site.initials': () => initialsOf(t('site.name')),
+};
+
+/** Text for a key. `@path` reads config.json. `{{other.key}}` and `{{year}}` inside a text are resolved too. */
 const t = (key) => {
+  if (key.startsWith('@')) return String(COMPUTED[key.slice(1)]?.() ?? cfgGet(key.slice(1)) ?? '');
   const entry = I18N.dict[key];
   if (!entry || typeof entry !== 'object') {
     console.warn(`languages.json: missing key "${key}"`);
     return '';
   }
   const value = entry[I18N.lang] ?? entry[I18N.langs[0]] ?? '';
-  return value.replace(/\{\{([\w.]+)\}\}/g, (_, inner) => t(inner));
+  return value.replace(/\{\{([^}]+)\}\}/g, (_, inner) => (inner === 'year' ? String(new Date().getFullYear()) : t(inner)));
 };
 const keysMatching = (pattern) => Object.keys(I18N.dict).filter((key) => pattern.test(key));
+/** Distinct numbers N found in keys matching a pattern with one (\d+) group, ascending: counts items without a typed count. */
+const numbered = (pattern) =>
+  [...new Set(keysMatching(pattern).map((key) => Number(key.match(pattern)[1])))].sort((a, b) => a - b);
+
+/** Whole years since a date (career start). */
+function yearsSince(date) {
+  const start = new Date(date);
+  if (Number.isNaN(start.getTime())) return 0;
+  const now = new Date();
+  let years = now.getFullYear() - start.getFullYear();
+  if (now.getMonth() < start.getMonth() || (now.getMonth() === start.getMonth() && now.getDate() < start.getDate())) years--;
+  return Math.max(0, years);
+}
+
+/** Timeline + certificate lists: one item per numbered group of keys. */
+function renderLists() {
+  const li = (n, name) => esc(t(`${name}.${n}`));
+  const experience = $('[data-render="experience"]');
+  if (experience)
+    experience.innerHTML = numbered(/^experience\.(\d+)\.role$/)
+      .map((n) => {
+        const bullets = numbered(new RegExp(`^experience\\.${n}\\.bullet\\.(\\d+)$`));
+        return `<li data-reveal><span class="period">${li('period', `experience.${n}`)}</span><div><h3>${li('role', `experience.${n}`)}</h3><p class="org">${li('org', `experience.${n}`)}</p>${
+          bullets.length ? `<ul>${bullets.map((b) => `<li>${esc(t(`experience.${n}.bullet.${b}`))}</li>`).join('')}</ul>` : ''
+        }</div></li>`;
+      })
+      .join('');
+
+  const education = $('[data-render="education"]');
+  if (education)
+    education.innerHTML = numbered(/^education\.(\d+)\.degree$/)
+      .map(
+        (n) =>
+          `<li data-reveal><span class="period">${li('period', `education.${n}`)}</span><div><h3>${li('degree', `education.${n}`)}</h3><p class="org">${li('school', `education.${n}`)}</p></div></li>`,
+      )
+      .join('');
+
+  const certificates = $('[data-render="certificates"]');
+  if (certificates)
+    certificates.innerHTML = numbered(/^certificates\.(\d+)\.name$/)
+      .map(
+        (n) =>
+          `<li data-reveal><div class="row"><span class="n">${li('name', `certificates.${n}`)}</span> <span class="m"> ${li('meta', `certificates.${n}`)} </span></div></li>`,
+      )
+      .join('');
+}
 
 function applyContent() {
   $$('[data-t]').forEach((el) => (el.textContent = t(el.dataset.t)));
@@ -46,18 +112,36 @@ function applyContent() {
       .map((key) => `<li>${esc(t(key))}</li>`)
       .join('');
   });
-  const skills = keysMatching(/^skills\.(lang|fw|tools)\.\d+$/)
-    .map((key) => `<li>${esc(t(key))}</li>`)
-    .join('');
+  const skillKeys = keysMatching(/^skills\.(lang|fw|tools)\.\d+$/);
+  const skills = skillKeys.map((key) => `<li>${esc(t(key))}</li>`).join('');
   $$('[data-marquee]').forEach((list) => (list.innerHTML = skills));
+
+  // numbers counted by code
+  const two = (n) => String(n).padStart(2, '0');
+  const stats = {
+    years: `${two(yearsSince(I18N.cfg.careerStart))}+`,
+    projects: two(I18N.projects.length),
+    tech: two(skillKeys.length),
+  };
+  $$('[data-stat]').forEach((el) => (el.textContent = stats[el.dataset.stat] ?? ''));
 
   document.title = t('meta.title');
   $('meta[name="description"]')?.setAttribute('content', t('meta.description'));
 
-  // language switch: points at the next language in the file
+  // language switch: points at the next language in the file; label and name come from the language code
   const next = I18N.langs[(I18N.langs.indexOf(I18N.lang) + 1) % I18N.langs.length];
+  let nextName = next.toUpperCase();
+  try {
+    nextName = new Intl.DisplayNames([next], { type: 'language' }).of(next) ?? nextName;
+  } catch {
+    /* old browser: keep the code */
+  }
   $$('[data-lang-switch]').forEach((link) => {
     link.href = `?lang=${next}`;
+    link.hreflang = next;
+    link.lang = next;
+    link.textContent = next.toUpperCase();
+    link.setAttribute('aria-label', nextName);
     link.addEventListener('click', () => {
       try {
         localStorage.setItem('lang', next);
@@ -68,15 +152,15 @@ function applyContent() {
   });
 }
 
-/** Loads languages.json + projects.json, builds the page content. Resolves when the page is ready to initialise. */
+/** Loads the JSON files and builds the page content. Resolves when the page is ready to initialise. */
 async function initContent() {
   try {
-    const [dict, projects] = await Promise.all([
-      fetch('languages.json').then((r) => r.json()),
-      fetch('projects.json').then((r) => r.json()),
-    ]);
+    const [dict, projects, cfg] = await Promise.all(
+      ['languages.json', 'projects.json', 'config.json'].map((file) => fetch(file).then((r) => r.json())),
+    );
     I18N.dict = dict;
     I18N.projects = projects;
+    I18N.cfg = cfg;
     I18N.langs = Object.keys(dict['meta.title'] ?? {});
     let saved = null;
     try {
@@ -88,12 +172,13 @@ async function initContent() {
     I18N.lang = I18N.langs.includes(wanted) ? wanted : I18N.langs[0];
     root.lang = I18N.lang;
     renderProjects(projects);
+    renderLists();
     applyContent();
   } catch (error) {
     console.error(error);
     document.body.insertAdjacentHTML(
       'afterbegin',
-      '<p style="padding:1rem;font:14px monospace;background:#fee;color:#900">Cannot load languages.json / projects.json. Open the site through a web server (e.g. <code>npx serve</code> or VS Code Live Server), not by double-clicking the file.</p>',
+      '<p style="padding:1rem;font:14px monospace;background:#fee;color:#900">Cannot load languages.json / projects.json / config.json. Open the site through a web server (e.g. <code>npx serve</code> or VS Code Live Server), not by double-clicking the file.</p>',
     );
   } finally {
     root.classList.add('ready');
@@ -124,30 +209,37 @@ function renderProjects(projects) {
   list.innerHTML = projects
     .map((p, index) => {
       const id = p.id;
+      const has = (key) => Boolean(I18N.dict[key]);
+      // counts come from the data, nothing is typed twice
+      const images = p.gallery?.length ? p.gallery : p.cover ? [p.cover] : [];
+      const cover = p.cover ?? images[0];
+      const slideCount = Math.max(1, images.length);
+      const highlightCount = numbered(new RegExp(`^project\\.${id}\\.highlight\\.(\\d+)$`)).length;
+      const metricCount = numbered(new RegExp(`^project\\.${id}\\.metric\\.(\\d+)\\.value$`)).length;
       const text = (name) => esc(t(`project.${id}.${name}`));
       const title = text('title');
       const neighbour = (step) => projects[(index + step + projects.length) % projects.length];
 
-      const slides = range(p.images)
+      const slides = range(slideCount)
         .map(
           (n) => `<figure class="gallery__slide">
   <div class="gallery__media">
     <span class="gallery__ph">${n}</span>
-    <img src="images/projects/project-${id}-${n}.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+    ${images[n - 1] ? `<img src="${esc(images[n - 1])}" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />` : ''}
   </div>
-  <figcaption>${text(`caption.${n}`)}</figcaption>
+  ${has(`project.${id}.caption.${n}`) ? `<figcaption>${text(`caption.${n}`)}</figcaption>` : ''}
 </figure>`,
         )
         .join('');
 
-      const metrics = p.metrics
-        ? `<ul class="metrics" aria-label="${esc(t('dialog.metrics_aria'))}">${range(p.metrics)
+      const metrics = metricCount
+        ? `<ul class="metrics" aria-label="${esc(t('dialog.metrics_aria'))}">${range(metricCount)
             .map((n) => `<li><strong>${text(`metric.${n}.value`)}</strong><span>${text(`metric.${n}.label`)}</span></li>`)
             .join('')}</ul>`
         : '';
 
-      const highlights = p.highlights
-        ? `<div><h4>${esc(t('dialog.highlights'))}</h4><ul class="highlights">${range(p.highlights)
+      const highlights = highlightCount
+        ? `<div><h4>${esc(t('dialog.highlights'))}</h4><ul class="highlights">${range(highlightCount)
             .map((n) => `<li>${text(`highlight.${n}`)}</li>`)
             .join('')}</ul></div>`
         : '';
@@ -173,7 +265,7 @@ function renderProjects(projects) {
     <span class="chrome"> <i></i> <i></i> <i></i> </span>
     <span class="screen">
       <span class="ph" aria-hidden="true">${ICON.image}</span>
-      <img src="images/projects/project-${id}.webp" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />
+      ${cover ? `<img src="${esc(cover)}" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />` : ''}
     </span>
   </span>
   <span class="info">
@@ -194,7 +286,7 @@ function renderProjects(projects) {
       <div class="gallery" data-gallery data-thumb-label="${esc(t('dialog.image'))}">
         <div class="gallery__track" tabindex="0" role="group" aria-roledescription="carousel" aria-label="${esc(t('dialog.gallery_aria'))}">${slides}</div>
         <div class="gallery__bar">
-          <span class="gallery__count" aria-live="polite">1 / ${p.images}</span>
+          <span class="gallery__count" aria-live="polite">1 / ${slideCount}</span>
           <div class="gallery__nav">
             <button class="gallery__btn" type="button" data-gallery-prev aria-label="${esc(t('dialog.prev_image'))}">${ICON.back}</button>
             <button class="gallery__btn" type="button" data-gallery-next aria-label="${esc(t('dialog.next_image'))}">${ICON.arrow}</button>
@@ -1037,8 +1129,11 @@ function initProjectDialog() {
 
 /* ===== message-dialog ===== */
 /**
- * Message dialog: a five-step conversation that opens with a circular reveal from the pressed button.
- * Answers stay in the form until sent, so closing and reopening resumes where you left off.
+ * Message dialog with two modes (tabs):
+ *   chat   a plain message: name, email and one message, shown as a small chat thread
+ *   brief  a project request: the five-step conversation (needs, budget, direction of the project ...)
+ * It opens with a circular reveal from the pressed button; data-message-open="brief" opens the brief tab.
+ * Answers stay in the forms until sent, so closing and reopening resumes where you left off.
  */
 function initMessageDialog() {
   const dialog = $('#message-dialog');
@@ -1049,7 +1144,10 @@ function initMessageDialog() {
   const TAU = Math.PI * 2;
   const steps = $$('[data-step]', form);
   const total = steps.length;
+  const progress = $('.msg__progress', dialog);
+  if (progress) progress.innerHTML = '<i></i>'.repeat(total); // one bar per step, counted
   const bars = $$('.msg__progress i', dialog);
+  $$('[data-total]', dialog).forEach((el) => (el.textContent = String(total)));
   const current = $('[data-current]', dialog);
   const trail = $('[data-trail]', dialog);
   const back = $('[data-msg-back]', dialog);
@@ -1059,8 +1157,19 @@ function initMessageDialog() {
   const status = $('[data-status]', dialog);
   const done = $('.msg__done', dialog);
   const counter = $('[data-counter]', dialog);
+  if (counter) counter.textContent = `0/${$('textarea', form)?.maxLength ?? 600}`;
   const data = form.dataset;
   const words = (dialog.dataset.words ?? '').split('|').filter(Boolean);
+
+  /* ---- modes: chat | brief ---- */
+  const tabs = $$('[data-msg-tab]', dialog);
+  const panels = $$('[data-panel]', dialog);
+  const chatForm = $('[data-chat-form]', dialog);
+  const thread = $('[data-thread]', dialog);
+  const chatError = $('[data-chat-error]', dialog);
+  const chatStatus = $('[data-chat-status]', dialog);
+  const chatSend = $('.chat__send', dialog);
+  let mode = 'chat';
 
   let hello = $('[data-hello]', dialog);
   let helloTimer = 0;
@@ -1206,7 +1315,7 @@ function initMessageDialog() {
         if (!response.ok) throw new Error(response.statusText);
       } else {
         viaMail = true;
-        const subject = encodeURIComponent(`[Portfolio] ${body.name}`);
+        const subject = encodeURIComponent(`[Portfolio] ${(data.subject ?? '{name}').replace('{name}', body.name)}`);
         location.href = `mailto:${data.email}?subject=${subject}&body=${encodeURIComponent(`${body.text}\n`)}`;
       }
     } catch {
@@ -1237,6 +1346,114 @@ function initMessageDialog() {
     goTo(0);
   }
 
+  /* ---- tabs ---- */
+  function setMode(next, { focus = true } = {}) {
+    mode = next === 'brief' ? 'brief' : 'chat';
+    dialog.dataset.mode = mode;
+    tabs.forEach((tab) => {
+      const on = tab.dataset.msgTab === mode;
+      tab.setAttribute('aria-selected', String(on));
+      tab.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach((panel) => (panel.hidden = panel.dataset.panel !== mode));
+    if (!focus) return;
+    if (mode === 'brief') goTo(index);
+    else focusChat();
+  }
+
+  /* ---- chat: a plain message shown as a small thread ---- */
+  function focusChat() {
+    if (!chatForm) return;
+    const empty = [...chatForm.querySelectorAll('input, textarea')].find((field) => !field.value.trim());
+    setTimeout(() => (empty ?? chatForm.elements.namedItem('message'))?.focus({ preventScroll: true }), 150);
+  }
+
+  function addBubble(text, who) {
+    const bubble = document.createElement('p');
+    bubble.className = `bubble bubble--${who}`;
+    bubble.textContent = text;
+    thread.append(bubble);
+    thread.scrollTo({ top: thread.scrollHeight, behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  async function sendChat() {
+    const el = (name) => chatForm.elements.namedItem(name);
+    const fields = ['name', 'email', 'message'].map(el);
+    fields.forEach((field) => field.removeAttribute('aria-invalid'));
+    chatError.textContent = '';
+    const bad = fields.find((field) => !field.checkValidity() || !field.value.trim());
+    if (bad) {
+      bad.setAttribute('aria-invalid', 'true');
+      chatError.textContent = bad.dataset.error ?? '';
+      bad.focus({ preventScroll: true });
+      return;
+    }
+    const [name, email, message] = fields.map((field) => field.value.trim());
+    const cd = chatForm.dataset;
+    chatSend.disabled = true;
+    chatStatus.textContent = cd.sending ?? '';
+    let viaMail = false;
+    try {
+      const endpoint = cd.endpoint || data.endpoint;
+      if (endpoint) {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'chat', name, email, message }),
+        });
+        if (!response.ok) throw new Error(response.statusText);
+      } else {
+        viaMail = true;
+        const subject = encodeURIComponent(`[Portfolio] ${(cd.subject ?? '{name}').replace('{name}', name)}`);
+        const body = encodeURIComponent(`${message}\n\n— ${name} <${email}>\n`);
+        location.href = `mailto:${cd.email}?subject=${subject}&body=${body}`;
+      }
+    } catch {
+      chatStatus.textContent = cd.fail ?? '';
+      chatSend.disabled = false;
+      return;
+    }
+    chatSend.disabled = false;
+    chatStatus.textContent = '';
+    addBubble(message, 'me');
+    el('message').value = '';
+    const reply = ((viaMail ? cd.replyMail : cd.reply) ?? '').replace('{name}', name.slice(0, 24));
+    setTimeout(() => addBubble(reply, 'them'), reduced ? 0 : 700);
+    el('message').focus({ preventScroll: true });
+  }
+
+  /* ---- avatar: your photo if it exists, else Gravatar for the email, else the portrait, else initials ---- */
+  async function initAvatar() {
+    const photo = $('.msg__photo', dialog);
+    if (!photo) return;
+    const sources = [cfgGet('images.avatar')];
+    if (cfgGet('images.gravatar') && window.crypto?.subtle) {
+      try {
+        const bytes = new TextEncoder().encode(String(cfgGet('links.email')).trim().toLowerCase());
+        const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))]
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
+        sources.push(`https://gravatar.com/avatar/${hash}?s=160&d=404`);
+      } catch {
+        /* no Gravatar: skip it */
+      }
+    }
+    sources.push(cfgGet('images.portrait'));
+    for (const src of sources.filter(Boolean)) {
+      const ok = await new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve(true);
+        probe.onerror = () => resolve(false);
+        probe.src = src;
+      });
+      if (ok) {
+        photo.src = src;
+        photo.hidden = false;
+        return;
+      }
+    }
+  }
+
   /* ---- open / close ---- */
   function open(trigger) {
     root.classList.add('modal-open');
@@ -1246,7 +1463,9 @@ function initMessageDialog() {
     dialog.style.setProperty('--ox', `${spot.left + spot.width / 2 - box.left}px`);
     dialog.style.setProperty('--oy', `${spot.top + spot.height / 2 - box.top}px`);
     if (sent) reset();
-    else goTo(index);
+    const wanted = trigger.dataset.messageOpen === 'brief' ? 'brief' : 'chat';
+    goTo(index, { focus: false });
+    setMode(wanted);
     startHello();
   }
 
@@ -1285,6 +1504,34 @@ function initMessageDialog() {
   });
   dialog.addEventListener('close', () => root.classList.remove('modal-open'));
 
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => setMode(tab.dataset.msgTab));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const other = tabs[(i + 1) % tabs.length];
+      other.focus();
+      setMode(other.dataset.msgTab, { focus: false });
+    });
+  });
+  chatForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    void sendChat();
+  });
+  chatForm?.addEventListener('keydown', (e) => {
+    // Enter sends, Shift+Enter makes a new line (not while an input method is composing, e.g. Telex)
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.target instanceof HTMLTextAreaElement) {
+      e.preventDefault();
+      void sendChat();
+    }
+  });
+  chatForm?.addEventListener('input', (e) => {
+    const field = e.target;
+    if (field instanceof HTMLElement && field.getAttribute('aria-invalid') === 'true') {
+      field.removeAttribute('aria-invalid');
+      chatError.textContent = '';
+    }
+  });
   back.addEventListener('click', () => goTo(index - 1));
   trail.addEventListener('click', (e) => {
     const chip = e.target instanceof Element ? e.target.closest('[data-goto]') : null;
@@ -1327,6 +1574,8 @@ function initMessageDialog() {
   }
 
   goTo(0, { focus: false });
+  setMode('chat', { focus: false });
+  void initAvatar();
 }
 
 /* ===== main ===== */

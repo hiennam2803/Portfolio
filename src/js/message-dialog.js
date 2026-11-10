@@ -1,7 +1,10 @@
 /* ===== message-dialog ===== */
 /**
- * Message dialog: a five-step conversation that opens with a circular reveal from the pressed button.
- * Answers stay in the form until sent, so closing and reopening resumes where you left off.
+ * Message dialog with two modes (tabs):
+ *   chat   a plain message: name, email and one message, shown as a small chat thread
+ *   brief  a project request: the five-step conversation (needs, budget, direction of the project ...)
+ * It opens with a circular reveal from the pressed button; data-message-open="brief" opens the brief tab.
+ * Answers stay in the forms until sent, so closing and reopening resumes where you left off.
  */
 function initMessageDialog() {
   const dialog = $('#message-dialog');
@@ -12,7 +15,10 @@ function initMessageDialog() {
   const TAU = Math.PI * 2;
   const steps = $$('[data-step]', form);
   const total = steps.length;
+  const progress = $('.msg__progress', dialog);
+  if (progress) progress.innerHTML = '<i></i>'.repeat(total); // one bar per step, counted
   const bars = $$('.msg__progress i', dialog);
+  $$('[data-total]', dialog).forEach((el) => (el.textContent = String(total)));
   const current = $('[data-current]', dialog);
   const trail = $('[data-trail]', dialog);
   const back = $('[data-msg-back]', dialog);
@@ -22,8 +28,19 @@ function initMessageDialog() {
   const status = $('[data-status]', dialog);
   const done = $('.msg__done', dialog);
   const counter = $('[data-counter]', dialog);
+  if (counter) counter.textContent = `0/${$('textarea', form)?.maxLength ?? 600}`;
   const data = form.dataset;
   const words = (dialog.dataset.words ?? '').split('|').filter(Boolean);
+
+  /* ---- modes: chat | brief ---- */
+  const tabs = $$('[data-msg-tab]', dialog);
+  const panels = $$('[data-panel]', dialog);
+  const chatForm = $('[data-chat-form]', dialog);
+  const thread = $('[data-thread]', dialog);
+  const chatError = $('[data-chat-error]', dialog);
+  const chatStatus = $('[data-chat-status]', dialog);
+  const chatSend = $('.chat__send', dialog);
+  let mode = 'chat';
 
   let hello = $('[data-hello]', dialog);
   let helloTimer = 0;
@@ -169,7 +186,7 @@ function initMessageDialog() {
         if (!response.ok) throw new Error(response.statusText);
       } else {
         viaMail = true;
-        const subject = encodeURIComponent(`[Portfolio] ${body.name}`);
+        const subject = encodeURIComponent(`[Portfolio] ${(data.subject ?? '{name}').replace('{name}', body.name)}`);
         location.href = `mailto:${data.email}?subject=${subject}&body=${encodeURIComponent(`${body.text}\n`)}`;
       }
     } catch {
@@ -200,6 +217,114 @@ function initMessageDialog() {
     goTo(0);
   }
 
+  /* ---- tabs ---- */
+  function setMode(next, { focus = true } = {}) {
+    mode = next === 'brief' ? 'brief' : 'chat';
+    dialog.dataset.mode = mode;
+    tabs.forEach((tab) => {
+      const on = tab.dataset.msgTab === mode;
+      tab.setAttribute('aria-selected', String(on));
+      tab.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach((panel) => (panel.hidden = panel.dataset.panel !== mode));
+    if (!focus) return;
+    if (mode === 'brief') goTo(index);
+    else focusChat();
+  }
+
+  /* ---- chat: a plain message shown as a small thread ---- */
+  function focusChat() {
+    if (!chatForm) return;
+    const empty = [...chatForm.querySelectorAll('input, textarea')].find((field) => !field.value.trim());
+    setTimeout(() => (empty ?? chatForm.elements.namedItem('message'))?.focus({ preventScroll: true }), 150);
+  }
+
+  function addBubble(text, who) {
+    const bubble = document.createElement('p');
+    bubble.className = `bubble bubble--${who}`;
+    bubble.textContent = text;
+    thread.append(bubble);
+    thread.scrollTo({ top: thread.scrollHeight, behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  async function sendChat() {
+    const el = (name) => chatForm.elements.namedItem(name);
+    const fields = ['name', 'email', 'message'].map(el);
+    fields.forEach((field) => field.removeAttribute('aria-invalid'));
+    chatError.textContent = '';
+    const bad = fields.find((field) => !field.checkValidity() || !field.value.trim());
+    if (bad) {
+      bad.setAttribute('aria-invalid', 'true');
+      chatError.textContent = bad.dataset.error ?? '';
+      bad.focus({ preventScroll: true });
+      return;
+    }
+    const [name, email, message] = fields.map((field) => field.value.trim());
+    const cd = chatForm.dataset;
+    chatSend.disabled = true;
+    chatStatus.textContent = cd.sending ?? '';
+    let viaMail = false;
+    try {
+      const endpoint = cd.endpoint || data.endpoint;
+      if (endpoint) {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'chat', name, email, message }),
+        });
+        if (!response.ok) throw new Error(response.statusText);
+      } else {
+        viaMail = true;
+        const subject = encodeURIComponent(`[Portfolio] ${(cd.subject ?? '{name}').replace('{name}', name)}`);
+        const body = encodeURIComponent(`${message}\n\n— ${name} <${email}>\n`);
+        location.href = `mailto:${cd.email}?subject=${subject}&body=${body}`;
+      }
+    } catch {
+      chatStatus.textContent = cd.fail ?? '';
+      chatSend.disabled = false;
+      return;
+    }
+    chatSend.disabled = false;
+    chatStatus.textContent = '';
+    addBubble(message, 'me');
+    el('message').value = '';
+    const reply = ((viaMail ? cd.replyMail : cd.reply) ?? '').replace('{name}', name.slice(0, 24));
+    setTimeout(() => addBubble(reply, 'them'), reduced ? 0 : 700);
+    el('message').focus({ preventScroll: true });
+  }
+
+  /* ---- avatar: your photo if it exists, else Gravatar for the email, else the portrait, else initials ---- */
+  async function initAvatar() {
+    const photo = $('.msg__photo', dialog);
+    if (!photo) return;
+    const sources = [cfgGet('images.avatar')];
+    if (cfgGet('images.gravatar') && window.crypto?.subtle) {
+      try {
+        const bytes = new TextEncoder().encode(String(cfgGet('links.email')).trim().toLowerCase());
+        const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))]
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
+        sources.push(`https://gravatar.com/avatar/${hash}?s=160&d=404`);
+      } catch {
+        /* no Gravatar: skip it */
+      }
+    }
+    sources.push(cfgGet('images.portrait'));
+    for (const src of sources.filter(Boolean)) {
+      const ok = await new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve(true);
+        probe.onerror = () => resolve(false);
+        probe.src = src;
+      });
+      if (ok) {
+        photo.src = src;
+        photo.hidden = false;
+        return;
+      }
+    }
+  }
+
   /* ---- open / close ---- */
   function open(trigger) {
     root.classList.add('modal-open');
@@ -209,7 +334,9 @@ function initMessageDialog() {
     dialog.style.setProperty('--ox', `${spot.left + spot.width / 2 - box.left}px`);
     dialog.style.setProperty('--oy', `${spot.top + spot.height / 2 - box.top}px`);
     if (sent) reset();
-    else goTo(index);
+    const wanted = trigger.dataset.messageOpen === 'brief' ? 'brief' : 'chat';
+    goTo(index, { focus: false });
+    setMode(wanted);
     startHello();
   }
 
@@ -248,6 +375,34 @@ function initMessageDialog() {
   });
   dialog.addEventListener('close', () => root.classList.remove('modal-open'));
 
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => setMode(tab.dataset.msgTab));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const other = tabs[(i + 1) % tabs.length];
+      other.focus();
+      setMode(other.dataset.msgTab, { focus: false });
+    });
+  });
+  chatForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    void sendChat();
+  });
+  chatForm?.addEventListener('keydown', (e) => {
+    // Enter sends, Shift+Enter makes a new line (not while an input method is composing, e.g. Telex)
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.target instanceof HTMLTextAreaElement) {
+      e.preventDefault();
+      void sendChat();
+    }
+  });
+  chatForm?.addEventListener('input', (e) => {
+    const field = e.target;
+    if (field instanceof HTMLElement && field.getAttribute('aria-invalid') === 'true') {
+      field.removeAttribute('aria-invalid');
+      chatError.textContent = '';
+    }
+  });
   back.addEventListener('click', () => goTo(index - 1));
   trail.addEventListener('click', (e) => {
     const chip = e.target instanceof Element ? e.target.closest('[data-goto]') : null;
@@ -290,4 +445,6 @@ function initMessageDialog() {
   }
 
   goTo(0, { focus: false });
+  setMode('chat', { focus: false });
+  void initAvatar();
 }

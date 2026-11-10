@@ -23,30 +23,37 @@ function renderProjects(projects) {
   list.innerHTML = projects
     .map((p, index) => {
       const id = p.id;
+      const has = (key) => Boolean(I18N.dict[key]);
+      // counts come from the data, nothing is typed twice
+      const images = p.gallery?.length ? p.gallery : p.cover ? [p.cover] : [];
+      const cover = p.cover ?? images[0];
+      const slideCount = Math.max(1, images.length);
+      const highlightCount = numbered(new RegExp(`^project\\.${id}\\.highlight\\.(\\d+)$`)).length;
+      const metricCount = numbered(new RegExp(`^project\\.${id}\\.metric\\.(\\d+)\\.value$`)).length;
       const text = (name) => esc(t(`project.${id}.${name}`));
       const title = text('title');
       const neighbour = (step) => projects[(index + step + projects.length) % projects.length];
 
-      const slides = range(p.images)
+      const slides = range(slideCount)
         .map(
           (n) => `<figure class="gallery__slide">
   <div class="gallery__media">
     <span class="gallery__ph">${n}</span>
-    <img src="images/projects/project-${id}-${n}.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+    ${images[n - 1] ? `<img src="${esc(images[n - 1])}" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />` : ''}
   </div>
-  <figcaption>${text(`caption.${n}`)}</figcaption>
+  ${has(`project.${id}.caption.${n}`) ? `<figcaption>${text(`caption.${n}`)}</figcaption>` : ''}
 </figure>`,
         )
         .join('');
 
-      const metrics = p.metrics
-        ? `<ul class="metrics" aria-label="${esc(t('dialog.metrics_aria'))}">${range(p.metrics)
+      const metrics = metricCount
+        ? `<ul class="metrics" aria-label="${esc(t('dialog.metrics_aria'))}">${range(metricCount)
             .map((n) => `<li><strong>${text(`metric.${n}.value`)}</strong><span>${text(`metric.${n}.label`)}</span></li>`)
             .join('')}</ul>`
         : '';
 
-      const highlights = p.highlights
-        ? `<div><h4>${esc(t('dialog.highlights'))}</h4><ul class="highlights">${range(p.highlights)
+      const highlights = highlightCount
+        ? `<div><h4>${esc(t('dialog.highlights'))}</h4><ul class="highlights">${range(highlightCount)
             .map((n) => `<li>${text(`highlight.${n}`)}</li>`)
             .join('')}</ul></div>`
         : '';
@@ -72,7 +79,7 @@ function renderProjects(projects) {
     <span class="chrome"> <i></i> <i></i> <i></i> </span>
     <span class="screen">
       <span class="ph" aria-hidden="true">${ICON.image}</span>
-      <img src="images/projects/project-${id}.webp" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />
+      ${cover ? `<img src="${esc(cover)}" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />` : ''}
     </span>
   </span>
   <span class="info">
@@ -93,7 +100,7 @@ function renderProjects(projects) {
       <div class="gallery" data-gallery data-thumb-label="${esc(t('dialog.image'))}">
         <div class="gallery__track" tabindex="0" role="group" aria-roledescription="carousel" aria-label="${esc(t('dialog.gallery_aria'))}">${slides}</div>
         <div class="gallery__bar">
-          <span class="gallery__count" aria-live="polite">1 / ${p.images}</span>
+          <span class="gallery__count" aria-live="polite">1 / ${slideCount}</span>
           <div class="gallery__nav">
             <button class="gallery__btn" type="button" data-gallery-prev aria-label="${esc(t('dialog.prev_image'))}">${ICON.back}</button>
             <button class="gallery__btn" type="button" data-gallery-next aria-label="${esc(t('dialog.next_image'))}">${ICON.arrow}</button>
