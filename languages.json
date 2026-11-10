@@ -12,6 +12,10 @@
     "vi": "hello@example.com",
     "en": "hello@example.com"
   },
+  "site.mailto": {
+    "vi": "mailto:{{site.email}}",
+    "en": "mailto:{{site.email}}"
+  },
   "site.github": {
     "vi": "https://github.com/your-handle",
     "en": "https://github.com/your-handle"
@@ -19,6 +23,14 @@
   "site.linkedin": {
     "vi": "https://linkedin.com/in/your-handle",
     "en": "https://linkedin.com/in/your-handle"
+  },
+  "social.github": {
+    "vi": "GitHub",
+    "en": "GitHub"
+  },
+  "social.linkedin": {
+    "vi": "LinkedIn",
+    "en": "LinkedIn"
   },
   "site.city": {
     "vi": "[Thành phố, Quốc gia]",
@@ -71,10 +83,6 @@
     "en": "Contact"
   },
   "_lang": "=== Nút chuyển ngôn ngữ ===",
-  "lang.switch_href": {
-    "vi": "en/",
-    "en": "../"
-  },
   "lang.switch_code": {
     "vi": "en",
     "en": "vi"
@@ -96,6 +104,14 @@
     "vi": "Hello",
     "en": "Xin chào"
   },
+  "curtain.3": {
+    "vi": "你好",
+    "en": "你好"
+  },
+  "curtain.4": {
+    "vi": "こんにちは",
+    "en": "こんにちは"
+  },
   "_meta": "=== Tiêu đề trang + mô tả SEO ===",
   "meta.title": {
     "vi": "[Họ tên] — Portfolio lập trình viên",
@@ -113,6 +129,10 @@
   "header.theme_aria": {
     "vi": "Đổi giao diện sáng/tối",
     "en": "Toggle theme"
+  },
+  "header.menu_aria": {
+    "vi": "Menu",
+    "en": "Menu"
   },
   "_hero": "=== hero ===",
   "hero.section_title": {
@@ -158,6 +178,22 @@
   "hero.available": {
     "vi": "Sẵn sàng làm việc",
     "en": "Available for work"
+  },
+  "hero.portrait_hint": {
+    "vi": "images/portrait.webp",
+    "en": "images/portrait.webp"
+  },
+  "hero.stat_years_value": {
+    "vi": "00+",
+    "en": "00+"
+  },
+  "hero.stat_projects_value": {
+    "vi": "00",
+    "en": "00"
+  },
+  "hero.stat_tech_value": {
+    "vi": "00",
+    "en": "00"
   },
   "hero.stat_years": {
     "vi": "Năm kinh nghiệm",
@@ -770,6 +806,10 @@
     "vi": "Vui lòng nhập email hợp lệ.",
     "en": "Please enter a valid email address."
   },
+  "msg.step2_label": {
+    "vi": "Email",
+    "en": "Email"
+  },
   "msg.step2_q": {
     "vi": "Mình liên lạc với bạn qua đâu?",
     "en": "Where can I reach you?"
@@ -789,6 +829,10 @@
   "msg.opt_app": {
     "vi": "Ứng dụng",
     "en": "App"
+  },
+  "msg.opt_website": {
+    "vi": "Website",
+    "en": "Website"
   },
   "msg.opt_uiux": {
     "vi": "Thiết kế UI/UX",

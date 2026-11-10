@@ -1,5 +1,5 @@
 <!-- Message dialog + floating button -->
-<button class="fab" type="button" data-message-open aria-label="{{common.send_message}}">
+<button class="fab" type="button" data-message-open data-ta="aria-label:common.send_message">
   <svg
     width="20"
     height="20"
@@ -13,21 +13,21 @@
     focusable="false"
   >
     <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.2A8 8 0 1 1 21 12z" /></svg
-  ><span>{{common.message_short}}</span>
+  ><span data-t="common.message_short"></span>
 </button>
 
 <dialog
   class="msg"
   id="message-dialog"
-  aria-labelledby="msg-title"
-  data-words="{{msg.words}}"
+  aria-labelledby="msg-title" data-ta="data-words:msg.words"
+ 
 >
   <aside class="msg__side">
     <div class="msg__orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p class="msg__hello" aria-hidden="true"><span data-hello>{{curtain.1}}</span></p>
+    <p class="msg__hello" aria-hidden="true"><span data-hello data-t="curtain.1"></span></p>
     <div class="msg__intro">
-      <h2 id="msg-title">{{msg.title}}</h2>
-      <p>{{msg.intro}}</p>
+      <h2 id="msg-title" data-t="msg.title"></h2>
+      <p data-t="msg.intro"></p>
     </div>
     <ul class="msg__meta">
       <li>
@@ -46,7 +46,7 @@
           <path
             d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6"
           /></svg
-        ><a class="u" href="mailto:{{site.email}}">{{site.email}}</a>
+        ><a class="u" data-ta="href:site.mailto" data-t="site.email"></a>
       </li>
       <li>
         <svg
@@ -63,7 +63,7 @@
         >
           <circle cx="12" cy="12" r="9" />
           <path d="M12 7v5l3 2" /></svg
-        ><span>{{msg.reply_time}}</span>
+        ><span data-t="msg.reply_time"></span>
       </li>
       <li>
         <svg
@@ -80,15 +80,15 @@
         >
           <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
           <circle cx="12" cy="10" r="2.5" /></svg
-        ><span>{{site.city}}</span>
+        ><span data-t="site.city"></span>
       </li>
     </ul>
     <p class="msg__avatar">
-      <span class="msg__initials">{{site.initials}}<i></i></span><span>{{site.name}}</span>
+      <span class="msg__initials"><span data-t="site.initials"></span><i></i></span><span data-t="site.name"></span>
     </p>
   </aside>
   <div class="msg__main">
-    <button class="msg__close" type="button" data-msg-close aria-label="{{common.close}}">
+    <button class="msg__close" type="button" data-msg-close data-ta="aria-label:common.close">
       <svg
         width="20"
         height="20"
@@ -106,100 +106,100 @@
     </button>
     <div class="msg__top">
       <div class="msg__progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <p class="msg__count" aria-live="polite">{{msg.step_word}} <span data-current>1</span> {{msg.of_total}}</p>
+      <p class="msg__count" aria-live="polite"><span data-t="msg.step_word"></span> <span data-current>1</span> <span data-t="msg.of_total"></span></p>
     </div>
-    <ul class="msg__trail" data-trail aria-label="{{msg.answers_aria}}"></ul>
+    <ul class="msg__trail" data-trail data-ta="aria-label:msg.answers_aria"></ul>
     <form
       class="msg__form"
       data-msg-form
-      novalidate
-      data-email="{{site.email}}"
-      data-ok="{{msg.ok}}"
-      data-ok-mail="{{msg.ok_mail}}"
-      data-fail="{{msg.fail}}"
-      data-sending="{{msg.sending}}"
-      data-done-title="{{msg.done_title}}"
+      novalidate data-ta="data-email:site.email;data-ok:msg.ok;data-ok-mail:msg.ok_mail;data-fail:msg.fail;data-sending:msg.sending;data-done-title:msg.done_title"
+     
+     
+     
+     
+     
+     
     >
       <div class="msg__steps">
-        <div class="msg__step" data-step data-label="{{msg.step1_label}}" data-error="{{msg.step1_error}}">
-          <h3 class="msg__q" id="mq1">{{msg.step1_q}}</h3>
+        <div class="msg__step" data-step data-ta="data-label:msg.step1_label;data-error:msg.step1_error">
+          <h3 class="msg__q" id="mq1" data-t="msg.step1_q"></h3>
           <div class="msg__field">
             <input
               name="name"
               type="text"
               required
               autocomplete="name"
-              placeholder="{{msg.step1_placeholder}}"
+             
               aria-labelledby="mq1"
-              aria-describedby="me1"
+              aria-describedby="me1" data-ta="placeholder:msg.step1_placeholder"
             />
           </div>
           <p class="msg__error" id="me1" role="alert"></p>
         </div>
-        <div class="msg__step" data-step data-label="Email" data-error="{{msg.step2_error}}">
-          <h3 class="msg__q" id="mq2">{{msg.step2_q}}</h3>
+        <div class="msg__step" data-step data-ta="data-label:msg.step2_label;data-error:msg.step2_error">
+          <h3 class="msg__q" id="mq2" data-t="msg.step2_q"></h3>
           <div class="msg__field">
             <input
               name="email"
               type="email"
               required
               autocomplete="email"
-              placeholder="{{msg.step2_placeholder}}"
+             
               aria-labelledby="mq2"
-              aria-describedby="me2"
+              aria-describedby="me2" data-ta="placeholder:msg.step2_placeholder"
             />
           </div>
           <p class="msg__error" id="me2" role="alert"></p>
         </div>
-        <fieldset class="msg__step" data-step data-label="{{msg.step3_label}}">
-          <legend class="msg__q">{{msg.step3_q}}</legend>
+        <fieldset class="msg__step" data-step data-ta="data-label:msg.step3_label">
+          <legend class="msg__q" data-t="msg.step3_q"></legend>
           <div class="msg__opts">
             <label class="opt"
-              ><input type="checkbox" name="topics" value="Website" /><span>Website</span></label
+              ><input type="checkbox" name="topics" data-ta="value:msg.opt_website" /><span data-t="msg.opt_website"></span></label
             ><label class="opt"
-              ><input type="checkbox" name="topics" value="{{msg.opt_app}}" /><span>{{msg.opt_app}}</span></label
+              ><input type="checkbox" name="topics" data-ta="value:msg.opt_app" /><span data-t="msg.opt_app"></span></label
             ><label class="opt"
-              ><input type="checkbox" name="topics" value="{{msg.opt_uiux}}" /><span
-                >{{msg.opt_uiux}}</span
+              ><input type="checkbox" name="topics" data-ta="value:msg.opt_uiux" /><span data-t="msg.opt_uiux"
+                ></span
               ></label
             ><label class="opt"
-              ><input type="checkbox" name="topics" value="{{msg.opt_perf}}" /><span
-                >{{msg.opt_perf}}</span
+              ><input type="checkbox" name="topics" data-ta="value:msg.opt_perf" /><span data-t="msg.opt_perf"
+                ></span
               ></label
-            ><label class="opt"><input type="checkbox" name="topics" value="{{msg.opt_other}}" /><span>{{msg.opt_other}}</span></label>
+            ><label class="opt"><input type="checkbox" name="topics" data-ta="value:msg.opt_other" /><span data-t="msg.opt_other"></span></label>
           </div>
-          <p class="msg__note">{{msg.step3_hint}}</p>
+          <p class="msg__note" data-t="msg.step3_hint"></p>
         </fieldset>
-        <fieldset class="msg__step" data-step data-label="{{msg.step4_label}}">
-          <legend class="msg__q">{{msg.step4_q}}</legend>
+        <fieldset class="msg__step" data-step data-ta="data-label:msg.step4_label">
+          <legend class="msg__q" data-t="msg.step4_q"></legend>
           <div class="msg__opts">
-            <label class="opt"><input type="radio" name="budget" value="{{msg.tier_1}}" /><span>{{msg.tier_1}}</span></label
+            <label class="opt"><input type="radio" name="budget" data-ta="value:msg.tier_1" /><span data-t="msg.tier_1"></span></label
             ><label class="opt"
-              ><input type="radio" name="budget" value="{{msg.tier_2}}" /><span>{{msg.tier_2}}</span></label
+              ><input type="radio" name="budget" data-ta="value:msg.tier_2" /><span data-t="msg.tier_2"></span></label
             ><label class="opt"
-              ><input type="radio" name="budget" value="{{msg.tier_3}}" /><span>{{msg.tier_3}}</span></label
+              ><input type="radio" name="budget" data-ta="value:msg.tier_3" /><span data-t="msg.tier_3"></span></label
             ><label class="opt"
-              ><input type="radio" name="budget" value="{{msg.opt_unsure}}" /><span>{{msg.opt_unsure}}</span></label
+              ><input type="radio" name="budget" data-ta="value:msg.opt_unsure" /><span data-t="msg.opt_unsure"></span></label
             >
           </div>
-          <p class="msg__note">{{msg.optional}}</p>
+          <p class="msg__note" data-t="msg.optional"></p>
         </fieldset>
         <div
           class="msg__step"
-          data-step
-          data-label="{{msg.step5_label}}"
-          data-error="{{msg.step5_error}}"
+          data-step data-ta="data-label:msg.step5_label;data-error:msg.step5_error"
+         
+         
         >
-          <h3 class="msg__q" id="mq5">{{msg.step5_q}}</h3>
+          <h3 class="msg__q" id="mq5" data-t="msg.step5_q"></h3>
           <div class="msg__field">
             <textarea
               name="message"
               required
               rows="4"
               maxlength="600"
-              placeholder="{{msg.step5_placeholder}}"
+             
               aria-labelledby="mq5"
-              aria-describedby="me5"
+              aria-describedby="me5" data-ta="placeholder:msg.step5_placeholder"
             ></textarea
             ><span class="msg__counter" data-counter>0/600</span>
           </div>
@@ -221,23 +221,23 @@
             focusable="false"
           >
             <path d="M19 12H5M11 6l-6 6 6 6" /></svg
-          >{{msg.back}}
+          ><span data-t="msg.back"></span>
         </button>
         <span
           class="msg__hint"
-          data-hint
-          data-hint-next="{{msg.hint_next}}"
-          data-hint-send="{{msg.hint_send}}"
-          >{{msg.hint_next}}</span
+          data-hint data-ta="data-hint-next:msg.hint_next;data-hint-send:msg.hint_send" data-t="msg.hint_next"
+         
+         
+          ></span
         >
         <button
           class="btn solid msg__next"
           type="submit"
-          data-msg-next
-          data-label-next="{{msg.next}}"
-          data-label-send="{{common.send_message}}"
+          data-msg-next data-ta="data-label-next:msg.next;data-label-send:common.send_message"
+         
+         
         >
-          <span>{{msg.next}}</span
+          <span data-t="msg.next"></span
           ><svg
             width="18"
             height="18"
@@ -263,7 +263,7 @@
       </svg>
       <h3 data-done-title></h3>
       <p data-done-text></p>
-      <button class="btn" type="button" data-msg-again>{{msg.again}}</button>
+      <button class="btn" type="button" data-msg-again data-t="msg.again"></button>
       <div class="msg__burst" aria-hidden="true"></div>
     </div>
   </div>

@@ -1,37 +1,37 @@
 <div class="curtain" aria-hidden="true">
-  <span style="--k: 0">{{curtain.1}}</span><span style="--k: 1">{{curtain.2}}</span><span style="--k: 2">你好</span
-  ><span style="--k: 3">こんにちは</span>
+  <span style="--k: 0" data-t="curtain.1"></span><span style="--k: 1" data-t="curtain.2"></span><span style="--k: 2" data-t="curtain.3"></span
+  ><span style="--k: 3" data-t="curtain.4"></span>
 </div>
-<a class="skip" href="#main">{{header.skip}}</a>
+<a class="skip" href="#main" data-t="header.skip"></a>
 <div class="progress" aria-hidden="true"></div>
 <div class="hud" aria-hidden="true">
   <div class="hud-frame"><i></i><i></i><i></i><i></i></div>
 </div>
 <header data-header>
   <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="{{site.name}}">{{site.initials}}<i>.</i></a>
-    <nav class="nav" data-nav aria-label="{{nav.aria}}">
+    <a class="logo" href="#top" data-ta="aria-label:site.name"><span data-t="site.initials"></span><i>.</i></a>
+    <nav class="nav" data-nav data-ta="aria-label:nav.aria">
       <a href="#about"
-        ><span class="roll"><span data-text="{{nav.about}}">{{nav.about}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.about" data-t="nav.about"></span></span></a
       ><a href="#skills"
-        ><span class="roll"><span data-text="{{nav.skills}}">{{nav.skills}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.skills" data-t="nav.skills"></span></span></a
       ><a href="#projects"
-        ><span class="roll"><span data-text="{{nav.projects}}">{{nav.projects}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.projects" data-t="nav.projects"></span></span></a
       ><a href="#experience"
-        ><span class="roll"><span data-text="{{nav.experience}}">{{nav.experience}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.experience" data-t="nav.experience"></span></span></a
       ><a href="#education"
-        ><span class="roll"><span data-text="{{nav.education}}">{{nav.education}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.education" data-t="nav.education"></span></span></a
       ><a href="#certificates"
-        ><span class="roll"><span data-text="{{nav.certificates}}">{{nav.certificates}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.certificates" data-t="nav.certificates"></span></span></a
       ><a href="#contact"
-        ><span class="roll"><span data-text="{{nav.contact}}">{{nav.contact}}</span></span></a
+        ><span class="roll"><span data-ta="data-text:nav.contact" data-t="nav.contact"></span></span></a
       >
       <span class="indicator" data-indicator aria-hidden="true"></span>
     </nav>
     <div class="tools">
-      <button class="pill pill--cta" type="button" data-message-open>{{common.message_short}}</button>
-      <a class="pill" href="{{lang.switch_href}}" hreflang="{{lang.switch_code}}" lang="{{lang.switch_code}}" aria-label="{{lang.switch_aria}}">{{lang.switch_label}}</a>
-      <button class="pill theme" type="button" data-theme-toggle aria-label="{{header.theme_aria}}">
+      <button class="pill pill--cta" type="button" data-message-open data-t="common.message_short"></button>
+      <a class="pill" href="?" data-lang-switch data-ta="hreflang:lang.switch_code;lang:lang.switch_code;aria-label:lang.switch_aria" data-t="lang.switch_label"></a>
+      <button class="pill theme" type="button" data-theme-toggle data-ta="aria-label:header.theme_aria">
         <svg
           viewBox="0 0 24 24"
           width="18"
@@ -56,16 +56,16 @@
         data-menu-btn
         aria-expanded="false"
         aria-controls="mobile-nav"
-        aria-label="Menu"
+        data-ta="aria-label:header.menu_aria"
       >
         <span class="l1"></span><span class="l2"></span>
       </button>
     </div>
   </div>
-  <nav id="mobile-nav" class="mobile" data-mobile-nav aria-label="{{nav.aria}}">
-    <a href="#about" style="--i: 0"> {{nav.about}} </a><a href="#skills" style="--i: 1"> {{nav.skills}} </a
-    ><a href="#projects" style="--i: 2"> {{nav.projects}} </a><a href="#experience" style="--i: 3"> {{nav.experience}} </a
-    ><a href="#education" style="--i: 4"> {{nav.education}} </a><a href="#certificates" style="--i: 5"> {{nav.certificates}} </a
-    ><a href="#contact" style="--i: 6"> {{nav.contact}} </a>
+  <nav id="mobile-nav" class="mobile" data-mobile-nav data-ta="aria-label:nav.aria">
+    <a href="#about" style="--i: 0" data-t="nav.about"></a><a href="#skills" style="--i: 1" data-t="nav.skills"></a
+    ><a href="#projects" style="--i: 2" data-t="nav.projects"></a><a href="#experience" style="--i: 3" data-t="nav.experience"></a
+    ><a href="#education" style="--i: 4" data-t="nav.education"></a><a href="#certificates" style="--i: 5" data-t="nav.certificates"></a
+    ><a href="#contact" style="--i: 6" data-t="nav.contact"></a>
   </nav>
 </header>

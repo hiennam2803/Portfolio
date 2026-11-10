@@ -276,6 +276,11 @@ body::after {
   opacity: 0.06;
 }
 
+/* content is filled from languages.json by js/main.js: stay hidden until it is in (see initContent) */
+html.js:not(.ready) body {
+  visibility: hidden;
+}
+
 /* Reusable primitives: underlined links and square, mono-labelled buttons. */
 .u {
   background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;

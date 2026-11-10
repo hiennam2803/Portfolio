@@ -1,4 +1,6 @@
 utils
+i18n
+projects-render
 theme
 reveal
 scrub
@@ -13,4 +15,3 @@ portrait
 project-dialog
 message-dialog
 main
-

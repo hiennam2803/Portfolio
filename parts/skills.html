@@ -1,26 +1,20 @@
 <!-- Skills -->
 <section class="section" id="skills" aria-labelledby="skills-h">
   <div class="wrap grid">
-    <h2 id="skills-h" class="rail" data-split>{{nav.skills}}</h2>
+    <h2 id="skills-h" class="rail" data-split data-t="nav.skills"></h2>
     <div class="body">
       <div class="groups" data-stagger>
         <div class="group" data-reveal>
-          <h3>{{skills.group.lang}}</h3>
-          <ul>
-            {{skills_lang}}
-          </ul>
+          <h3 data-t="skills.group.lang"></h3>
+          <ul data-list="skills.lang"></ul>
         </div>
         <div class="group" data-reveal>
-          <h3>{{skills.group.fw}}</h3>
-          <ul>
-            {{skills_fw}}
-          </ul>
+          <h3 data-t="skills.group.fw"></h3>
+          <ul data-list="skills.fw"></ul>
         </div>
         <div class="group" data-reveal>
-          <h3>{{skills.group.tools}}</h3>
-          <ul>
-            {{skills_tools}}
-          </ul>
+          <h3 data-t="skills.group.tools"></h3>
+          <ul data-list="skills.tools"></ul>
         </div>
       </div>
     </div>

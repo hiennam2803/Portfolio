@@ -1,14 +1,12 @@
 <!doctype html>
-<html lang="{{lang}}" data-theme="light">
+<html data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>{{title}}</title>
-    <meta name="description" content="{{description}}" />
-    <link rel="canonical" href="{{canonical}}" />
-    <link rel="alternate" hreflang="vi" href="{{alt_vi}}" />
-    <link rel="alternate" hreflang="en" href="{{alt_en}}" />
-    <link rel="icon" href="{{root}}favicon.svg" type="image/svg+xml" />
+    <!-- Title + description are filled from languages.json (meta.title, meta.description) -->
+    <title></title>
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#eef1f5" />
     <!-- Set theme + js flag before paint: no flash, no layout shift -->
     <script>
@@ -25,23 +23,27 @@
           if (sessionStorage.getItem('seen')) d.classList.add('seen');
           else sessionStorage.setItem('seen', '1');
         } catch (e) {}
+        // never leave the page hidden if the content fails to load
+        setTimeout(function () {
+          d.classList.add('ready');
+        }, 3000);
       })();
     </script>
     <link
       rel="preload"
-      href="{{root}}fonts/archivo-latin-wdth-normal.woff2"
+      href="fonts/archivo-latin-wdth-normal.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="{{root}}fonts/jetbrains-mono-latin-wght-normal.woff2"
+      href="fonts/jetbrains-mono-latin-wght-normal.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="{{root}}css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     {{header}}
@@ -50,6 +52,6 @@
 
     {{footer}} {{dialogs}}
 
-    <script src="{{root}}js/main.js" defer></script>
+    <script src="js/main.js" defer></script>
   </body>
 </html>
