@@ -1,0 +1,43 @@
+/* Skills: a bill of materials. One ruled row per group, tags with a hard offset shadow on hover. */
+#skills .groups {
+  border-top: 1px solid var(--ink);
+}
+#skills .group {
+  display: grid;
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--line);
+}
+#skills h3 {
+  font-size: var(--step-2);
+}
+#skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+#skills li {
+  padding: 0.65rem 1.1rem;
+  border: 1px solid var(--ink);
+  background: var(--bg);
+  font: 500 1.1rem / 1 var(--font-mono);
+  cursor: default;
+  transition:
+    transform var(--d-base) var(--ease-soft),
+    box-shadow var(--d-base) var(--ease-out),
+    background var(--d-fast),
+    border-color var(--d-fast);
+}
+#skills li:hover {
+  transform: translate(-3px, -3px);
+  border-color: var(--ink);
+  background: var(--signal);
+  color: var(--on-signal);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+@media (min-width: 48rem) {
+  #skills .group {
+    grid-template-columns: 17rem 1fr;
+    align-items: center;
+  }
+}

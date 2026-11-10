@@ -1,0 +1,53 @@
+/* Technology ticker: two rows of condensed display type, filled / outlined, reacting to scroll speed (see JS). */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--ink);
+  background: var(--bg);
+}
+.marquee__row {
+  overflow: hidden;
+  transform: skewX(var(--skew, 0deg));
+}
+.marquee__row + .marquee__row {
+  border-top: 1px solid var(--line);
+}
+.marquee .track {
+  display: flex;
+  width: max-content;
+  animation: slide 60s linear infinite;
+}
+.marquee .track--rev {
+  animation-direction: reverse;
+  animation-duration: 75s;
+}
+.marquee ul {
+  display: flex;
+  flex: none;
+}
+.marquee li {
+  position: relative;
+  padding: 0.1em var(--s-6);
+  font: 800 clamp(3rem, 1rem + 8vw, 8rem) / 1.05 var(--font-display);
+  font-variation-settings: 'wdth' 66;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.marquee li:nth-child(even) {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+.marquee li::after {
+  content: '+';
+  position: absolute;
+  right: -0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--signal);
+  font: 400 1.5rem var(--font-mono);
+  -webkit-text-stroke: 0;
+}
+@keyframes slide {
+  to {
+    transform: translateX(-50%);
+  }
+}

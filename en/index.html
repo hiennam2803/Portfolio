@@ -1,0 +1,1255 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[Your Name] — Developer Portfolio</title>
+    <meta name="description" content="[One-sentence description of what you build.]" />
+    <link rel="canonical" href="https://example.com/en/" />
+    <link rel="alternate" hreflang="vi" href="https://example.com/" />
+    <link rel="alternate" hreflang="en" href="https://example.com/en/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#eef1f5" />
+    <!-- Set theme + js flag before paint: no flash, no layout shift -->
+    <script>
+      (function () {
+        var d = document.documentElement,
+          t;
+        try {
+          t = localStorage.getItem('theme');
+        } catch (e) {}
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        d.dataset.theme = t;
+        d.classList.add('js');
+        try {
+          if (sessionStorage.getItem('seen')) d.classList.add('seen');
+          else sessionStorage.setItem('seen', '1');
+        } catch (e) {}
+      })();
+    </script>
+    <link
+      rel="preload"
+      href="../fonts/archivo-latin-wdth-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/jetbrains-mono-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="curtain" aria-hidden="true">
+  <span style="--k: 0">Hello</span><span style="--k: 1">Xin chào</span><span style="--k: 2">你好</span
+  ><span style="--k: 3">こんにちは</span>
+</div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<div class="hud" aria-hidden="true">
+  <div class="hud-frame"><i></i><i></i><i></i><i></i></div>
+</div>
+<header data-header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Your Name">YN<i>.</i></a>
+    <nav class="nav" data-nav aria-label="Primary">
+      <a href="#about"
+        ><span class="roll"><span data-text="About">About</span></span></a
+      ><a href="#skills"
+        ><span class="roll"><span data-text="Skills">Skills</span></span></a
+      ><a href="#projects"
+        ><span class="roll"><span data-text="Projects">Projects</span></span></a
+      ><a href="#experience"
+        ><span class="roll"><span data-text="Experience">Experience</span></span></a
+      ><a href="#education"
+        ><span class="roll"><span data-text="Education">Education</span></span></a
+      ><a href="#certificates"
+        ><span class="roll"><span data-text="Certificates">Certificates</span></span></a
+      ><a href="#contact"
+        ><span class="roll"><span data-text="Contact">Contact</span></span></a
+      >
+      <span class="indicator" data-indicator aria-hidden="true"></span>
+    </nav>
+    <div class="tools">
+      <button class="pill pill--cta" type="button" data-message-open>Message</button>
+      <a class="pill" href="../" hreflang="vi" lang="vi" aria-label="Tiếng Việt">VI</a>
+      <button class="pill theme" type="button" data-theme-toggle aria-label="Toggle theme">
+        <svg
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <circle class="core" cx="12" cy="12" r="4.5"></circle>
+          <g class="rays">
+            <path
+              d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            ></path>
+          </g>
+        </svg>
+      </button>
+      <button
+        class="pill menu"
+        type="button"
+        data-menu-btn
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Menu"
+      >
+        <span class="l1"></span><span class="l2"></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile" data-mobile-nav aria-label="Primary">
+    <a href="#about" style="--i: 0"> About </a><a href="#skills" style="--i: 1"> Skills </a
+    ><a href="#projects" style="--i: 2"> Projects </a><a href="#experience" style="--i: 3"> Experience </a
+    ><a href="#education" style="--i: 4"> Education </a><a href="#certificates" style="--i: 5"> Certificates </a
+    ><a href="#contact" style="--i: 6"> Contact </a>
+  </nav>
+</header>
+
+    <main id="main"><section id="top" data-title="Home" class="hero" aria-labelledby="hero-h">
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="top">
+      <div class="main">
+        <p class="hello">[Short greeting]</p>
+        <h1 id="hero-h">
+          <span class="line"> <span style="--i: 0">Your</span> </span
+          ><span class="line"> <span style="--i: 1">Name.</span> </span>
+        </h1>
+        <p class="role">[Your role, e.g. Frontend Developer]</p>
+        <p class="intro">[Two sentences about what you build and what you care about.]</p>
+        <div class="actions">
+          <a class="btn solid" href="#projects" data-magnetic
+            >View projects<svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6"></path></svg
+          ></a>
+          <a class="btn" href="#contact" data-magnetic>Get in touch</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <div class="photo">
+          <!-- Portrait (4:5): save your photo as images/portrait.webp (or .jpg and change src). Until the file exists, the placeholder shows. -->
+          <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg><small>images/portrait.webp</small></span>
+          <img src="../images/portrait.webp" alt="Portrait" width="640" height="800" fetchpriority="high" decoding="async" onerror="this.remove()" />
+        </div>
+        <button class="badge" type="button" data-message-open aria-label="Send a message">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="badge-path" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" /></defs>
+            <text>
+              <textPath href="#badge-path" textLength="284" lengthAdjust="spacing">
+                Send a message • Send a message •
+              </textPath>
+            </text>
+          </svg>
+          <span class="badge__arrow"
+            ><svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" /></svg
+          ></span>
+        </button>
+        <figcaption class="chip"><span class="dot" aria-hidden="true"></span>Available for work</figcaption>
+      </figure>
+    </div>
+    <dl class="stats">
+      <div>
+        <dd data-count>00+</dd>
+        <dt>Years of experience</dt>
+      </div>
+      <div>
+        <dd data-count>00</dd>
+        <dt>Projects shipped</dt>
+      </div>
+      <div>
+        <dd data-count>00</dd>
+        <dt>Technologies</dt>
+      </div>
+    </dl>
+    <a class="scroll" href="#about" aria-label="Scroll"
+      ><span class="track"><i></i></span><span>Scroll</span></a
+    >
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__row">
+    <div class="track">
+      <ul><li>[Language] 1</li>
+<li>[Language] 2</li>
+<li>[Language] 3</li>
+<li>[Framework] 1</li>
+<li>[Framework] 2</li>
+<li>[Tool] 1</li>
+<li>[Tool] 2</li>
+<li>[Tool] 3</li></ul>
+      <ul><li>[Language] 1</li>
+<li>[Language] 2</li>
+<li>[Language] 3</li>
+<li>[Framework] 1</li>
+<li>[Framework] 2</li>
+<li>[Tool] 1</li>
+<li>[Tool] 2</li>
+<li>[Tool] 3</li></ul>
+    </div>
+  </div>
+  <div class="marquee__row">
+    <div class="track track--rev">
+      <ul><li>[Language] 1</li>
+<li>[Language] 2</li>
+<li>[Language] 3</li>
+<li>[Framework] 1</li>
+<li>[Framework] 2</li>
+<li>[Tool] 1</li>
+<li>[Tool] 2</li>
+<li>[Tool] 3</li></ul>
+      <ul><li>[Language] 1</li>
+<li>[Language] 2</li>
+<li>[Language] 3</li>
+<li>[Framework] 1</li>
+<li>[Framework] 2</li>
+<li>[Tool] 1</li>
+<li>[Tool] 2</li>
+<li>[Tool] 3</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="section" id="about" aria-labelledby="about-h">
+  <div class="wrap grid">
+    <h2 id="about-h" class="rail" data-split>About</h2>
+    <div class="body">
+      <div class="text" data-stagger>
+        <p class="lead" data-scrub>[Paragraph one: who you are and how you work.]</p>
+        <p class data-reveal>[Paragraph two: what you are looking for or currently exploring.]</p>
+      </div>
+      <dl data-stagger>
+        <div data-reveal>
+          <dt>Location</dt>
+          <dd>[City, Country]</dd>
+        </div>
+        <div data-reveal>
+          <dt>Focus</dt>
+          <dd>[Your focus]</dd>
+        </div>
+        <div data-reveal>
+          <dt>Languages</dt>
+          <dd>Vietnamese, English</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section" id="skills" aria-labelledby="skills-h">
+  <div class="wrap grid">
+    <h2 id="skills-h" class="rail" data-split>Skills</h2>
+    <div class="body">
+      <div class="groups" data-stagger>
+        <div class="group" data-reveal>
+          <h3>Languages</h3>
+          <ul>
+            <li>[Language] 1</li>
+<li>[Language] 2</li>
+<li>[Language] 3</li>
+          </ul>
+        </div>
+        <div class="group" data-reveal>
+          <h3>Frameworks</h3>
+          <ul>
+            <li>[Framework] 1</li>
+<li>[Framework] 2</li>
+          </ul>
+        </div>
+        <div class="group" data-reveal>
+          <h3>Tools</h3>
+          <ul>
+            <li>[Tool] 1</li>
+<li>[Tool] 2</li>
+<li>[Tool] 3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects: the list is generated from projects.json (data) + project.N.* in languages.json (text), using parts/project.html -->
+<section class="section" id="projects" aria-labelledby="projects-h">
+  <div class="wrap grid">
+    <h2 id="projects-h" class="rail" data-split>Projects</h2>
+    <div class="body">
+      <ul data-stagger>
+        <li data-reveal>
+  <a
+    class="row"
+    data-tilt
+    data-project-open="project-1"
+    href="#project-1"
+    aria-haspopup="dialog"
+    aria-label="View project details: [Project one]"
+  >
+    <span class="frame" aria-hidden="true">
+      <span class="chrome"> <i></i> <i></i> <i></i> </span>
+      <span class="screen">
+        <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg></span>
+        <img src="../images/projects/project-1.webp" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />
+      </span>
+    </span>
+    <span class="info">
+      <span class="meta">
+        <span>2025</span> <span class="stack">[Tech 1] · [Tech 2] · [Tech 3]</span>
+      </span>
+      <h3>[Project one]</h3>
+      <p>[What the project does and the problem it solves.]</p>
+      <span class="go">
+        View details
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </span>
+    </span>
+  </a>
+  <dialog class="modal" id="project-1" aria-labelledby="project-1-title" data-index="0">
+    <div class="modal__top">
+      <p class="modal__crumb"><span>Project details</span><b>01 / 03</b></p>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <div class="modal__scroll">
+      <div class="modal__layout">
+        <div class="gallery" data-gallery data-thumb-label="Image">
+          <div
+            class="gallery__track"
+            tabindex="0"
+            role="group"
+            aria-roledescription="carousel"
+            aria-label="Project images"
+          >
+            <figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">1</span>
+    <img src="../images/projects/project-1-1.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 1</figcaption>
+</figure>
+<figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">2</span>
+    <img src="../images/projects/project-1-2.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 2</figcaption>
+</figure>
+<figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">3</span>
+    <img src="../images/projects/project-1-3.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 3</figcaption>
+</figure>
+          </div>
+          <div class="gallery__bar">
+            <span class="gallery__count" aria-live="polite">1 / 3</span>
+            <div class="gallery__nav">
+              <button class="gallery__btn" type="button" data-gallery-prev aria-label="Previous image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="transform: scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </button>
+              <button class="gallery__btn" type="button" data-gallery-next aria-label="Next image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div class="gallery__thumbs"></div>
+        </div>
+        <div class="modal__info" data-stagger>
+          <p class="modal__meta"><span>2025</span><span class="modal__status" data-status="done">Completed</span></p>
+          <h3 id="project-1-title">[Project one]</h3>
+          <p class="modal__lead">[What the project does and the problem it solves.]</p>
+          <ul class="metrics" aria-label="Key metrics">
+  <li><strong>[00%]</strong><span>[Metric] 1</span></li>
+  <li><strong>[00%]</strong><span>[Metric] 2</span></li>
+  <li><strong>[00%]</strong><span>[Metric] 3</span></li>
+</ul>
+          <p class="modal__text">[A longer description: the context, the goal and who the project is for.]</p>
+          <dl class="facts">
+            <div>
+              <dt>Role</dt>
+              <dd>[Your role]</dd>
+            </div>
+            <div>
+              <dt>Duration</dt>
+              <dd>[How long it took]</dd>
+            </div>
+            <div>
+              <dt>Team size</dt>
+              <dd>[Number of people]</dd>
+            </div>
+          </dl>
+          <ol class="case">
+            <li>
+              <h4>Problem</h4>
+              <p>[Problem: what users or the business were struggling with.]</p>
+            </li>
+            <li>
+              <h4>Solution</h4>
+              <p>[Solution: how you designed and built it.]</p>
+            </li>
+            <li>
+              <h4>Result</h4>
+              <p>[Result: the measurable impact.]</p>
+            </li>
+          </ol>
+          <div>
+  <h4>Highlights</h4>
+  <ul class="highlights">
+    <li>[Highlight] 1</li>
+    <li>[Highlight] 2</li>
+    <li>[Highlight] 3</li>
+  </ul>
+</div>
+          <div>
+            <h4>Tech stack</h4>
+            <ul class="tags">
+              <li>[Tech 1]</li>
+<li>[Tech 2]</li>
+<li>[Tech 3]</li>
+            </ul>
+          </div>
+          <div class="modal__links">
+            <a class="btn solid" href="#" target="_blank" rel="noopener">Live demo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a class="btn" href="#" target="_blank" rel="noopener">Source code</a>
+            <button class="btn" type="button" data-copy="https://example.com/en/#project-1" data-copied="Copied">Copy link</button>
+          </div>
+        </div>
+      </div>
+      <nav class="modal__pager" aria-label="Switch project">
+  <button class="pager" type="button" data-project-go="project-3">
+    <span class="pager__dir">&larr; Previous project</span>
+    <span class="pager__title">[Project three]</span>
+  </button>
+  <button class="pager" type="button" data-project-go="project-2">
+    <span class="pager__dir">Next project &rarr;</span>
+    <span class="pager__title">[Project two]</span>
+  </button>
+</nav>
+    </div>
+  </dialog>
+</li>
+<li data-reveal>
+  <a
+    class="row"
+    data-tilt
+    data-project-open="project-2"
+    href="#project-2"
+    aria-haspopup="dialog"
+    aria-label="View project details: [Project two]"
+  >
+    <span class="frame" aria-hidden="true">
+      <span class="chrome"> <i></i> <i></i> <i></i> </span>
+      <span class="screen">
+        <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg></span>
+        <img src="../images/projects/project-2.webp" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />
+      </span>
+    </span>
+    <span class="info">
+      <span class="meta">
+        <span>2024</span> <span class="stack">[Tech 1] · [Tech 2]</span>
+      </span>
+      <h3>[Project two]</h3>
+      <p>[What the project does and the problem it solves.]</p>
+      <span class="go">
+        View details
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </span>
+    </span>
+  </a>
+  <dialog class="modal" id="project-2" aria-labelledby="project-2-title" data-index="1">
+    <div class="modal__top">
+      <p class="modal__crumb"><span>Project details</span><b>02 / 03</b></p>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <div class="modal__scroll">
+      <div class="modal__layout">
+        <div class="gallery" data-gallery data-thumb-label="Image">
+          <div
+            class="gallery__track"
+            tabindex="0"
+            role="group"
+            aria-roledescription="carousel"
+            aria-label="Project images"
+          >
+            <figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">1</span>
+    <img src="../images/projects/project-2-1.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 1</figcaption>
+</figure>
+<figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">2</span>
+    <img src="../images/projects/project-2-2.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 2</figcaption>
+</figure>
+<figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">3</span>
+    <img src="../images/projects/project-2-3.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 3</figcaption>
+</figure>
+          </div>
+          <div class="gallery__bar">
+            <span class="gallery__count" aria-live="polite">1 / 3</span>
+            <div class="gallery__nav">
+              <button class="gallery__btn" type="button" data-gallery-prev aria-label="Previous image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="transform: scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </button>
+              <button class="gallery__btn" type="button" data-gallery-next aria-label="Next image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div class="gallery__thumbs"></div>
+        </div>
+        <div class="modal__info" data-stagger>
+          <p class="modal__meta"><span>2024</span><span class="modal__status" data-status="done">Completed</span></p>
+          <h3 id="project-2-title">[Project two]</h3>
+          <p class="modal__lead">[What the project does and the problem it solves.]</p>
+          <ul class="metrics" aria-label="Key metrics">
+  <li><strong>[00%]</strong><span>[Metric] 1</span></li>
+  <li><strong>[00%]</strong><span>[Metric] 2</span></li>
+  <li><strong>[00%]</strong><span>[Metric] 3</span></li>
+</ul>
+          <p class="modal__text">[A longer description: the context, the goal and who the project is for.]</p>
+          <dl class="facts">
+            <div>
+              <dt>Role</dt>
+              <dd>[Your role]</dd>
+            </div>
+            <div>
+              <dt>Duration</dt>
+              <dd>[How long it took]</dd>
+            </div>
+            <div>
+              <dt>Team size</dt>
+              <dd>[Number of people]</dd>
+            </div>
+          </dl>
+          <ol class="case">
+            <li>
+              <h4>Problem</h4>
+              <p>[Problem: what users or the business were struggling with.]</p>
+            </li>
+            <li>
+              <h4>Solution</h4>
+              <p>[Solution: how you designed and built it.]</p>
+            </li>
+            <li>
+              <h4>Result</h4>
+              <p>[Result: the measurable impact.]</p>
+            </li>
+          </ol>
+          <div>
+  <h4>Highlights</h4>
+  <ul class="highlights">
+    <li>[Highlight] 1</li>
+    <li>[Highlight] 2</li>
+    <li>[Highlight] 3</li>
+  </ul>
+</div>
+          <div>
+            <h4>Tech stack</h4>
+            <ul class="tags">
+              <li>[Tech 1]</li>
+<li>[Tech 2]</li>
+            </ul>
+          </div>
+          <div class="modal__links">
+            <a class="btn solid" href="#" target="_blank" rel="noopener">Live demo<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a class="btn" href="#" target="_blank" rel="noopener">Source code</a>
+            <button class="btn" type="button" data-copy="https://example.com/en/#project-2" data-copied="Copied">Copy link</button>
+          </div>
+        </div>
+      </div>
+      <nav class="modal__pager" aria-label="Switch project">
+  <button class="pager" type="button" data-project-go="project-1">
+    <span class="pager__dir">&larr; Previous project</span>
+    <span class="pager__title">[Project one]</span>
+  </button>
+  <button class="pager" type="button" data-project-go="project-3">
+    <span class="pager__dir">Next project &rarr;</span>
+    <span class="pager__title">[Project three]</span>
+  </button>
+</nav>
+    </div>
+  </dialog>
+</li>
+<li data-reveal>
+  <a
+    class="row"
+    data-tilt
+    data-project-open="project-3"
+    href="#project-3"
+    aria-haspopup="dialog"
+    aria-label="View project details: [Project three]"
+  >
+    <span class="frame" aria-hidden="true">
+      <span class="chrome"> <i></i> <i></i> <i></i> </span>
+      <span class="screen">
+        <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg></span>
+        <img src="../images/projects/project-3.webp" alt="" width="640" height="400" loading="lazy" decoding="async" onerror="this.remove()" />
+      </span>
+    </span>
+    <span class="info">
+      <span class="meta">
+        <span>2023</span> <span class="stack">[Tech 1] · [Tech 2] · [Tech 3]</span>
+      </span>
+      <h3>[Project three]</h3>
+      <p>[What the project does and the problem it solves.]</p>
+      <span class="go">
+        View details
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </span>
+    </span>
+  </a>
+  <dialog class="modal" id="project-3" aria-labelledby="project-3-title" data-index="2">
+    <div class="modal__top">
+      <p class="modal__crumb"><span>Project details</span><b>03 / 03</b></p>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <div class="modal__scroll">
+      <div class="modal__layout">
+        <div class="gallery" data-gallery data-thumb-label="Image">
+          <div
+            class="gallery__track"
+            tabindex="0"
+            role="group"
+            aria-roledescription="carousel"
+            aria-label="Project images"
+          >
+            <figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">1</span>
+    <img src="../images/projects/project-3-1.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 1</figcaption>
+</figure>
+<figure class="gallery__slide">
+  <div class="gallery__media">
+    <span class="gallery__ph">2</span>
+    <img src="../images/projects/project-3-2.webp" alt="" width="1280" height="800" loading="lazy" decoding="async" onerror="this.remove()" />
+  </div>
+  <figcaption>[Image caption] 2</figcaption>
+</figure>
+          </div>
+          <div class="gallery__bar">
+            <span class="gallery__count" aria-live="polite">1 / 2</span>
+            <div class="gallery__nav">
+              <button class="gallery__btn" type="button" data-gallery-prev aria-label="Previous image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="transform: scaleX(-1)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </button>
+              <button class="gallery__btn" type="button" data-gallery-next aria-label="Next image">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div class="gallery__thumbs"></div>
+        </div>
+        <div class="modal__info" data-stagger>
+          <p class="modal__meta"><span>2023</span><span class="modal__status" data-status="progress">In progress</span></p>
+          <h3 id="project-3-title">[Project three]</h3>
+          <p class="modal__lead">[What the project does and the problem it solves.]</p>
+          <ul class="metrics" aria-label="Key metrics">
+  <li><strong>[00%]</strong><span>[Metric] 1</span></li>
+  <li><strong>[00%]</strong><span>[Metric] 2</span></li>
+  <li><strong>[00%]</strong><span>[Metric] 3</span></li>
+</ul>
+          <p class="modal__text">[A longer description: the context, the goal and who the project is for.]</p>
+          <dl class="facts">
+            <div>
+              <dt>Role</dt>
+              <dd>[Your role]</dd>
+            </div>
+            <div>
+              <dt>Duration</dt>
+              <dd>[How long it took]</dd>
+            </div>
+            <div>
+              <dt>Team size</dt>
+              <dd>[Number of people]</dd>
+            </div>
+          </dl>
+          <ol class="case">
+            <li>
+              <h4>Problem</h4>
+              <p>[Problem: what users or the business were struggling with.]</p>
+            </li>
+            <li>
+              <h4>Solution</h4>
+              <p>[Solution: how you designed and built it.]</p>
+            </li>
+            <li>
+              <h4>Result</h4>
+              <p>[Result: the measurable impact.]</p>
+            </li>
+          </ol>
+          <div>
+  <h4>Highlights</h4>
+  <ul class="highlights">
+    <li>[Highlight] 1</li>
+    <li>[Highlight] 2</li>
+    <li>[Highlight] 3</li>
+  </ul>
+</div>
+          <div>
+            <h4>Tech stack</h4>
+            <ul class="tags">
+              <li>[Tech 1]</li>
+<li>[Tech 2]</li>
+<li>[Tech 3]</li>
+            </ul>
+          </div>
+          <div class="modal__links">
+            <a class="btn" href="#" target="_blank" rel="noopener">Source code</a>
+            <button class="btn" type="button" data-copy="https://example.com/en/#project-3" data-copied="Copied">Copy link</button>
+          </div>
+        </div>
+      </div>
+      <nav class="modal__pager" aria-label="Switch project">
+  <button class="pager" type="button" data-project-go="project-2">
+    <span class="pager__dir">&larr; Previous project</span>
+    <span class="pager__title">[Project two]</span>
+  </button>
+  <button class="pager" type="button" data-project-go="project-1">
+    <span class="pager__dir">Next project &rarr;</span>
+    <span class="pager__title">[Project one]</span>
+  </button>
+</nav>
+    </div>
+  </dialog>
+</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Experience: copy one <li data-reveal> block to add a job; add keys experience.N.* in languages.json -->
+<section class="section" id="experience" aria-labelledby="experience-h">
+  <div class="wrap grid">
+    <h2 id="experience-h" class="rail" data-split>Experience</h2>
+    <div class="body">
+      <ol class="timeline" data-stagger data-draw>
+        <li data-reveal>
+          <span class="period">[Start – Present]</span>
+          <div>
+            <h3>[Job title]</h3>
+            <p class="org">[Company]</p>
+            <ul>
+              <li>[Achievement or responsibility]</li>
+              <li>[Achievement or responsibility]</li>
+            </ul>
+          </div>
+        </li>
+        <li data-reveal>
+          <span class="period">[Start – End]</span>
+          <div>
+            <h3>[Job title]</h3>
+            <p class="org">[Company]</p>
+            <ul>
+              <li>[Achievement or responsibility]</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section" id="education" aria-labelledby="education-h">
+  <div class="wrap grid">
+    <h2 id="education-h" class="rail" data-split>Education</h2>
+    <div class="body">
+      <ol class="timeline" data-stagger data-draw>
+        <li data-reveal>
+          <span class="period">[Start – End]</span>
+          <div>
+            <h3>[Degree]</h3>
+            <p class="org">[University]</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Certificates -->
+<section class="section" id="certificates" aria-labelledby="certificates-h">
+  <div class="wrap grid">
+    <h2 id="certificates-h" class="rail" data-split>Certificates</h2>
+    <div class="body">
+      <ul data-stagger>
+        <li data-reveal>
+          <div class="row">
+            <span class="n">[Certificate name]</span> <span class="m"> [Issuer] · [Year] </span>
+          </div>
+        </li>
+        <li data-reveal>
+          <div class="row">
+            <span class="n">[Certificate name]</span> <span class="m"> [Issuer] · [Year] </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section panel" id="contact" aria-labelledby="contact-h">
+  <div class="wrap grid">
+    <h2 id="contact-h" class="rail" data-split>Contact</h2>
+    <div class="body">
+      <p class="lead" data-split>Have a project or a role in mind? Write to me.</p>
+      <p class="mail" data-reveal>
+        <a class="u" href="mailto:hello@example.com">hello@example.com</a
+        ><button
+          class="copy"
+          type="button"
+          data-copy="hello@example.com"
+          data-copied="Copied"
+          aria-live="polite"
+        >
+          Copy
+        </button>
+      </p>
+      <p class="contact-cta" data-reveal>
+        <button class="btn solid" type="button" data-message-open data-magnetic>
+          Send a message<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </p>
+      <ul class="social" data-stagger>
+        <li data-reveal>
+          <a href="https://github.com/your-handle" rel="noopener" target="_blank">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a href="https://linkedin.com/in/your-handle" rel="noopener" target="_blank">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"
+              ></path>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section></main>
+
+    <!-- Footer -->
+<footer class="panel">
+  <div class="wrap">
+    <div class="foot-top">
+      <p class="foot-cta" data-reveal>
+        Have a project in mind?<a class="u" href="mailto:hello@example.com">hello@example.com</a>
+      </p>
+      <nav class="foot-cols" aria-label="Footer navigation" data-reveal>
+        <div>
+          <h3>Navigate</h3>
+          <ul>
+            <li><a class="u" href="#about">About</a></li>
+            <li><a class="u" href="#skills">Skills</a></li>
+            <li><a class="u" href="#projects">Projects</a></li>
+            <li><a class="u" href="#experience">Experience</a></li>
+            <li><a class="u" href="#education">Education</a></li>
+            <li><a class="u" href="#certificates">Certificates</a></li>
+            <li><a class="u" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Connect</h3>
+          <ul>
+            <li>
+              <a class="u" href="https://github.com/your-handle" target="_blank" rel="noopener">GitHub</a>
+            </li>
+            <li>
+              <a class="u" href="https://linkedin.com/in/your-handle" target="_blank" rel="noopener"
+                >LinkedIn</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <p class="foot-mark" aria-hidden="true" data-reveal>Your Name</p>
+    <div class="foot-bottom">
+      <p>© 2026 Your Name. All rights reserved.</p>
+      <a class="up" href="#top"
+        >Back to top<svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M12 19V5M6 11l6-6 6 6"></path></svg
+      ></a>
+    </div>
+  </div>
+</footer> <!-- Message dialog + floating button -->
+<button class="fab" type="button" data-message-open aria-label="Send a message">
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.2A8 8 0 1 1 21 12z" /></svg
+  ><span>Message</span>
+</button>
+
+<dialog
+  class="msg"
+  id="message-dialog"
+  aria-labelledby="msg-title"
+  data-words="Hello|Xin chào|你好|こんにちは|Bonjour"
+>
+  <aside class="msg__side">
+    <div class="msg__orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <p class="msg__hello" aria-hidden="true"><span data-hello>Hello</span></p>
+    <div class="msg__intro">
+      <h2 id="msg-title">Let's make something worth remembering.</h2>
+      <p>[One or two lines about how you work with clients.]</p>
+    </div>
+    <ul class="msg__meta">
+      <li>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6"
+          /></svg
+        ><a class="u" href="mailto:hello@example.com">hello@example.com</a>
+      </li>
+      <li>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" /></svg
+        ><span>Usually replies within [24 hours]</span>
+      </li>
+      <li>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
+          <circle cx="12" cy="10" r="2.5" /></svg
+        ><span>[City, Country]</span>
+      </li>
+    </ul>
+    <p class="msg__avatar">
+      <span class="msg__initials">YN<i></i></span><span>Your Name</span>
+    </p>
+  </aside>
+  <div class="msg__main">
+    <button class="msg__close" type="button" data-msg-close aria-label="Close">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+    <div class="msg__top">
+      <div class="msg__progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="msg__count" aria-live="polite">Step <span data-current>1</span> of 5</p>
+    </div>
+    <ul class="msg__trail" data-trail aria-label="Your answers"></ul>
+    <form
+      class="msg__form"
+      data-msg-form
+      novalidate
+      data-email="hello@example.com"
+      data-ok="I'll reply by email as soon as I can."
+      data-ok-mail="Your mail app is open. Press Send there to finish."
+      data-fail="Could not send. Please try again or email directly."
+      data-sending="Sending…"
+      data-done-title="Got it! Thank you, {name}."
+    >
+      <div class="msg__steps">
+        <div class="msg__step" data-step data-label="Name" data-error="Please enter your name.">
+          <h3 class="msg__q" id="mq1">What's your name?</h3>
+          <div class="msg__field">
+            <input
+              name="name"
+              type="text"
+              required
+              autocomplete="name"
+              placeholder="[Your name]"
+              aria-labelledby="mq1"
+              aria-describedby="me1"
+            />
+          </div>
+          <p class="msg__error" id="me1" role="alert"></p>
+        </div>
+        <div class="msg__step" data-step data-label="Email" data-error="Please enter a valid email address.">
+          <h3 class="msg__q" id="mq2">Where can I reach you?</h3>
+          <div class="msg__field">
+            <input
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+              aria-labelledby="mq2"
+              aria-describedby="me2"
+            />
+          </div>
+          <p class="msg__error" id="me2" role="alert"></p>
+        </div>
+        <fieldset class="msg__step" data-step data-label="Need">
+          <legend class="msg__q">What do you need?</legend>
+          <div class="msg__opts">
+            <label class="opt"
+              ><input type="checkbox" name="topics" value="Website" /><span>Website</span></label
+            ><label class="opt"
+              ><input type="checkbox" name="topics" value="App" /><span>App</span></label
+            ><label class="opt"
+              ><input type="checkbox" name="topics" value="UI/UX design" /><span
+                >UI/UX design</span
+              ></label
+            ><label class="opt"
+              ><input type="checkbox" name="topics" value="Performance tuning" /><span
+                >Performance tuning</span
+              ></label
+            ><label class="opt"><input type="checkbox" name="topics" value="Something else" /><span>Something else</span></label>
+          </div>
+          <p class="msg__note">Pick one or more</p>
+        </fieldset>
+        <fieldset class="msg__step" data-step data-label="Budget">
+          <legend class="msg__q">Budget and timeline?</legend>
+          <div class="msg__opts">
+            <label class="opt"><input type="radio" name="budget" value="[Tier 1]" /><span>[Tier 1]</span></label
+            ><label class="opt"
+              ><input type="radio" name="budget" value="[Tier 2]" /><span>[Tier 2]</span></label
+            ><label class="opt"
+              ><input type="radio" name="budget" value="[Tier 3]" /><span>[Tier 3]</span></label
+            ><label class="opt"
+              ><input type="radio" name="budget" value="Not sure yet" /><span>Not sure yet</span></label
+            >
+          </div>
+          <p class="msg__note">Optional</p>
+        </fieldset>
+        <div
+          class="msg__step"
+          data-step
+          data-label="Message"
+          data-error="Please write a few lines about your project."
+        >
+          <h3 class="msg__q" id="mq5">Tell me a little about the project.</h3>
+          <div class="msg__field">
+            <textarea
+              name="message"
+              required
+              rows="4"
+              maxlength="600"
+              placeholder="[Goals, deadline, reference links…]"
+              aria-labelledby="mq5"
+              aria-describedby="me5"
+            ></textarea
+            ><span class="msg__counter" data-counter>0/600</span>
+          </div>
+          <p class="msg__error" id="me5" role="alert"></p>
+        </div>
+      </div>
+      <div class="msg__actions">
+        <button class="msg__back" type="button" data-msg-back>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M19 12H5M11 6l-6 6 6 6" /></svg
+          >Back
+        </button>
+        <span
+          class="msg__hint"
+          data-hint
+          data-hint-next="Press Enter ↵ to continue"
+          data-hint-send="Ctrl + Enter to send"
+          >Press Enter ↵ to continue</span
+        >
+        <button
+          class="btn solid msg__next"
+          type="submit"
+          data-msg-next
+          data-label-next="Continue"
+          data-label-send="Send a message"
+        >
+          <span>Continue</span
+          ><svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+      <p class="msg__status" role="status" data-status></p>
+    </form>
+    <div class="msg__done" inert>
+      <svg class="msg__check" viewBox="0 0 52 52" aria-hidden="true">
+        <circle cx="26" cy="26" r="24" />
+        <path d="M14 27l8 8 16-17" />
+      </svg>
+      <h3 data-done-title></h3>
+      <p data-done-text></p>
+      <button class="btn" type="button" data-msg-again>Send another message</button>
+      <div class="msg__burst" aria-hidden="true"></div>
+    </div>
+  </div>
+</dialog>
+
+    <script src="../js/main.js" defer></script>
+  </body>
+</html>

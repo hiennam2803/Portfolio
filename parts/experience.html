@@ -1,0 +1,31 @@
+<!-- Experience: copy one <li data-reveal> block to add a job; add keys experience.N.* in languages.json -->
+<section class="section" id="experience" aria-labelledby="experience-h">
+  <div class="wrap grid">
+    <h2 id="experience-h" class="rail" data-split>{{nav.experience}}</h2>
+    <div class="body">
+      <ol class="timeline" data-stagger data-draw>
+        <li data-reveal>
+          <span class="period">{{experience.1.period}}</span>
+          <div>
+            <h3>{{experience.1.role}}</h3>
+            <p class="org">{{experience.1.org}}</p>
+            <ul>
+              <li>{{experience.1.bullet.1}}</li>
+              <li>{{experience.1.bullet.2}}</li>
+            </ul>
+          </div>
+        </li>
+        <li data-reveal>
+          <span class="period">{{experience.2.period}}</span>
+          <div>
+            <h3>{{experience.2.role}}</h3>
+            <p class="org">{{experience.2.org}}</p>
+            <ul>
+              <li>{{experience.2.bullet.1}}</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>

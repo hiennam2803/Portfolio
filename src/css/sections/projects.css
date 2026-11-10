@@ -1,0 +1,174 @@
+/* Projects: a drawing register. Hover inverts the row and a plate follows the pointer. */
+#projects .body > ul {
+  border-top: 1px solid var(--ink);
+  counter-reset: proj;
+}
+#projects .body > ul > li {
+  counter-increment: proj;
+  border-bottom: 1px solid var(--ink);
+}
+#projects .row {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--s-2) var(--s-5);
+  align-items: start;
+  padding-block: var(--s-6);
+  transition: color var(--d-base) var(--ease-out);
+}
+#projects .row::before {
+  content: counter(proj, decimal-leading-zero);
+  padding-top: 0.45rem;
+  color: var(--signal);
+  font: 500 var(--step--1) / 1 var(--font-mono);
+}
+#projects .row::after {
+  content: '';
+  position: absolute;
+  inset: 0 calc(-1 * var(--gutter));
+  z-index: -1;
+  background: var(--ink);
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  transition: transform var(--d-base) var(--ease-out);
+}
+#projects .row:hover,
+#projects .row:focus-visible {
+  color: var(--bg);
+}
+#projects .row:hover::after,
+#projects .row:focus-visible::after {
+  transform: none;
+}
+#projects .info {
+  display: contents;
+}
+#projects .row h3 {
+  grid-column: 2;
+  font-size: var(--step-3);
+  line-height: 0.88;
+}
+#projects .info p {
+  grid-column: 2;
+  max-width: 52ch;
+  font-size: 1.25rem;
+  opacity: 0.72;
+}
+#projects .meta {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  font: 500 1rem / 1.5 var(--font-mono);
+}
+#projects .meta > span:first-child {
+  color: var(--signal);
+}
+#projects .go {
+  grid-column: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+  font: 500 var(--step--1) / 1 var(--font-mono);
+}
+#projects .go svg {
+  transition: transform var(--d-base) var(--ease-out);
+}
+#projects .row:hover .go svg {
+  transform: translateX(6px);
+}
+
+/* preview plate: on phones it sits under the text; on desktop it follows the pointer (see register.js) */
+#projects .frame {
+  grid-column: 2;
+  grid-row: 6;
+  display: block;
+  width: 100%;
+  max-width: 26rem;
+  margin-top: var(--s-3);
+  border: 1px solid currentColor;
+  background: var(--surface);
+}
+#projects .chrome {
+  display: none;
+}
+#projects .screen {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--surface);
+}
+#projects .screen img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#projects .ph svg {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+@media (min-width: 56rem) {
+  #projects .row {
+    grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 13rem) auto;
+  }
+  #projects .row h3,
+  #projects .info p {
+    grid-column: 2;
+  }
+  #projects .row h3 {
+    grid-row: 1;
+  }
+  #projects .info p {
+    grid-row: 2;
+  }
+  #projects .meta {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-top: 0.45rem;
+  }
+  #projects .go {
+    grid-column: 4;
+    grid-row: 1;
+    justify-self: end;
+    margin-top: 0;
+    padding-top: 0.45rem;
+  }
+  #projects .frame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    width: 19rem;
+    max-width: none;
+    margin: 0;
+    pointer-events: none;
+    opacity: 0;
+    color: var(--signal);
+    box-shadow: 6px 6px 0 var(--signal);
+    translate: var(--px, 34rem) calc(var(--py, 4rem) - 50%);
+    rotate: -6deg;
+    scale: 0.9;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transform-origin: 50% 100%;
+    transition:
+      transform 0.3s var(--ease-out),
+      translate 0.4s var(--ease-out),
+      opacity var(--d-base),
+      rotate 0.45s var(--ease-soft),
+      scale var(--d-base) var(--ease-out);
+  }
+  #projects .row:hover .frame,
+  #projects .row:focus-visible .frame {
+    opacity: 1;
+    rotate: calc(var(--tilt, 0) * 1deg);
+    scale: 1;
+  }
+}

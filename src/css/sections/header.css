@@ -1,0 +1,283 @@
+/* Header: sheet index navigation, language, theme, message. */
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--header-h);
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  border-bottom: 1px solid var(--ink);
+  transition: transform var(--d-base) var(--ease-in-out);
+  view-transition-name: site-header;
+}
+header[data-hidden] {
+  transform: translateY(-100%);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  font: 800 1.6rem / 1 var(--font-display);
+  font-variation-settings: 'wdth' 70;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.logo i {
+  margin-left: 1px;
+  color: var(--signal);
+  font-style: normal;
+  transition: transform var(--d-base) var(--ease-soft);
+}
+.logo:hover i {
+  transform: translateY(-4px);
+}
+.nav {
+  position: relative;
+  display: none;
+  gap: var(--s-5);
+  counter-reset: nav;
+}
+.nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding-block: var(--s-4);
+  color: var(--mute);
+  font: 500 var(--step--2) / 1 var(--font-mono);
+  transition: color var(--d-fast);
+}
+.nav a::before {
+  counter-increment: nav;
+  content: counter(nav, decimal-leading-zero);
+  color: var(--signal);
+  opacity: 0.8;
+}
+.nav a:hover,
+.nav a[data-active] {
+  color: var(--ink);
+}
+.indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 3px;
+  background: var(--signal);
+  transform-origin: 0 50%;
+  opacity: 0;
+  transform: translateX(var(--x, 0)) scaleX(var(--w, 0));
+  transition: none;
+  view-transition-name: nav-indicator;
+}
+.indicator.is-ready {
+  transition:
+    transform var(--d-base) var(--ease-in-out),
+    opacity var(--d-fast);
+}
+.roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.4;
+}
+.roll > span {
+  display: block;
+  transition: transform var(--d-base) var(--ease-out);
+}
+.roll > span::after {
+  content: attr(data-text);
+  content: attr(data-text) / '';
+  position: absolute;
+  left: 0;
+  top: 100%;
+}
+.nav a:hover .roll > span,
+.nav a:focus-visible .roll > span {
+  transform: translateY(-100%);
+}
+
+.tools {
+  display: flex;
+  gap: var(--s-2);
+}
+.pill {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--ink);
+  font: 500 var(--step--2) / 1 var(--font-mono);
+  cursor: pointer;
+  transition:
+    transform var(--d-base) var(--ease-soft),
+    border-color var(--d-fast),
+    background var(--d-fast),
+    color var(--d-fast);
+}
+.pill:hover {
+  border-color: var(--ink);
+  transform: translateY(var(--lift));
+}
+.pill:active {
+  transform: scale(var(--press));
+  transition-duration: var(--d-instant);
+}
+.pill--cta {
+  display: none;
+  padding: 0 var(--s-4);
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+.pill--cta:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--on-signal);
+}
+.pill--icon {
+  display: none;
+}
+.pill--icon[aria-pressed='true'] {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--on-signal);
+}
+.theme .rays {
+  transform-origin: 12px 12px;
+  transition: transform var(--d-slow) var(--ease-out);
+}
+.theme:hover .rays {
+  transform: rotate(60deg);
+}
+[data-theme='dark'] .theme .core {
+  fill: currentColor;
+}
+[data-theme='dark'] .theme .rays {
+  transform: scale(0.6);
+  opacity: 0.4;
+}
+.menu {
+  position: relative;
+}
+.menu span {
+  position: absolute;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform var(--d-base) var(--ease-out);
+}
+.l1 {
+  transform: translateY(-3.5px);
+}
+.l2 {
+  transform: translateY(3.5px);
+}
+header[data-open] .l1 {
+  transform: rotate(45deg);
+}
+header[data-open] .l2 {
+  transform: rotate(-45deg);
+}
+
+.mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: calc(var(--header-h) + 2rem) var(--gutter) calc(var(--s-6) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  counter-reset: m;
+  transition:
+    clip-path var(--d-slow) var(--ease-in-out),
+    visibility 0s var(--d-slow);
+}
+header[data-open] .mobile {
+  clip-path: inset(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+.mobile a {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-block: var(--s-1);
+  font: 800 var(--step-3) / 1 var(--font-display);
+  font-variation-settings: 'wdth' 68;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity var(--d-base) var(--ease-out),
+    transform var(--d-base) var(--ease-out);
+}
+.mobile a::before {
+  counter-increment: m;
+  content: counter(m, decimal-leading-zero);
+  color: var(--signal);
+  font: 500 var(--step--1) var(--font-mono);
+}
+header[data-open] .mobile a {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(200ms + var(--i) * 50ms);
+}
+.progress {
+  position: fixed;
+  top: calc(var(--header-h) - 1px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: 3px;
+  background: var(--signal);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+@supports (animation-timeline: scroll()) {
+  .progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes grow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+@media (min-width: 64rem) {
+  .nav {
+    display: flex;
+  }
+  .pill--icon {
+    display: inline-grid;
+  }
+  .pill--cta {
+    display: inline-grid;
+  }
+  .menu,
+  .mobile {
+    display: none;
+  }
+}

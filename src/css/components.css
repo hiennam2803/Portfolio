@@ -1,0 +1,83 @@
+/* Reusable primitives: underlined links and square, mono-labelled buttons. */
+.u {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  padding-bottom: 2px;
+  transition: background-size var(--d-base) var(--ease-out);
+}
+.u:hover,
+.u:focus-visible {
+  background-size: 0 1px;
+  background-position: 100% 100%;
+}
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 3rem;
+  padding: 0 var(--s-5);
+  border: 1px solid var(--ink);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--ink);
+  font: 500 var(--step--1) / 1 var(--font-mono);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    transform var(--d-base) var(--ease-soft),
+    color var(--d-base) var(--ease-out),
+    border-color var(--d-base);
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  transform: translateX(-101%);
+  transition: transform var(--d-base) var(--ease-out);
+}
+.btn:hover,
+.btn:focus-visible {
+  color: var(--bg);
+}
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: none;
+}
+.btn:active {
+  transform: scale(var(--press));
+  transition-duration: var(--d-instant);
+}
+.btn svg {
+  transition: transform var(--d-base) var(--ease-out);
+}
+.btn:hover svg {
+  transform: translateX(4px);
+}
+.btn.solid {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn.solid::before {
+  background: var(--signal);
+}
+.btn.solid:hover,
+.btn.solid:focus-visible {
+  border-color: var(--signal);
+  color: var(--on-signal);
+}
+.btn[data-magnetic] {
+  transform: translate(var(--mx, 0), var(--my, 0));
+}
+.btn[data-magnetic]:active {
+  transform: translate(var(--mx, 0), var(--my, 0)) scale(var(--press));
+}
+@media (hover: none) {
+  .btn:active {
+    transform: scale(var(--press));
+  }
+}

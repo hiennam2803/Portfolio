@@ -1,0 +1,64 @@
+/* Experience + education: a revision table (rev A, B, C ...). */
+.timeline {
+  border-top: 1px solid var(--ink);
+  counter-reset: rev;
+}
+.timeline > li {
+  counter-increment: rev;
+  display: grid;
+  gap: var(--s-3) var(--s-5);
+  padding-block: var(--s-6);
+  border-bottom: 1px solid var(--line);
+}
+.timeline > li::before {
+  content: counter(rev, upper-alpha);
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--ink);
+  font: 700 var(--step--1) var(--font-mono);
+  transition:
+    background var(--d-base),
+    color var(--d-base);
+}
+.timeline > li:hover::before {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--on-signal);
+}
+.timeline .period {
+  color: var(--mute);
+  font: 500 1.1rem / 1.6 var(--font-mono);
+}
+.timeline h3 {
+  font-size: var(--step-2);
+}
+.timeline .org {
+  margin: var(--s-2) 0 var(--s-4);
+  color: var(--mute);
+  font-size: 1.3rem;
+}
+.timeline li ul {
+  display: grid;
+  gap: var(--s-2);
+  max-width: 56ch;
+  font-size: 1.25rem;
+}
+.timeline li ul li {
+  position: relative;
+  padding-left: 1.3rem;
+}
+.timeline li ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--signal);
+  font-family: var(--font-mono);
+}
+@media (min-width: 56rem) {
+  .timeline > li {
+    grid-template-columns: 3.5rem 12rem minmax(0, 1fr);
+    align-items: start;
+  }
+}

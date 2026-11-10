@@ -1,0 +1,873 @@
+{
+  "_site": "=== Thông tin cá nhân dùng chung (đổi một chỗ, áp dụng toàn trang) ===",
+  "site.name": {
+    "vi": "Your Name",
+    "en": "Your Name"
+  },
+  "site.initials": {
+    "vi": "YN",
+    "en": "YN"
+  },
+  "site.email": {
+    "vi": "hello@example.com",
+    "en": "hello@example.com"
+  },
+  "site.github": {
+    "vi": "https://github.com/your-handle",
+    "en": "https://github.com/your-handle"
+  },
+  "site.linkedin": {
+    "vi": "https://linkedin.com/in/your-handle",
+    "en": "https://linkedin.com/in/your-handle"
+  },
+  "site.city": {
+    "vi": "[Thành phố, Quốc gia]",
+    "en": "[City, Country]"
+  },
+  "_common": "=== Chữ dùng chung nhiều nơi ===",
+  "common.close": {
+    "vi": "Đóng",
+    "en": "Close"
+  },
+  "common.send_message": {
+    "vi": "Gửi tin nhắn",
+    "en": "Send a message"
+  },
+  "common.message_short": {
+    "vi": "Nhắn tin",
+    "en": "Message"
+  },
+  "_nav": "=== Menu điều hướng (header, menu mobile, footer) ===",
+  "nav.aria": {
+    "vi": "Điều hướng chính",
+    "en": "Primary"
+  },
+  "nav.about": {
+    "vi": "Giới thiệu",
+    "en": "About"
+  },
+  "nav.skills": {
+    "vi": "Kỹ năng",
+    "en": "Skills"
+  },
+  "nav.projects": {
+    "vi": "Dự án",
+    "en": "Projects"
+  },
+  "nav.experience": {
+    "vi": "Kinh nghiệm",
+    "en": "Experience"
+  },
+  "nav.education": {
+    "vi": "Học vấn",
+    "en": "Education"
+  },
+  "nav.certificates": {
+    "vi": "Chứng chỉ",
+    "en": "Certificates"
+  },
+  "nav.contact": {
+    "vi": "Liên hệ",
+    "en": "Contact"
+  },
+  "_lang": "=== Nút chuyển ngôn ngữ ===",
+  "lang.switch_href": {
+    "vi": "en/",
+    "en": "../"
+  },
+  "lang.switch_code": {
+    "vi": "en",
+    "en": "vi"
+  },
+  "lang.switch_aria": {
+    "vi": "English",
+    "en": "Tiếng Việt"
+  },
+  "lang.switch_label": {
+    "vi": "EN",
+    "en": "VI"
+  },
+  "_curtain": "=== Màn chào lúc mở trang ===",
+  "curtain.1": {
+    "vi": "Xin chào",
+    "en": "Hello"
+  },
+  "curtain.2": {
+    "vi": "Hello",
+    "en": "Xin chào"
+  },
+  "_meta": "=== Tiêu đề trang + mô tả SEO ===",
+  "meta.title": {
+    "vi": "[Họ tên] — Portfolio lập trình viên",
+    "en": "[Your Name] — Developer Portfolio"
+  },
+  "meta.description": {
+    "vi": "[Một câu mô tả bạn xây dựng gì.]",
+    "en": "[One-sentence description of what you build.]"
+  },
+  "_header": "=== Header (khung trang) ===",
+  "header.skip": {
+    "vi": "Bỏ qua đến nội dung",
+    "en": "Skip to content"
+  },
+  "header.theme_aria": {
+    "vi": "Đổi giao diện sáng/tối",
+    "en": "Toggle theme"
+  },
+  "_hero": "=== hero ===",
+  "hero.section_title": {
+    "vi": "Trang chủ",
+    "en": "Home"
+  },
+  "hero.hello": {
+    "vi": "[Lời chào ngắn]",
+    "en": "[Short greeting]"
+  },
+  "hero.h1_line1": {
+    "vi": "Họ",
+    "en": "Your"
+  },
+  "hero.h1_line2": {
+    "vi": "Tên.",
+    "en": "Name."
+  },
+  "hero.role": {
+    "vi": "[Vai trò, ví dụ: Lập trình viên Frontend]",
+    "en": "[Your role, e.g. Frontend Developer]"
+  },
+  "hero.intro": {
+    "vi": "[Hai câu về những gì bạn xây dựng và điều bạn quan tâm.]",
+    "en": "[Two sentences about what you build and what you care about.]"
+  },
+  "hero.view_projects": {
+    "vi": "Xem dự án",
+    "en": "View projects"
+  },
+  "hero.contact": {
+    "vi": "Liên hệ",
+    "en": "Get in touch"
+  },
+  "hero.alt_portrait": {
+    "vi": "Ảnh chân dung",
+    "en": "Portrait"
+  },
+  "hero.badge_ring": {
+    "vi": "Gửi tin nhắn • Gửi tin nhắn •",
+    "en": "Send a message • Send a message •"
+  },
+  "hero.available": {
+    "vi": "Sẵn sàng làm việc",
+    "en": "Available for work"
+  },
+  "hero.stat_years": {
+    "vi": "Năm kinh nghiệm",
+    "en": "Years of experience"
+  },
+  "hero.stat_projects": {
+    "vi": "Dự án hoàn thành",
+    "en": "Projects shipped"
+  },
+  "hero.stat_tech": {
+    "vi": "Công nghệ",
+    "en": "Technologies"
+  },
+  "hero.scroll": {
+    "vi": "Cuộn",
+    "en": "Scroll"
+  },
+  "_about": "=== about ===",
+  "about.lead": {
+    "vi": "[Đoạn một: bạn là ai và cách bạn làm việc.]",
+    "en": "[Paragraph one: who you are and how you work.]"
+  },
+  "about.text": {
+    "vi": "[Đoạn hai: bạn đang tìm kiếm hoặc khám phá điều gì.]",
+    "en": "[Paragraph two: what you are looking for or currently exploring.]"
+  },
+  "about.location_label": {
+    "vi": "Nơi ở",
+    "en": "Location"
+  },
+  "about.focus_label": {
+    "vi": "Chuyên môn",
+    "en": "Focus"
+  },
+  "about.focus_value": {
+    "vi": "[Lĩnh vực]",
+    "en": "[Your focus]"
+  },
+  "about.languages_label": {
+    "vi": "Ngôn ngữ",
+    "en": "Languages"
+  },
+  "about.languages_value": {
+    "vi": "Tiếng Việt, Tiếng Anh",
+    "en": "Vietnamese, English"
+  },
+  "_skills": "=== Kỹ năng (các mục skills.*.N cũng tự chạy thành dải chữ marquee ở dưới phần hero) ===",
+  "skills.group.lang": {
+    "vi": "Ngôn ngữ",
+    "en": "Languages"
+  },
+  "skills.group.fw": {
+    "vi": "Framework",
+    "en": "Frameworks"
+  },
+  "skills.group.tools": {
+    "vi": "Công cụ",
+    "en": "Tools"
+  },
+  "skills.lang.1": {
+    "vi": "[Ngôn ngữ] 1",
+    "en": "[Language] 1"
+  },
+  "skills.lang.2": {
+    "vi": "[Ngôn ngữ] 2",
+    "en": "[Language] 2"
+  },
+  "skills.lang.3": {
+    "vi": "[Ngôn ngữ] 3",
+    "en": "[Language] 3"
+  },
+  "skills.fw.1": {
+    "vi": "[Framework] 1",
+    "en": "[Framework] 1"
+  },
+  "skills.fw.2": {
+    "vi": "[Framework] 2",
+    "en": "[Framework] 2"
+  },
+  "skills.tools.1": {
+    "vi": "[Công cụ] 1",
+    "en": "[Tool] 1"
+  },
+  "skills.tools.2": {
+    "vi": "[Công cụ] 2",
+    "en": "[Tool] 2"
+  },
+  "skills.tools.3": {
+    "vi": "[Công cụ] 3",
+    "en": "[Tool] 3"
+  },
+  "_projects": "=== Danh sách dự án (nội dung từng dự án: project.N.*; số liệu / link / công nghệ: projects.json) ===",
+  "projects.view_details": {
+    "vi": "Xem chi tiết",
+    "en": "View details"
+  },
+  "projects.aria_open": {
+    "vi": "Xem chi tiết dự án: {title}",
+    "en": "View project details: {title}"
+  },
+  "_dialog": "=== Dialog chi tiết dự án ===",
+  "dialog.label": {
+    "vi": "Chi tiết dự án",
+    "en": "Project details"
+  },
+  "dialog.gallery_aria": {
+    "vi": "Hình ảnh dự án",
+    "en": "Project images"
+  },
+  "dialog.image": {
+    "vi": "Ảnh",
+    "en": "Image"
+  },
+  "dialog.prev_image": {
+    "vi": "Ảnh trước",
+    "en": "Previous image"
+  },
+  "dialog.next_image": {
+    "vi": "Ảnh sau",
+    "en": "Next image"
+  },
+  "dialog.status_done": {
+    "vi": "Đã hoàn thành",
+    "en": "Completed"
+  },
+  "dialog.status_progress": {
+    "vi": "Đang phát triển",
+    "en": "In progress"
+  },
+  "dialog.metrics_aria": {
+    "vi": "Số liệu chính",
+    "en": "Key metrics"
+  },
+  "dialog.role": {
+    "vi": "Vai trò",
+    "en": "Role"
+  },
+  "dialog.duration": {
+    "vi": "Thời gian",
+    "en": "Duration"
+  },
+  "dialog.team": {
+    "vi": "Quy mô nhóm",
+    "en": "Team size"
+  },
+  "dialog.problem": {
+    "vi": "Vấn đề",
+    "en": "Problem"
+  },
+  "dialog.solution": {
+    "vi": "Giải pháp",
+    "en": "Solution"
+  },
+  "dialog.result": {
+    "vi": "Kết quả",
+    "en": "Result"
+  },
+  "dialog.highlights": {
+    "vi": "Điểm nổi bật",
+    "en": "Highlights"
+  },
+  "dialog.stack": {
+    "vi": "Công nghệ sử dụng",
+    "en": "Tech stack"
+  },
+  "dialog.live": {
+    "vi": "Xem trực tiếp",
+    "en": "Live demo"
+  },
+  "dialog.source": {
+    "vi": "Mã nguồn",
+    "en": "Source code"
+  },
+  "dialog.copy_link": {
+    "vi": "Sao chép liên kết",
+    "en": "Copy link"
+  },
+  "dialog.pager_aria": {
+    "vi": "Chuyển dự án",
+    "en": "Switch project"
+  },
+  "dialog.prev_project": {
+    "vi": "Dự án trước",
+    "en": "Previous project"
+  },
+  "dialog.next_project": {
+    "vi": "Dự án tiếp",
+    "en": "Next project"
+  },
+  "_project_items": "=== Nội dung từng dự án (project.N.*). Thêm dự án: thêm khối này + 1 dòng trong projects.json ===",
+  "project.1.title": {
+    "vi": "[Dự án một]",
+    "en": "[Project one]"
+  },
+  "project.1.summary": {
+    "vi": "[Dự án làm gì và giải quyết vấn đề gì.]",
+    "en": "[What the project does and the problem it solves.]"
+  },
+  "project.1.overview": {
+    "vi": "[Mô tả chi tiết hơn: bối cảnh, mục tiêu và đối tượng người dùng của dự án.]",
+    "en": "[A longer description: the context, the goal and who the project is for.]"
+  },
+  "project.1.problem": {
+    "vi": "[Vấn đề: người dùng hoặc doanh nghiệp đang gặp khó khăn gì.]",
+    "en": "[Problem: what users or the business were struggling with.]"
+  },
+  "project.1.solution": {
+    "vi": "[Giải pháp: bạn đã thiết kế và xây dựng như thế nào.]",
+    "en": "[Solution: how you designed and built it.]"
+  },
+  "project.1.result": {
+    "vi": "[Kết quả: tác động có thể đo lường được.]",
+    "en": "[Result: the measurable impact.]"
+  },
+  "project.1.role": {
+    "vi": "[Vai trò của bạn]",
+    "en": "[Your role]"
+  },
+  "project.1.duration": {
+    "vi": "[Thời gian thực hiện]",
+    "en": "[How long it took]"
+  },
+  "project.1.team": {
+    "vi": "[Số thành viên]",
+    "en": "[Number of people]"
+  },
+  "project.1.highlight.1": {
+    "vi": "[Điểm nổi bật] 1",
+    "en": "[Highlight] 1"
+  },
+  "project.1.highlight.2": {
+    "vi": "[Điểm nổi bật] 2",
+    "en": "[Highlight] 2"
+  },
+  "project.1.highlight.3": {
+    "vi": "[Điểm nổi bật] 3",
+    "en": "[Highlight] 3"
+  },
+  "project.1.metric.1.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.1.metric.1.label": {
+    "vi": "[Chỉ số] 1",
+    "en": "[Metric] 1"
+  },
+  "project.1.metric.2.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.1.metric.2.label": {
+    "vi": "[Chỉ số] 2",
+    "en": "[Metric] 2"
+  },
+  "project.1.metric.3.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.1.metric.3.label": {
+    "vi": "[Chỉ số] 3",
+    "en": "[Metric] 3"
+  },
+  "project.1.caption.1": {
+    "vi": "[Chú thích ảnh] 1",
+    "en": "[Image caption] 1"
+  },
+  "project.1.caption.2": {
+    "vi": "[Chú thích ảnh] 2",
+    "en": "[Image caption] 2"
+  },
+  "project.1.caption.3": {
+    "vi": "[Chú thích ảnh] 3",
+    "en": "[Image caption] 3"
+  },
+  "project.2.title": {
+    "vi": "[Dự án hai]",
+    "en": "[Project two]"
+  },
+  "project.2.summary": {
+    "vi": "[Dự án làm gì và giải quyết vấn đề gì.]",
+    "en": "[What the project does and the problem it solves.]"
+  },
+  "project.2.overview": {
+    "vi": "[Mô tả chi tiết hơn: bối cảnh, mục tiêu và đối tượng người dùng của dự án.]",
+    "en": "[A longer description: the context, the goal and who the project is for.]"
+  },
+  "project.2.problem": {
+    "vi": "[Vấn đề: người dùng hoặc doanh nghiệp đang gặp khó khăn gì.]",
+    "en": "[Problem: what users or the business were struggling with.]"
+  },
+  "project.2.solution": {
+    "vi": "[Giải pháp: bạn đã thiết kế và xây dựng như thế nào.]",
+    "en": "[Solution: how you designed and built it.]"
+  },
+  "project.2.result": {
+    "vi": "[Kết quả: tác động có thể đo lường được.]",
+    "en": "[Result: the measurable impact.]"
+  },
+  "project.2.role": {
+    "vi": "[Vai trò của bạn]",
+    "en": "[Your role]"
+  },
+  "project.2.duration": {
+    "vi": "[Thời gian thực hiện]",
+    "en": "[How long it took]"
+  },
+  "project.2.team": {
+    "vi": "[Số thành viên]",
+    "en": "[Number of people]"
+  },
+  "project.2.highlight.1": {
+    "vi": "[Điểm nổi bật] 1",
+    "en": "[Highlight] 1"
+  },
+  "project.2.highlight.2": {
+    "vi": "[Điểm nổi bật] 2",
+    "en": "[Highlight] 2"
+  },
+  "project.2.highlight.3": {
+    "vi": "[Điểm nổi bật] 3",
+    "en": "[Highlight] 3"
+  },
+  "project.2.metric.1.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.2.metric.1.label": {
+    "vi": "[Chỉ số] 1",
+    "en": "[Metric] 1"
+  },
+  "project.2.metric.2.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.2.metric.2.label": {
+    "vi": "[Chỉ số] 2",
+    "en": "[Metric] 2"
+  },
+  "project.2.metric.3.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.2.metric.3.label": {
+    "vi": "[Chỉ số] 3",
+    "en": "[Metric] 3"
+  },
+  "project.2.caption.1": {
+    "vi": "[Chú thích ảnh] 1",
+    "en": "[Image caption] 1"
+  },
+  "project.2.caption.2": {
+    "vi": "[Chú thích ảnh] 2",
+    "en": "[Image caption] 2"
+  },
+  "project.2.caption.3": {
+    "vi": "[Chú thích ảnh] 3",
+    "en": "[Image caption] 3"
+  },
+  "project.3.title": {
+    "vi": "[Dự án ba]",
+    "en": "[Project three]"
+  },
+  "project.3.summary": {
+    "vi": "[Dự án làm gì và giải quyết vấn đề gì.]",
+    "en": "[What the project does and the problem it solves.]"
+  },
+  "project.3.overview": {
+    "vi": "[Mô tả chi tiết hơn: bối cảnh, mục tiêu và đối tượng người dùng của dự án.]",
+    "en": "[A longer description: the context, the goal and who the project is for.]"
+  },
+  "project.3.problem": {
+    "vi": "[Vấn đề: người dùng hoặc doanh nghiệp đang gặp khó khăn gì.]",
+    "en": "[Problem: what users or the business were struggling with.]"
+  },
+  "project.3.solution": {
+    "vi": "[Giải pháp: bạn đã thiết kế và xây dựng như thế nào.]",
+    "en": "[Solution: how you designed and built it.]"
+  },
+  "project.3.result": {
+    "vi": "[Kết quả: tác động có thể đo lường được.]",
+    "en": "[Result: the measurable impact.]"
+  },
+  "project.3.role": {
+    "vi": "[Vai trò của bạn]",
+    "en": "[Your role]"
+  },
+  "project.3.duration": {
+    "vi": "[Thời gian thực hiện]",
+    "en": "[How long it took]"
+  },
+  "project.3.team": {
+    "vi": "[Số thành viên]",
+    "en": "[Number of people]"
+  },
+  "project.3.highlight.1": {
+    "vi": "[Điểm nổi bật] 1",
+    "en": "[Highlight] 1"
+  },
+  "project.3.highlight.2": {
+    "vi": "[Điểm nổi bật] 2",
+    "en": "[Highlight] 2"
+  },
+  "project.3.highlight.3": {
+    "vi": "[Điểm nổi bật] 3",
+    "en": "[Highlight] 3"
+  },
+  "project.3.metric.1.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.3.metric.1.label": {
+    "vi": "[Chỉ số] 1",
+    "en": "[Metric] 1"
+  },
+  "project.3.metric.2.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.3.metric.2.label": {
+    "vi": "[Chỉ số] 2",
+    "en": "[Metric] 2"
+  },
+  "project.3.metric.3.value": {
+    "vi": "[00%]",
+    "en": "[00%]"
+  },
+  "project.3.metric.3.label": {
+    "vi": "[Chỉ số] 3",
+    "en": "[Metric] 3"
+  },
+  "project.3.caption.1": {
+    "vi": "[Chú thích ảnh] 1",
+    "en": "[Image caption] 1"
+  },
+  "project.3.caption.2": {
+    "vi": "[Chú thích ảnh] 2",
+    "en": "[Image caption] 2"
+  },
+  "_experience": "=== Kinh nghiệm ===",
+  "experience.1.period": {
+    "vi": "[Bắt đầu – Hiện tại]",
+    "en": "[Start – Present]"
+  },
+  "experience.1.role": {
+    "vi": "[Chức danh]",
+    "en": "[Job title]"
+  },
+  "experience.1.org": {
+    "vi": "[Công ty]",
+    "en": "[Company]"
+  },
+  "experience.1.bullet.1": {
+    "vi": "[Thành tựu hoặc trách nhiệm]",
+    "en": "[Achievement or responsibility]"
+  },
+  "experience.1.bullet.2": {
+    "vi": "[Thành tựu hoặc trách nhiệm]",
+    "en": "[Achievement or responsibility]"
+  },
+  "experience.2.period": {
+    "vi": "[Bắt đầu – Kết thúc]",
+    "en": "[Start – End]"
+  },
+  "experience.2.role": {
+    "vi": "[Chức danh]",
+    "en": "[Job title]"
+  },
+  "experience.2.org": {
+    "vi": "[Công ty]",
+    "en": "[Company]"
+  },
+  "experience.2.bullet.1": {
+    "vi": "[Thành tựu hoặc trách nhiệm]",
+    "en": "[Achievement or responsibility]"
+  },
+  "_education": "=== Học vấn ===",
+  "education.1.period": {
+    "vi": "[Bắt đầu – Kết thúc]",
+    "en": "[Start – End]"
+  },
+  "education.1.degree": {
+    "vi": "[Bằng cấp]",
+    "en": "[Degree]"
+  },
+  "education.1.school": {
+    "vi": "[Trường đại học]",
+    "en": "[University]"
+  },
+  "_certificates": "=== Chứng chỉ ===",
+  "certificates.1.name": {
+    "vi": "[Tên chứng chỉ]",
+    "en": "[Certificate name]"
+  },
+  "certificates.1.meta": {
+    "vi": "[Đơn vị cấp] · [Năm]",
+    "en": "[Issuer] · [Year]"
+  },
+  "certificates.2.name": {
+    "vi": "[Tên chứng chỉ]",
+    "en": "[Certificate name]"
+  },
+  "certificates.2.meta": {
+    "vi": "[Đơn vị cấp] · [Năm]",
+    "en": "[Issuer] · [Year]"
+  },
+  "_contact": "=== contact ===",
+  "contact.lead": {
+    "vi": "Bạn có dự án hoặc vị trí muốn trao đổi? Hãy viết cho tôi.",
+    "en": "Have a project or a role in mind? Write to me."
+  },
+  "contact.copied": {
+    "vi": "Đã sao chép",
+    "en": "Copied"
+  },
+  "contact.copy": {
+    "vi": "Sao chép",
+    "en": "Copy"
+  },
+  "_footer": "=== footer ===",
+  "footer.cta": {
+    "vi": "Bạn có dự án muốn trao đổi?",
+    "en": "Have a project in mind?"
+  },
+  "footer.nav_aria": {
+    "vi": "Điều hướng chân trang",
+    "en": "Footer navigation"
+  },
+  "footer.nav_title": {
+    "vi": "Điều hướng",
+    "en": "Navigate"
+  },
+  "footer.connect": {
+    "vi": "Kết nối",
+    "en": "Connect"
+  },
+  "footer.copyright": {
+    "vi": "© 2026 {{site.name}}. Bảo lưu mọi quyền.",
+    "en": "© 2026 {{site.name}}. All rights reserved."
+  },
+  "footer.back_to_top": {
+    "vi": "Lên đầu trang",
+    "en": "Back to top"
+  },
+  "_msg": "=== message-dialog ===",
+  "msg.words": {
+    "vi": "Xin chào|Hello|你好|こんにちは|Bonjour",
+    "en": "Hello|Xin chào|你好|こんにちは|Bonjour"
+  },
+  "msg.title": {
+    "vi": "Cùng tạo nên điều gì đó đáng nhớ.",
+    "en": "Let's make something worth remembering."
+  },
+  "msg.intro": {
+    "vi": "[Một hai câu về cách bạn làm việc cùng khách hàng.]",
+    "en": "[One or two lines about how you work with clients.]"
+  },
+  "msg.reply_time": {
+    "vi": "Thường phản hồi trong [24 giờ]",
+    "en": "Usually replies within [24 hours]"
+  },
+  "msg.step_word": {
+    "vi": "Bước",
+    "en": "Step"
+  },
+  "msg.of_total": {
+    "vi": "trên 5",
+    "en": "of 5"
+  },
+  "msg.answers_aria": {
+    "vi": "Câu trả lời của bạn",
+    "en": "Your answers"
+  },
+  "msg.ok": {
+    "vi": "Mình sẽ phản hồi qua email sớm nhất có thể.",
+    "en": "I'll reply by email as soon as I can."
+  },
+  "msg.ok_mail": {
+    "vi": "Ứng dụng thư đã mở. Bấm Gửi trong đó để hoàn tất nhé.",
+    "en": "Your mail app is open. Press Send there to finish."
+  },
+  "msg.fail": {
+    "vi": "Chưa gửi được. Hãy thử lại hoặc email trực tiếp.",
+    "en": "Could not send. Please try again or email directly."
+  },
+  "msg.sending": {
+    "vi": "Đang gửi…",
+    "en": "Sending…"
+  },
+  "msg.done_title": {
+    "vi": "Đã nhận! Cảm ơn {name}.",
+    "en": "Got it! Thank you, {name}."
+  },
+  "msg.step1_label": {
+    "vi": "Tên",
+    "en": "Name"
+  },
+  "msg.step1_error": {
+    "vi": "Vui lòng nhập tên của bạn.",
+    "en": "Please enter your name."
+  },
+  "msg.step1_q": {
+    "vi": "Bạn tên là gì?",
+    "en": "What's your name?"
+  },
+  "msg.step1_placeholder": {
+    "vi": "[Họ tên của bạn]",
+    "en": "[Your name]"
+  },
+  "msg.step2_error": {
+    "vi": "Vui lòng nhập email hợp lệ.",
+    "en": "Please enter a valid email address."
+  },
+  "msg.step2_q": {
+    "vi": "Mình liên lạc với bạn qua đâu?",
+    "en": "Where can I reach you?"
+  },
+  "msg.step2_placeholder": {
+    "vi": "ban@example.com",
+    "en": "you@example.com"
+  },
+  "msg.step3_label": {
+    "vi": "Cần",
+    "en": "Need"
+  },
+  "msg.step3_q": {
+    "vi": "Bạn đang cần gì?",
+    "en": "What do you need?"
+  },
+  "msg.opt_app": {
+    "vi": "Ứng dụng",
+    "en": "App"
+  },
+  "msg.opt_uiux": {
+    "vi": "Thiết kế UI/UX",
+    "en": "UI/UX design"
+  },
+  "msg.opt_perf": {
+    "vi": "Tối ưu hiệu năng",
+    "en": "Performance tuning"
+  },
+  "msg.opt_other": {
+    "vi": "Khác",
+    "en": "Something else"
+  },
+  "msg.step3_hint": {
+    "vi": "Chọn một hoặc nhiều mục",
+    "en": "Pick one or more"
+  },
+  "msg.step4_label": {
+    "vi": "Ngân sách",
+    "en": "Budget"
+  },
+  "msg.step4_q": {
+    "vi": "Ngân sách và thời gian dự kiến?",
+    "en": "Budget and timeline?"
+  },
+  "msg.tier_1": {
+    "vi": "[Mức 1]",
+    "en": "[Tier 1]"
+  },
+  "msg.tier_2": {
+    "vi": "[Mức 2]",
+    "en": "[Tier 2]"
+  },
+  "msg.tier_3": {
+    "vi": "[Mức 3]",
+    "en": "[Tier 3]"
+  },
+  "msg.opt_unsure": {
+    "vi": "Chưa rõ",
+    "en": "Not sure yet"
+  },
+  "msg.optional": {
+    "vi": "Không bắt buộc",
+    "en": "Optional"
+  },
+  "msg.step5_label": {
+    "vi": "Tin nhắn",
+    "en": "Message"
+  },
+  "msg.step5_error": {
+    "vi": "Hãy viết vài dòng về dự án của bạn.",
+    "en": "Please write a few lines about your project."
+  },
+  "msg.step5_q": {
+    "vi": "Kể mình nghe thêm về dự án nhé.",
+    "en": "Tell me a little about the project."
+  },
+  "msg.step5_placeholder": {
+    "vi": "[Mục tiêu, thời hạn, link tham khảo…]",
+    "en": "[Goals, deadline, reference links…]"
+  },
+  "msg.back": {
+    "vi": "Quay lại",
+    "en": "Back"
+  },
+  "msg.hint_next": {
+    "vi": "Nhấn Enter ↵ để tiếp tục",
+    "en": "Press Enter ↵ to continue"
+  },
+  "msg.hint_send": {
+    "vi": "Ctrl + Enter để gửi",
+    "en": "Ctrl + Enter to send"
+  },
+  "msg.next": {
+    "vi": "Tiếp tục",
+    "en": "Continue"
+  },
+  "msg.again": {
+    "vi": "Gửi tin nhắn khác",
+    "en": "Send another message"
+  }
+}

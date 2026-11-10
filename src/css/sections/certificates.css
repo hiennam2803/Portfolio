@@ -1,0 +1,29 @@
+/* Certificates: ruled register rows. */
+#certificates ul {
+  border-top: 1px solid var(--ink);
+}
+#certificates li {
+  border-bottom: 1px solid var(--line);
+}
+#certificates .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+  padding-block: var(--s-5);
+}
+#certificates .n {
+  font: 800 var(--step-2) / 1 var(--font-display);
+  font-variation-settings: 'wdth' 72;
+  text-transform: uppercase;
+  transition: color var(--d-fast);
+}
+#certificates .m {
+  margin-left: auto;
+  color: var(--mute);
+  font: 500 1.1rem / 1 var(--font-mono);
+}
+#certificates a.row:hover .n {
+  color: var(--signal);
+}

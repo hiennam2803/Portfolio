@@ -1,0 +1,91 @@
+/* Design tokens: "spec sheet" system. Light = drafting vellum, dark = blueprint. */
+:root {
+  --font-display: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:
+    'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --step--2: 0.72rem;
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.7vw, 1.65rem);
+  --step-2: clamp(1.9rem, 1.3rem + 2.2vw, 3.2rem);
+  --step-3: clamp(2.6rem, 1.3rem + 4.6vw, 5.4rem);
+  --step-4: clamp(3.6rem, 1rem + 11.5vw, 11.5rem);
+
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: clamp(4.5rem, 10vw, 8rem);
+  --gutter: clamp(1.25rem, 6vw, 6rem);
+  --maxw: 84rem;
+  --header-h: 3.5rem;
+  --r: 2px;
+  --radius: 2px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft: cubic-bezier(0.34, 1.25, 0.64, 1);
+  --d-instant: 90ms;
+  --d-fast: 180ms;
+  --d-base: 360ms;
+  --d-slow: 700ms;
+  --d-hero: 1000ms;
+  --stagger: 70ms;
+  --lift: -3px;
+  --press: 0.97;
+
+  --signal: #f0501c;
+  --on-signal: #0c1b33;
+  --dot-red: #ff6b6b;
+  --dot-amber: #ffc34d;
+  --dot-green: #3fcf8e;
+}
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #e7ecee;
+  --surface: #dae2e5;
+  --ink: #0c1b33;
+  --mute: #4a5b74;
+  --line: #b3bfca;
+  --accent: #1745d6;
+  --on-accent: #ffffff;
+  --accent-2: #f0501c;
+  --danger: #c62a3f;
+  --ok: #12935a;
+  --tick: rgb(12 27 51 / 0.55);
+  --panel-bg: #0b2a57;
+  --panel-ink: #eaf1ff;
+  --panel-mute: #9cb3d9;
+  --panel-line: #2a4f88;
+  --panel-accent: #ff7a45;
+  --panel-on-accent: #0b1e3f;
+  --panel-radius: 0;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0a2145;
+  --surface: #0e2b58;
+  --ink: #e8f0ff;
+  --mute: #9db4db;
+  --line: #27508a;
+  --accent: #8db4ff;
+  --on-accent: #0a2145;
+  --accent-2: #ff7a45;
+  --signal: #ff7a45;
+  --danger: #ff8da0;
+  --ok: #3fcf8e;
+  --tick: rgb(232 240 255 / 0.5);
+  --panel-bg: #0f3367;
+  --panel-ink: #eaf1ff;
+  --panel-mute: #a9c0e6;
+  --panel-line: #33609f;
+  --panel-accent: #ff7a45;
+  --panel-on-accent: #0b1e3f;
+}

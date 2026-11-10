@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "year": "2025",
+    "status": "done",
+    "tech": ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
+    "images": 3,
+    "highlights": 3,
+    "metrics": 3,
+    "live": "#",
+    "repo": "#"
+  },
+  {
+    "id": 2,
+    "year": "2024",
+    "status": "done",
+    "tech": ["[Tech 1]", "[Tech 2]"],
+    "images": 3,
+    "highlights": 3,
+    "metrics": 3,
+    "live": "#",
+    "repo": "#"
+  },
+  {
+    "id": 3,
+    "year": "2023",
+    "status": "progress",
+    "tech": ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
+    "images": 2,
+    "highlights": 3,
+    "metrics": 3,
+    "live": "",
+    "repo": "#"
+  }
+]

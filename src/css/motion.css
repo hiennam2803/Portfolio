@@ -1,0 +1,229 @@
+/* Motion system: reveals, curtain, progress, view transitions, reduced motion. */
+/* scroll reveal — gated on .js so no-JS still shows content */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity var(--d-slow) var(--ease-out),
+    transform var(--d-slow) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* scroll progress — pure CSS progressive enhancement */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 60;
+}
+@supports (animation-timeline: scroll()) {
+  .progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes grow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* page transitions (cross-document, zero JS): language switch + navigation */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: vt-out 220ms var(--ease-in-out) both;
+}
+::view-transition-new(root) {
+  animation: vt-in 420ms var(--ease-out) 60ms both;
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+/* theme switch: circular reveal from the toggle */
+:root[data-vt='theme']::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+:root[data-vt='theme']::view-transition-new(root) {
+  animation: reveal 650ms var(--ease-in-out) both;
+  mix-blend-mode: normal;
+}
+@keyframes reveal {
+  from {
+    clip-path: circle(0 at var(--cx, 50%) var(--cy, 0));
+  }
+  to {
+    clip-path: circle(150vmax at var(--cx, 50%) var(--cy, 0));
+  }
+}
+
+/* word-mask reveal */
+.js [data-split] .w {
+  padding-top: 0.3em;
+  margin-top: -0.3em;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.js [data-split] .w > span {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform var(--d-slow) var(--ease-out) calc(var(--w, 0) * 45ms);
+}
+.js [data-split].is-in .w > span {
+  transform: none;
+}
+
+/* opening curtain (once per session) */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--ink);
+  color: var(--bg);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  animation: wipe 1s var(--ease-in-out) 0.3s forwards;
+}
+.curtain span {
+  font: 700 clamp(3rem, 12vw, 7rem)/1 var(--font-display);
+  letter-spacing: -0.04em;
+  animation: cin 0.6s var(--ease-out) both;
+}
+.seen .curtain {
+  display: none;
+}
+@keyframes wipe {
+  from {
+    clip-path: inset(0);
+  }
+  99% {
+    clip-path: inset(0 0 100% 0);
+    visibility: visible;
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+  }
+}
+@keyframes cin {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* opening curtain: a blueprint sheet that cycles through greetings, then lifts */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background-color: #0a2145;
+  color: #e8f0ff;
+  background-image:
+    linear-gradient(rgb(150 190 255 / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(150 190 255 / 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: wipe 0.75s var(--ease-in-out) 0.9s forwards;
+}
+.curtain span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  font: 800 clamp(3.5rem, 1rem + 12vw, 9rem) / 1 var(--font-display);
+  font-variation-settings: 'wdth' 66;
+  text-transform: uppercase;
+  animation: greet 0.22s var(--ease-out) calc(var(--k, 0) * 0.22s) both;
+}
+.curtain span:last-child {
+  animation-name: greet-last;
+}
+.seen .curtain {
+  display: none;
+}
+@keyframes wipe {
+  from {
+    clip-path: inset(0);
+  }
+  99% {
+    clip-path: inset(0 0 100% 0);
+    visibility: visible;
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+  }
+}
+@keyframes greet {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  15% {
+    opacity: 1;
+    transform: none;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+@keyframes greet-last {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

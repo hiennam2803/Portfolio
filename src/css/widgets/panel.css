@@ -1,0 +1,27 @@
+/* Blueprint panel (contact + footer): same tokens, remapped, with a drafting grid. */
+.panel {
+  --bg: var(--panel-bg);
+  --ink: var(--panel-ink);
+  --mute: var(--panel-mute);
+  --line: var(--panel-line);
+  --accent: var(--panel-accent);
+  --on-accent: var(--panel-on-accent);
+  --signal: var(--panel-accent);
+  --on-signal: var(--panel-on-accent);
+  --tick: rgb(234 241 255 / 0.5);
+  background-color: var(--bg);
+  color: var(--ink);
+  background-image:
+    linear-gradient(rgb(150 190 255 / 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(150 190 255 / 0.16) 1px, transparent 1px),
+    linear-gradient(rgb(150 190 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(150 190 255 / 0.07) 1px, transparent 1px);
+  background-size:
+    160px 160px,
+    160px 160px,
+    32px 32px,
+    32px 32px;
+}
+.section.panel {
+  border-top: 0;
+}
