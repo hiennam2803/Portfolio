@@ -3,11 +3,17 @@
   "links": {
     "email": "vhdt283@gmail.com",
     "github": "https://github.com/hiennam2803",
-    "linkedin": "https://linkedin.com/in/your-handle"
+    "facebook": "https://www.facebook.com/hac.hack.14606",
+    "zalo": "https://zalo.me/0766606953"
   },
   "images": {
-    "portrait": "images/portrait.webp",
-    "avatar": "images/avatar.webp",
+    "portrait": "images/avt.jpg",
+    "avatar": "images/avt.jpg",
     "gravatar": true
+  },
+  "emailjs": {
+    "publicKey": "TLQLkM7fJdbpOFrhd",
+    "serviceId": "service_vg8q6v3",
+    "templateId": "template_87olk83"
   }
 }

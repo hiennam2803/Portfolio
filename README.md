@@ -2,7 +2,7 @@
 
 Một trang duy nhất, thiết kế như **bộ bản vẽ kỹ thuật**: mỗi mục là một "tờ" có khung viền bản vẽ. Giao diện sáng là giấy can, giao diện tối là bản thiết kế xanh (blueprint). Có tiếng Việt và tiếng Anh.
 
-- `index.html` — **chỉ chứa khung HTML, không có chữ nào**. Dữ liệu được trình duyệt nạp từ 3 file JSON mỗi khi mở trang: `languages.json` (chỉ chữ), `projects.json` (dự án, đường dẫn ảnh, link) và `config.json` (không phải chữ: ngày bắt đầu sự nghiệp, email/GitHub/LinkedIn, ảnh chân dung).
+- `index.html` — **chỉ chứa khung HTML, không có chữ nào**. Dữ liệu được trình duyệt nạp từ 3 file JSON mỗi khi mở trang: `languages.json` (chỉ chữ), `projects.json` (dự án, đường dẫn ảnh, link) và `config.json` (không phải chữ: ngày bắt đầu sự nghiệp, email/GitHub/LinkedIn, ảnh chân dung, khóa EmailJS).
 - Đổi ngôn ngữ: nút VI/EN ở header, hoặc `index.html?lang=en`. Lựa chọn được nhớ lại. (`en/index.html` chỉ là trang chuyển hướng cho link cũ.)
 
 > **Phải mở qua web server**, không bấm đúp file (trình duyệt chặn đọc JSON từ `file://`). Ví dụ: `npx serve`, `python3 -m http.server`, hoặc tiện ích Live Server của VS Code. Khi đưa lên hosting thì chạy bình thường.
@@ -20,6 +20,8 @@ node build.mjs --watch    # tự ghép lại mỗi khi bạn lưu file
 ```
 
 > `index.html`, `css/style.css`, `js/main.js` là file **được tạo ra**, đừng sửa trực tiếp.
+
+> ⚠️ **Lưu ý hiện tại:** `index.html` và `css/style.css` đã được sửa tay nên **đang khác** nguồn trong `parts/` và `src/css/` (ví dụ link Facebook/Zalo ở mục Liên hệ, CSS chữ lớn ở footer). Chạy `node build.mjs` sẽ **ghi đè** hai file này bằng bản cũ. Hãy đồng bộ `parts/` và `src/css/` theo hai file đó trước, hoặc sao lưu rồi chỉ lấy lại `js/main.js` sau khi build.
 
 ## languages.json — nơi chứa toàn bộ chữ
 
@@ -126,6 +128,16 @@ Có **hai chế độ** (hai tab ở đầu hộp thoại):
 - **Nhắn tin**: chat bình thường, chỉ gồm tên, email và một tin nhắn (Enter để gửi, Shift+Enter xuống dòng). Chữ nằm ở nhóm `chat.*` trong `languages.json`.
 - **Yêu cầu dự án**: 5 bước (tên, email, nhu cầu, ngân sách, hướng đi của dự án), mỗi bước là một `.msg__step`. Chữ nằm ở nhóm `msg.*`. Thêm / bớt bước thì số ô tiến trình tự khớp.
 - Mở bằng phần tử có `data-message-open` (mặc định mở tab Nhắn tin) hoặc `data-message-open="brief"` (mở thẳng tab Yêu cầu dự án). Mục Liên hệ có sẵn một nút cho mỗi chế độ.
-- Gửi trực tiếp: thêm `data-endpoint="https://formspree.io/f/XXXX"` vào `<form data-msg-form>` (yêu cầu dự án) và/hoặc `<form data-chat-form>` (nhắn tin; nếu bỏ trống sẽ dùng endpoint của form kia). Để trống cả hai thì mở ứng dụng thư của khách với nội dung điền sẵn.
+- **Gửi email thật bằng EmailJS** (cả hai chế độ), không mở ứng dụng thư của khách. Điền 3 giá trị trong `config.json`:
+
+  ```json
+  "emailjs": { "publicKey": "...", "serviceId": "...", "templateId": "..." }
+  ```
+
+  - Chưa điền đủ 3 giá trị thì form báo lỗi (khách thấy "Biểu mẫu chưa sẵn sàng", console của bạn có hướng dẫn) và **không** báo thành công giả. Chỉ khi EmailJS trả HTTP 200 mới hiện "đã gửi".
+  - Chỉ đặt **Public Key** ở đây. **Không bao giờ** đưa Private Key (Access Token) hay mật khẩu Gmail vào site: mọi khách đều xem được mã nguồn.
+  - Template trên EmailJS dùng các biến: `subject`, `form_type`, `from_name`, `from_email`, `reply_to`, `details`, `message`, `sent_at`, `visitor_lang` (ngoài ra có `project_type`, `budget`). Đặt **To Email** cố định là Gmail của bạn, **Reply-To** là `{{reply_to}}`.
+  - Nội dung email luôn bằng ngôn ngữ **đầu tiên** trong `languages.json` (tiếng Việt), dù khách xem trang bằng tiếng Anh. Nhãn nằm ở `mail.*`, thông báo lỗi ở `msg.fail*`, `msg.wait`, `msg.limit`, `msg.err_links`.
+  - Chống spam phía khách (đổi ở đầu `initMessageDialog` trong `src/js/message-dialog.js`, rồi `node build.mjs`): giãn cách 30 giây giữa hai tin, tối đa 5 tin/giờ/trình duyệt, tối đa 5 liên kết/tin, tin tối đa 600 ký tự, ô bẫy bot ẩn. Các giới hạn này chỉ chặn spam thông thường; hãy bật thêm giới hạn domain / reCAPTCHA trong dashboard EmailJS.
 - **Avatar** dưới cột trái: thử lần lượt `images.avatar` (ảnh bạn tự đặt) → Gravatar của email (nếu `images.gravatar` là `true` và email có đăng ký Gravatar) → `images.portrait` → chữ viết tắt. Google không cho lấy ảnh Gmail từ địa chỉ email, nên cách chắc chắn nhất là đặt ảnh vào `images/avatar.webp`.
 - Giao diện: `src/css/widgets/message-dialog.css` · logic: `src/js/message-dialog.js`.

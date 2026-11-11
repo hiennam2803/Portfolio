@@ -1134,6 +1134,7 @@ function initProjectDialog() {
  *   brief  a project request: the five-step conversation (needs, budget, direction of the project ...)
  * It opens with a circular reveal from the pressed button; data-message-open="brief" opens the brief tab.
  * Answers stay in the forms until sent, so closing and reopening resumes where you left off.
+ * Both forms send a real email through EmailJS (config.json -> "emailjs"); nothing opens a mail app.
  */
 function initMessageDialog() {
   const dialog = $('#message-dialog');
@@ -1176,6 +1177,176 @@ function initMessageDialog() {
   let helloIndex = 0;
   let index = 0;
   let sent = false;
+
+  /* ---- sending: EmailJS REST API (no mail app, no server; works on GitHub Pages) ----
+   * IDs come from config.json -> "emailjs" (publicKey, serviceId, templateId). The Public Key is meant to be public.
+   * Never put the Private Key (Access Token) anywhere in this site: it would be visible to every visitor.
+   * Visitor-side limits below only stop casual spam; the real protection is set in the EmailJS dashboard (see README). */
+  const EMAILJS_URL = 'https://api.emailjs.com/api/v1.0/email/send';
+  const SEND_TIMEOUT_MS = 15000;
+  const MIN_FILL_MS = 1500; // opening the dialog and writing a message takes a person longer than this
+  const COOLDOWN_MS = 30000; // pause between two sent messages
+  const HOUR_MS = 3600000;
+  const MAX_PER_HOUR = 5; // sent messages per browser per hour
+  const MAX_LINKS = 5; // links allowed in one message
+  const LIMITS = { name: 80, email: 254, message: 600, topics: 200, budget: 80 };
+  const SENT_KEY = 'mail-sent'; // only timestamps are stored, never what the visitor wrote
+  const OWNER_TZ = 'Asia/Ho_Chi_Minh';
+  const EMAIL_RE = /^[^\s@<>"(),:;\\[\]]+@[^\s@<>"(),:;\\[\]]+\.[^\s@<>"(),:;\\[\]]{2,}$/;
+  const CONTROL = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u200B\u200E\u200F\u202A-\u202E\u2066-\u2069]/g;
+
+  let busy = false; // one send at a time, for both forms
+  let openedAt = Date.now();
+
+  /** kind: config (IDs missing) | network (offline / timeout) | busy (429) | rejected (anything else EmailJS refuses) */
+  class MailError extends Error {
+    constructor(kind, detail = '') {
+      super(detail);
+      this.kind = kind;
+    }
+  }
+
+  /** Text in the site owner's language (the first language in languages.json): the email is written for you, not for the visitor. */
+  const owner = (key) => I18N.dict[key]?.[I18N.langs[0]] ?? '';
+  const oneLine = (value, max) =>
+    String(value ?? '').replace(CONTROL, '').replace(/<[^>]*>/g, '').replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, max);
+  const multiLine = (value, max) =>
+    String(value ?? '').replace(/\r\n?/g, '\n').replace(CONTROL, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, max);
+  const isEmail = (value) => value.length <= LIMITS.email && !value.includes('..') && EMAIL_RE.test(value);
+  const countLinks = (text) => (text.match(/https?:\/\/|www\./gi) ?? []).length;
+
+  /** The error text for a field, or '' when it is fine. `fallback` is the field's own message (data-error). */
+  function problemOf(field, fallback) {
+    const value = field.value.trim();
+    if (field.required && !value) return fallback;
+    if (field.type === 'email' && !isEmail(value)) return fallback;
+    if (field.name === 'message' && countLinks(value) > MAX_LINKS) return t('msg.err_links');
+    return '';
+  }
+
+  /* Hidden field that people never see but simple bots fill in; kept out of focus order and out of screen readers. */
+  const makeTrap = (target) => {
+    if (!target) return null;
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'extra_info';
+    input.tabIndex = -1;
+    input.autocomplete = 'off';
+    input.setAttribute('aria-hidden', 'true');
+    input.dataset.trap = '';
+    input.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none';
+    target.append(input);
+    return input;
+  };
+  const briefTrap = makeTrap(form);
+  const chatTrap = makeTrap(chatForm);
+  $$('input[name="name"]', dialog).forEach((input) => (input.maxLength = LIMITS.name));
+  $$('input[name="email"]', dialog).forEach((input) => (input.maxLength = LIMITS.email));
+
+  let sentLog = (() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(SENT_KEY) ?? '[]');
+      return Array.isArray(saved) ? saved.filter(Number.isFinite) : [];
+    } catch {
+      return [];
+    }
+  })();
+  /** '' = allowed. Otherwise the text to show: too soon after the last message, or too many this hour. */
+  function throttle() {
+    const now = Date.now();
+    sentLog = sentLog.filter((time) => time <= now && now - time < HOUR_MS);
+    if (!sentLog.length) return '';
+    const wait = COOLDOWN_MS - (now - Math.max(...sentLog));
+    if (wait > 0) return t('msg.wait').replace('{seconds}', String(Math.ceil(wait / 1000)));
+    return sentLog.length >= MAX_PER_HOUR ? t('msg.limit') : '';
+  }
+  function remember() {
+    sentLog.push(Date.now());
+    try {
+      localStorage.setItem(SENT_KEY, JSON.stringify(sentLog));
+    } catch {
+      /* storage blocked: the in-memory log still limits this visit */
+    }
+  }
+  /** '' = go ahead. Bots (filled the hidden field, or answered instantly) get the generic failure and nothing is sent. */
+  function preflight(trap) {
+    if (trap?.value || Date.now() - openedAt < MIN_FILL_MS) return t('msg.fail');
+    return throttle();
+  }
+
+  const stamp = () => {
+    try {
+      return new Intl.DateTimeFormat(I18N.langs[0], { dateStyle: 'medium', timeStyle: 'short', timeZone: OWNER_TZ }).format(new Date());
+    } catch {
+      return new Date().toISOString();
+    }
+  };
+
+  /** What the EmailJS template receives. Everything is trimmed, cut to a safe length and stripped of control characters. */
+  function buildParams(kind, raw) {
+    const brief = kind === 'brief';
+    const name = oneLine(raw.name, LIMITS.name);
+    const email = oneLine(raw.email, LIMITS.email);
+    const message = multiLine(raw.message, LIMITS.message);
+    const topics = (raw.topics ?? []).map((item) => oneLine(item, 60)).filter(Boolean).join(', ').slice(0, LIMITS.topics);
+    const budget = oneLine(raw.budget, LIMITS.budget);
+    if (!name || !isEmail(email) || !message) throw new MailError('rejected', 'invalid input');
+    const none = owner('mail.none');
+    return {
+      subject: `[Portfolio] ${owner(brief ? 'msg.subject_brief' : 'chat.subject').replace('{name}', name)}`,
+      form_type: owner(brief ? 'msg.tab_brief' : 'msg.tab_chat'),
+      from_name: name,
+      from_email: email,
+      reply_to: email,
+      project_type: topics,
+      budget,
+      details: brief ? `${owner('mail.type')}: ${topics || none}\n${owner('mail.budget')}: ${budget || none}` : '',
+      message,
+      sent_at: stamp(),
+      visitor_lang: I18N.lang,
+    };
+  }
+
+  /** Resolves only when EmailJS answers 200. Anything else throws a MailError. */
+  async function deliver(params) {
+    const { publicKey, serviceId, templateId } = cfgGet('emailjs') ?? {};
+    const ids = [publicKey, serviceId, templateId].map((value) => (typeof value === 'string' ? value.trim() : ''));
+    if (ids.some((value) => !value)) {
+      console.error('[contact] EmailJS is not configured: fill publicKey, serviceId and templateId under "emailjs" in config.json.');
+      throw new MailError('config');
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), SEND_TIMEOUT_MS);
+    let response;
+    try {
+      response = await fetch(EMAILJS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ service_id: ids[1], template_id: ids[2], user_id: ids[0], template_params: params }),
+        signal: controller.signal,
+      });
+    } catch (error) {
+      throw new MailError('network', error?.message);
+    } finally {
+      clearTimeout(timer);
+    }
+    if (response.ok) return;
+    const detail = await response.text().catch(() => '');
+    console.error(`[contact] EmailJS answered ${response.status}: ${detail}`); // for you in the console; visitors only see a short message
+    throw new MailError(response.status === 429 ? 'busy' : 'rejected', detail);
+  }
+
+  const failText = (error) => {
+    if (!(error instanceof MailError)) console.error(error);
+    return t({ config: 'msg.fail_config', network: 'msg.fail_network', busy: 'msg.fail_busy' }[error?.kind] ?? 'msg.fail');
+  };
+  const lockFields = (scope, on) =>
+    $$('input:not([type="checkbox"]):not([type="radio"]), textarea', scope).forEach((field) => (field.readOnly = on));
+  const show = (el, text, isError = false) => {
+    el.textContent = text;
+    el.style.color = isError ? 'var(--danger)' : '';
+    el.setAttribute('role', isError ? 'alert' : 'status');
+  };
 
   const fieldOf = (step) => $('input:not([type="checkbox"]):not([type="radio"]), textarea', step);
   const answerOf = (step) => {
@@ -1241,10 +1412,11 @@ function initMessageDialog() {
   function validate(step) {
     const field = fieldOf(step);
     if (!field) return true;
-    const valid = field.checkValidity();
+    const problem = problemOf(field, step.dataset.error ?? '');
+    const valid = !problem;
     field.setAttribute('aria-invalid', String(!valid));
     const output = $('.msg__error', step);
-    if (output) output.textContent = valid ? '' : (step.dataset.error ?? '');
+    if (output) output.textContent = problem;
     if (!valid) {
       step.classList.remove('is-shaking');
       void step.offsetWidth; // restart the shake animation
@@ -1254,18 +1426,20 @@ function initMessageDialog() {
     return valid;
   }
 
+  /* Choices are read in the owner's language (not the visitor's), so every email looks the same to you. */
+  const choiceLabel = (input) => {
+    const key = (input.dataset.ta ?? '').match(/value:([\w.]+)/)?.[1];
+    return (key && owner(key)) || input.value;
+  };
   function collect() {
-    const lines = steps
-      .map((step) => [step.dataset.label ?? '', answerOf(step)])
-      .filter(([, value]) => value);
-    const get = (name) => form.elements.namedItem(name)?.value?.trim?.() ?? '';
+    const get = (name) => form.elements.namedItem(name)?.value ?? '';
+    const picked = (name) => $$(`input[name="${name}"]:checked`, form).map(choiceLabel);
     return {
       name: get('name'),
       email: get('email'),
-      topics: $$('input[name="topics"]:checked', form).map((i) => i.value),
-      budget: $$('input[name="budget"]:checked', form)[0]?.value ?? '',
+      topics: picked('topics'),
+      budget: picked('budget')[0] ?? '',
       message: get('message'),
-      text: lines.map(([label, value]) => `${label}: ${value}`).join('\n'),
     };
   }
 
@@ -1289,47 +1463,58 @@ function initMessageDialog() {
     }
   }
 
-  function showDone(name, viaMail) {
+  function showDone(name) {
     sent = true;
     dialog.dataset.state = 'sent';
     done.inert = false;
     $('[data-done-title]', done).textContent = (data.doneTitle ?? '').replace('{name}', name.slice(0, 24));
-    $('[data-done-text]', done).textContent = (viaMail ? data.okMail : data.ok) ?? '';
+    $('[data-done-text]', done).textContent = data.ok ?? '';
     burst();
     $('[data-msg-again]', done).focus({ preventScroll: true });
   }
 
   async function submit() {
-    const body = collect();
-    next.disabled = true;
-    next.classList.add('is-loading');
-    status.textContent = data.sending ?? '';
-    let viaMail = false;
-    try {
-      if (data.endpoint) {
-        const response = await fetch(data.endpoint, {
-          method: 'POST',
-          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
-        if (!response.ok) throw new Error(response.statusText);
-      } else {
-        viaMail = true;
-        const subject = encodeURIComponent(`[Portfolio] ${(data.subject ?? '{name}').replace('{name}', body.name)}`);
-        location.href = `mailto:${data.email}?subject=${subject}&body=${encodeURIComponent(`${body.text}\n`)}`;
-      }
-    } catch {
-      status.textContent = data.fail ?? '';
-      next.disabled = false;
-      next.classList.remove('is-loading');
+    if (busy) return;
+    // every answer is checked again right before sending, not only the last step
+    const badStep = steps.findIndex((step) => {
+      const field = fieldOf(step);
+      return field && problemOf(field, step.dataset.error || 'invalid');
+    });
+    if (badStep !== -1) {
+      goTo(badStep);
+      validate(steps[badStep]);
       return;
     }
-    next.disabled = false;
-    next.classList.remove('is-loading');
-    showDone(body.name, viaMail);
+    const blocked = preflight(briefTrap);
+    if (blocked) {
+      show(status, blocked, true);
+      return;
+    }
+    busy = true;
+    next.disabled = true;
+    next.classList.add('is-loading');
+    lockFields(form, true);
+    show(status, data.sending ?? '');
+    let params;
+    try {
+      params = buildParams('brief', collect());
+      await deliver(params); // only a 200 from EmailJS gets past this line
+    } catch (error) {
+      show(status, failText(error), true);
+      return;
+    } finally {
+      busy = false;
+      next.disabled = false;
+      next.classList.remove('is-loading');
+      lockFields(form, false);
+    }
+    remember();
+    show(status, '');
+    showDone(params.from_name);
   }
 
   const advance = () => {
+    if (busy) return;
     if (!validate(steps[index])) return;
     if (index < total - 1) goTo(index + 1);
     else void submit();
@@ -1364,7 +1549,7 @@ function initMessageDialog() {
   /* ---- chat: a plain message shown as a small thread ---- */
   function focusChat() {
     if (!chatForm) return;
-    const empty = [...chatForm.querySelectorAll('input, textarea')].find((field) => !field.value.trim());
+    const empty = [...chatForm.querySelectorAll('input:not([data-trap]), textarea')].find((field) => !field.value.trim());
     setTimeout(() => (empty ?? chatForm.elements.namedItem('message'))?.focus({ preventScroll: true }), 150);
   }
 
@@ -1377,47 +1562,49 @@ function initMessageDialog() {
   }
 
   async function sendChat() {
+    if (busy) return;
     const el = (name) => chatForm.elements.namedItem(name);
     const fields = ['name', 'email', 'message'].map(el);
     fields.forEach((field) => field.removeAttribute('aria-invalid'));
     chatError.textContent = '';
-    const bad = fields.find((field) => !field.checkValidity() || !field.value.trim());
-    if (bad) {
-      bad.setAttribute('aria-invalid', 'true');
-      chatError.textContent = bad.dataset.error ?? '';
-      bad.focus({ preventScroll: true });
+    for (const field of fields) {
+      const problem = problemOf(field, field.dataset.error ?? '');
+      if (!problem) continue;
+      field.setAttribute('aria-invalid', 'true');
+      chatError.textContent = problem;
+      field.focus({ preventScroll: true });
       return;
     }
-    const [name, email, message] = fields.map((field) => field.value.trim());
+    const blocked = preflight(chatTrap);
+    if (blocked) {
+      chatError.textContent = blocked;
+      return;
+    }
     const cd = chatForm.dataset;
+    busy = true;
     chatSend.disabled = true;
+    chatSend.setAttribute('aria-busy', 'true');
+    lockFields(chatForm, true);
     chatStatus.textContent = cd.sending ?? '';
-    let viaMail = false;
+    let params;
     try {
-      const endpoint = cd.endpoint || data.endpoint;
-      if (endpoint) {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'chat', name, email, message }),
-        });
-        if (!response.ok) throw new Error(response.statusText);
-      } else {
-        viaMail = true;
-        const subject = encodeURIComponent(`[Portfolio] ${(cd.subject ?? '{name}').replace('{name}', name)}`);
-        const body = encodeURIComponent(`${message}\n\n— ${name} <${email}>\n`);
-        location.href = `mailto:${cd.email}?subject=${subject}&body=${body}`;
-      }
-    } catch {
-      chatStatus.textContent = cd.fail ?? '';
-      chatSend.disabled = false;
+      params = buildParams('chat', { name: el('name').value, email: el('email').value, message: el('message').value });
+      await deliver(params); // only a 200 from EmailJS gets past this line
+    } catch (error) {
+      chatStatus.textContent = '';
+      chatError.textContent = failText(error);
       return;
+    } finally {
+      busy = false;
+      chatSend.disabled = false;
+      chatSend.removeAttribute('aria-busy');
+      lockFields(chatForm, false);
     }
-    chatSend.disabled = false;
+    remember();
     chatStatus.textContent = '';
-    addBubble(message, 'me');
+    addBubble(params.message, 'me');
     el('message').value = '';
-    const reply = ((viaMail ? cd.replyMail : cd.reply) ?? '').replace('{name}', name.slice(0, 24));
+    const reply = (cd.reply ?? '').replace('{name}', params.from_name.slice(0, 24));
     setTimeout(() => addBubble(reply, 'them'), reduced ? 0 : 700);
     el('message').focus({ preventScroll: true });
   }
@@ -1456,6 +1643,7 @@ function initMessageDialog() {
 
   /* ---- open / close ---- */
   function open(trigger) {
+    openedAt = Date.now();
     root.classList.add('modal-open');
     dialog.showModal();
     const box = dialog.getBoundingClientRect();
@@ -1532,10 +1720,10 @@ function initMessageDialog() {
       chatError.textContent = '';
     }
   });
-  back.addEventListener('click', () => goTo(index - 1));
+  back.addEventListener('click', () => !busy && goTo(index - 1));
   trail.addEventListener('click', (e) => {
     const chip = e.target instanceof Element ? e.target.closest('[data-goto]') : null;
-    if (chip instanceof HTMLElement) goTo(Number(chip.dataset.goto));
+    if (chip instanceof HTMLElement && !busy) goTo(Number(chip.dataset.goto));
   });
   form.addEventListener('submit', (e) => {
     e.preventDefault();

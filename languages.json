@@ -8,10 +8,15 @@
     "vi": "GitHub",
     "en": "GitHub"
   },
-  "social.linkedin": {
-    "vi": "LinkedIn",
-    "en": "LinkedIn"
+  "social.facebook": {
+    "vi": "Facebook",
+    "en": "Facebook"
   },
+  "social.zalo": {
+    "vi": "Zalo",
+    "en": "Zalo"
+  },
+  
   "site.city": {
     "vi": "Hồ Chí Minh, Việt Nam",
     "en": "Ho Chi Minh City, Vietnam"
@@ -55,8 +60,8 @@
     "en": "Education"
   },
   "nav.certificates": {
-    "vi": "Chứng chỉ",
-    "en": "Certificates"
+    "vi": "Con người tôi",
+    "en": "About Me"
   },
   "nav.contact": {
     "vi": "Liên hệ",
@@ -336,252 +341,333 @@
   },
   "_project_items": "=== Nội dung từng dự án (project.N.*). Thêm dự án: thêm khối này + 1 dòng trong projects.json ===",
   "project.1.title": {
-    "vi": "[Dự án một]",
-    "en": "[Project one]"
+    "vi": "VYRON - Thuyết minh video YouTube",
+    "en": "VYRON - YouTube Video Narration"
   },
   "project.1.summary": {
-    "vi": "[Dự án làm gì và giải quyết vấn đề gì.]",
-    "en": "[What the project does and the problem it solves.]"
+    "vi": "Tiện ích Chrome tự lấy phụ đề YouTube, dịch sang tiếng Việt và đọc thành tiếng đồng bộ với video, chạy hoàn toàn trên máy người dùng.",
+    "en": "A Chrome extension that grabs YouTube subtitles, translates them into Vietnamese and reads them aloud in sync with the video, running entirely on the user's machine."
   },
   "project.1.overview": {
-    "vi": "[Mô tả chi tiết hơn: bối cảnh, mục tiêu và đối tượng người dùng của dự án.]",
-    "en": "[A longer description: the context, the goal and who the project is for.]"
+    "vi": "VYRON là tiện ích Chrome (Manifest V3) dành cho người muốn xem video tiếng nước ngoài mà không phải liên tục đọc phụ đề. Tiện ích lấy phụ đề (thủ công hoặc tự động), dịch sang tiếng Việt hoặc ngôn ngữ được chọn, rồi đọc bằng giọng Microsoft và tự điều chỉnh tốc độ để khớp với video. Mọi xử lý diễn ra trên trình duyệt, không có server riêng và không phát sinh chi phí dịch vụ.",
+    "en": "VYRON is a Chrome extension (Manifest V3) for people who want to watch foreign-language videos without constantly reading subtitles. It fetches subtitles (manual or auto-generated), translates them into Vietnamese or a chosen language, then reads them with a Microsoft voice and adjusts the speed to match the video. Everything runs in the browser, with no custom server and no service costs."
   },
   "project.1.problem": {
-    "vi": "[Vấn đề: người dùng hoặc doanh nghiệp đang gặp khó khăn gì.]",
-    "en": "[Problem: what users or the business were struggling with.]"
+    "vi": "Xem video dài bằng ngoại ngữ buộc người dùng vừa nhìn hình vừa đọc phụ đề, rất mệt. Các công cụ dịch có sẵn thường đọc lệch nhịp với video hoặc cần dịch vụ trả phí và gửi dữ liệu ra ngoài.",
+    "en": "Watching long foreign-language videos forces viewers to watch the picture and read subtitles at the same time, which is tiring. Existing tools often drift out of sync with the video, or need paid services and send data to third parties."
   },
   "project.1.solution": {
-    "vi": "[Giải pháp: bạn đã thiết kế và xây dựng như thế nào.]",
-    "en": "[Solution: how you designed and built it.]"
+    "vi": "Mình xây dựng bằng TypeScript và Vite, gồm Content Script, Page Bridge chạy trong MAIN world để lấy phụ đề trực tiếp từ YouTube, bộ dịch và bộ đọc TTS. Phần đồng bộ đo tốc độ giọng đọc rồi tự điều chỉnh tốc độ (tối đa 1.7x), đồng thời giảm âm lượng video khi đang đọc. Mình cũng sửa lỗi lấy phụ đề bằng cách thêm timeout, retry có backoff, kiểm tra Page Bridge sẵn sàng và Debug Panel ghi rõ lỗi ở bước nào.",
+    "en": "I built it with TypeScript and Vite: a Content Script, a Page Bridge running in the MAIN world to fetch subtitles directly from YouTube, a translation engine and a TTS reader. The sync layer measures voice speed and adapts the rate (up to 1.7x) while lowering the video volume during speech. I also fixed the subtitle fetching by adding timeouts, retry with backoff, a bridge readiness check and a Debug Panel that shows exactly which step failed."
   },
   "project.1.result": {
-    "vi": "[Kết quả: tác động có thể đo lường được.]",
-    "en": "[Result: the measurable impact.]"
+    "vi": "Phụ đề được lấy, dịch và đọc đồng bộ ổn định trên video thật (ví dụ 851 đoạn phụ đề trong một video), toàn bộ chạy cục bộ và miễn phí.",
+    "en": "Subtitles are fetched, translated and read in sync reliably on real videos (for example 851 subtitle segments in one video), all running locally and for free."
   },
   "project.1.role": {
-    "vi": "[Vai trò của bạn]",
-    "en": "[Your role]"
+    "vi": "Lập trình viên độc lập: thiết kế kiến trúc, lập trình, kiểm thử và gỡ lỗi",
+    "en": "Solo developer: architecture, implementation, testing and debugging"
   },
   "project.1.duration": {
-    "vi": "[Thời gian thực hiện]",
-    "en": "[How long it took]"
+    "vi": "1 tháng",
+    "en": "1 month"
   },
   "project.1.team": {
-    "vi": "[Số thành viên]",
-    "en": "[Number of people]"
+    "vi": "1 người",
+    "en": "1 person"
   },
   "project.1.highlight.1": {
-    "vi": "[Điểm nổi bật] 1",
-    "en": "[Highlight] 1"
+    "vi": "Chạy cục bộ hoàn toàn: không server, không chi phí, không gửi dữ liệu ra ngoài",
+    "en": "Fully local: no server, no cost, no data sent elsewhere"
   },
   "project.1.highlight.2": {
-    "vi": "[Điểm nổi bật] 2",
-    "en": "[Highlight] 2"
+    "vi": "Tự khớp tốc độ đọc với video và hỗ trợ pause, seek, chuyển video",
+    "en": "Auto-matches reading speed to the video and handles pause, seek and video changes"
   },
   "project.1.highlight.3": {
-    "vi": "[Điểm nổi bật] 3",
-    "en": "[Highlight] 3"
+    "vi": "Debug Panel chỉ rõ lỗi ở bước nào, thay vì báo lỗi chung chung",
+    "en": "A Debug Panel that shows exactly which step failed instead of a generic error"
   },
   "project.1.metric.1.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "3",
+    "en": "3"
   },
   "project.1.metric.1.label": {
-    "vi": "[Chỉ số] 1",
-    "en": "[Metric] 1"
+    "vi": "Giọng đọc Microsoft tiếng Việt",
+    "en": "Microsoft Vietnamese voices"
   },
   "project.1.metric.2.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "1.7x",
+    "en": "1.7x"
   },
   "project.1.metric.2.label": {
-    "vi": "[Chỉ số] 2",
-    "en": "[Metric] 2"
+    "vi": "Tốc độ đọc tối đa tự điều chỉnh",
+    "en": "Max auto-adjusted reading speed"
   },
   "project.1.metric.3.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "129",
+    "en": "129"
   },
   "project.1.metric.3.label": {
-    "vi": "[Chỉ số] 3",
-    "en": "[Metric] 3"
+    "vi": "Bài kiểm thử tự động",
+    "en": "Automated tests"
   },
   "project.1.caption.1": {
-    "vi": "[Chú thích ảnh] 1",
-    "en": "[Image caption] 1"
+    "vi": "Giao diện extension với popup cài đặt giọng đọc và tốc độ",
+    "en": "Extension interface with popup for voice and speed settings"
   },
   "project.1.caption.2": {
-    "vi": "[Chú thích ảnh] 2",
-    "en": "[Image caption] 2"
+    "vi": "Các cài đặt của extension",
+    "en": "Extension settings"
   },
   "project.1.caption.3": {
-    "vi": "[Chú thích ảnh] 3",
-    "en": "[Image caption] 3"
+    "vi": "Bảng chúi thích lỗi Debug Panel hiển thị trạng thái đồng bộ",
+    "en": "Debug Panel showing sync status and error details"
   },
   "project.2.title": {
-    "vi": "[Dự án hai]",
-    "en": "[Project two]"
+    "vi": "C.I.R.C.A",
+    "en": "C.I.R.C.A"
   },
   "project.2.summary": {
-    "vi": "[Dự án làm gì và giải quyết vấn đề gì.]",
-    "en": "[What the project does and the problem it solves.]"
+    "vi": "Ứng dụng desktop gom Claude, ChatGPT và Gemini vào một cửa sổ, kèm ngữ cảnh dự án để tiếp tục công việc ở phiên AI mới mà không phải giải thích lại.",
+    "en": "A desktop app that brings Claude, ChatGPT and Gemini into one window, with project context so you can continue in a fresh AI session without re-explaining."
   },
   "project.2.overview": {
-    "vi": "[Mô tả chi tiết hơn: bối cảnh, mục tiêu và đối tượng người dùng của dự án.]",
-    "en": "[A longer description: the context, the goal and who the project is for.]"
+    "vi": "C.I.R.C.A là ứng dụng Electron dành cho người làm việc hằng ngày với nhiều công cụ AI. Mỗi dự án có danh sách ngữ cảnh được ghim (kiến trúc, quyết định, việc đang làm), và tính năng 'Continue Context' dựng sẵn một prompt để dán vào phiên AI mới. Giao diện tối giản tông đen–lavender, ưu tiên hướng local-first và quyền riêng tư.",
+    "en": "C.I.R.C.A is an Electron app for people who work with several AI tools every day. Each project keeps a list of pinned context (architecture, decisions, current work), and the 'Continue Context' feature builds a ready-to-paste prompt for a new AI session. The interface is minimal, in a black-and-lavender theme, with a local-first, privacy-friendly approach."
   },
   "project.2.problem": {
-    "vi": "[Vấn đề: người dùng hoặc doanh nghiệp đang gặp khó khăn gì.]",
-    "en": "[Problem: what users or the business were struggling with.]"
+    "vi": "Mỗi lần mở phiên chat mới hoặc đổi sang AI khác, người dùng phải viết lại mục tiêu, tiến độ và các quyết định cũ. Việc này tốn thời gian, dễ sót thông tin, và ngữ cảnh bị rải rác giữa nhiều tab trình duyệt.",
+    "en": "Every time you open a new chat or switch to another AI, you have to rewrite the goal, progress and earlier decisions. It wastes time, details get lost, and context ends up scattered across browser tabs."
   },
   "project.2.solution": {
-    "vi": "[Giải pháp: bạn đã thiết kế và xây dựng như thế nào.]",
-    "en": "[Solution: how you designed and built it.]"
+    "vi": "Mình nhúng website AI thật vào ứng dụng bằng WebContentsView, chọn AI qua dropdown, và đặt panel ngữ cảnh ngay bên cạnh. Ngữ cảnh được ghim theo từng dự án, rồi 'Continue Context' gom mô tả dự án và các mục đã ghim thành một prompt để sao chép sang phiên mới. Hai panel hai bên thu gọn và kéo đổi kích thước được, nên khung làm việc luôn vừa với nhu cầu.",
+    "en": "I embedded the real AI websites with WebContentsView, added a dropdown to switch between them, and placed a context panel right beside the chat. Context is pinned per project, and 'Continue Context' combines the project description and pinned items into a prompt you can copy into a new session. Both side panels collapse and resize, so the workspace always fits the task."
   },
   "project.2.result": {
-    "vi": "[Kết quả: tác động có thể đo lường được.]",
-    "en": "[Result: the measurable impact.]"
+    "vi": "Đang phát triển. Đã chạy được giao diện chính, ba nền tảng AI và prompt Continue Context. Đang làm tiếp phần lưu trữ ngữ cảnh cục bộ. Chưa có số liệu đo lường tác động.",
+    "en": "In development. The main interface, three AI platforms and the Continue Context prompt are working. Local context storage is next. There are no measured impact figures yet."
   },
   "project.2.role": {
-    "vi": "[Vai trò của bạn]",
-    "en": "[Your role]"
+    "vi": "Lập trình viên độc lập: thiết kế giao diện, xây dựng ứng dụng Electron và luồng giao tiếp giữa giao diện với tiến trình chính",
+    "en": "Solo developer: interface design, Electron app development and the communication between the UI and the main process"
   },
   "project.2.duration": {
-    "vi": "[Thời gian thực hiện]",
-    "en": "[How long it took]"
+    "vi": "Đang thực hiện",
+    "en": "Ongoing"
   },
   "project.2.team": {
-    "vi": "[Số thành viên]",
-    "en": "[Number of people]"
+    "vi": "1 người (cá nhân)",
+    "en": "1 person (solo)"
   },
   "project.2.highlight.1": {
-    "vi": "[Điểm nổi bật] 1",
-    "en": "[Highlight] 1"
+    "vi": "Claude, ChatGPT và Gemini trong một cửa sổ, chuyển nhanh bằng dropdown",
+    "en": "Claude, ChatGPT and Gemini in one window, switched with a dropdown"
   },
   "project.2.highlight.2": {
-    "vi": "[Điểm nổi bật] 2",
-    "en": "[Highlight] 2"
+    "vi": "Ghim ngữ cảnh theo dự án và tạo prompt Continue Context chỉ với một lần bấm",
+    "en": "Per-project pinned context and a one-click Continue Context prompt"
   },
   "project.2.highlight.3": {
-    "vi": "[Điểm nổi bật] 3",
-    "en": "[Highlight] 3"
+    "vi": "Giao diện đen–lavender tối giản, hai panel thu gọn và kéo đổi kích thước được",
+    "en": "A minimal black-and-lavender interface with two collapsible, resizable panels"
   },
   "project.2.metric.1.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "3",
+    "en": "3"
   },
   "project.2.metric.1.label": {
-    "vi": "[Chỉ số] 1",
-    "en": "[Metric] 1"
+    "vi": "Nền tảng AI trong một cửa sổ",
+    "en": "AI platforms in one window"
   },
   "project.2.metric.2.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "2",
+    "en": "2"
   },
   "project.2.metric.2.label": {
-    "vi": "[Chỉ số] 2",
-    "en": "[Metric] 2"
+    "vi": "Panel thu gọn và kéo được",
+    "en": "Collapsible, resizable panels"
   },
   "project.2.metric.3.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "1",
+    "en": "1"
   },
   "project.2.metric.3.label": {
-    "vi": "[Chỉ số] 3",
-    "en": "[Metric] 3"
+    "vi": "Lần bấm để tạo prompt Continue Context",
+    "en": "Click to build the Continue Context prompt"
   },
   "project.2.caption.1": {
-    "vi": "[Chú thích ảnh] 1",
-    "en": "[Image caption] 1"
+    "vi": "Giao diện chính với website AI nhúng trong khung làm việc",
+    "en": "Main interface with the AI website embedded in the workspace"
   },
   "project.2.caption.2": {
-    "vi": "[Chú thích ảnh] 2",
-    "en": "[Image caption] 2"
+    "vi": "Panel ngữ cảnh với các mục đã ghim của dự án",
+    "en": "Context panel with the project's pinned items"
   },
   "project.2.caption.3": {
-    "vi": "[Chú thích ảnh] 3",
-    "en": "[Image caption] 3"
+    "vi": "Nơi quản lý ngữ cảnh dự án",
+    "en": "Project context manager"
   },
-  "project.3.title": {
-    "vi": "[Dự án ba]",
-    "en": "[Project three]"
+    "project.3.title": {
+    "vi": "Salud – Ứng dụng quản lý sức khỏe cá nhân",
+    "en": "Salud – Personal Health Management App"
   },
   "project.3.summary": {
-    "vi": "[Dự án làm gì và giải quyết vấn đề gì.]",
-    "en": "[What the project does and the problem it solves.]"
+    "vi": "Ứng dụng Android giúp người dùng theo dõi sức khỏe, dinh dưỡng, vận động và giấc ngủ trong một nơi.",
+    "en": "An Android app that brings health, nutrition, activity, and sleep tracking together in one place."
   },
   "project.3.overview": {
-    "vi": "[Mô tả chi tiết hơn: bối cảnh, mục tiêu và đối tượng người dùng của dự án.]",
-    "en": "[A longer description: the context, the goal and who the project is for.]"
+    "vi": "Salud là trợ lý sức khỏe cá nhân dành cho người bận rộn và những ai muốn xây dựng lối sống lành mạnh. Ứng dụng kết hợp theo dõi các chỉ số cơ thể, nhật ký dinh dưỡng, vận động, giấc ngủ và gợi ý sức khỏe có hỗ trợ AI.",
+    "en": "Salud is a personal health companion for busy people and anyone looking to build healthier habits. It combines body-metric tracking, nutrition logs, activity and sleep tracking, and AI-assisted health suggestions."
   },
   "project.3.problem": {
-    "vi": "[Vấn đề: người dùng hoặc doanh nghiệp đang gặp khó khăn gì.]",
-    "en": "[Problem: what users or the business were struggling with.]"
+    "vi": "Thông tin về sức khỏe, ăn uống, tập luyện và giấc ngủ thường bị phân tán, khiến người dùng khó theo dõi tiến trình và duy trì thói quen lành mạnh.",
+    "en": "Health, nutrition, exercise, and sleep information is often scattered across different tools, making it hard to track progress and maintain healthy habits."
   },
   "project.3.solution": {
-    "vi": "[Giải pháp: bạn đã thiết kế và xây dựng như thế nào.]",
-    "en": "[Solution: how you designed and built it.]"
+    "vi": "Xây dựng ứng dụng Android bằng Kotlin và Jetpack Compose theo kiến trúc MVVM. Salud cung cấp dashboard, theo dõi cân nặng và BMI, dinh dưỡng, vận động, giấc ngủ, mục tiêu cá nhân và trợ lý AI; Firebase hỗ trợ xác thực và lưu trữ dữ liệu.",
+    "en": "Built an Android app with Kotlin and Jetpack Compose using MVVM. Salud offers a dashboard, weight and BMI tracking, nutrition, activity and sleep logs, personal goals, and an AI assistant, with Firebase for authentication and data storage."
   },
   "project.3.result": {
-    "vi": "[Kết quả: tác động có thể đo lường được.]",
-    "en": "[Result: the measurable impact.]"
+    "vi": "Hoàn thành ứng dụng Android với các tính năng cốt lõi để ghi nhận và xem lại dữ liệu sức khỏe cá nhân. Dự án tập trung vào một trải nghiệm quản lý sức khỏe thống nhất thay vì các chỉ số và thói quen bị tách rời.",
+    "en": "Delivered an Android app with core features for recording and reviewing personal health data. The project brings health metrics and everyday wellness habits into one unified experience."
   },
   "project.3.role": {
-    "vi": "[Vai trò của bạn]",
-    "en": "[Your role]"
+    "vi": "Đồng phát triển — UI/UX, Android và tích hợp Firebase",
+    "en": "Co-developer — UI/UX, Android development, and Firebase integration"
   },
   "project.3.duration": {
-    "vi": "[Thời gian thực hiện]",
-    "en": "[How long it took]"
+    "vi": "3 tháng (tháng 9–12/2025)",
+    "en": "3 months (September–December 2025)"
   },
   "project.3.team": {
-    "vi": "[Số thành viên]",
-    "en": "[Number of people]"
+    "vi": "2 thành viên",
+    "en": "2 team members"
   },
   "project.3.highlight.1": {
-    "vi": "[Điểm nổi bật] 1",
-    "en": "[Highlight] 1"
+    "vi": "Theo dõi cân nặng, BMI và các chỉ số sức khỏe qua dashboard và biểu đồ.",
+    "en": "Track weight, BMI, and health metrics through a dashboard and charts."
   },
   "project.3.highlight.2": {
-    "vi": "[Điểm nổi bật] 2",
-    "en": "[Highlight] 2"
+    "vi": "Quản lý dinh dưỡng, vận động, giấc ngủ và mục tiêu cá nhân.",
+    "en": "Manage nutrition, activity, sleep, and personal goals."
   },
   "project.3.highlight.3": {
-    "vi": "[Điểm nổi bật] 3",
-    "en": "[Highlight] 3"
+    "vi": "Tích hợp trợ lý AI hỗ trợ gợi ý về sức khỏe, ăn uống và luyện tập.",
+    "en": "Includes an AI assistant for health, nutrition, and exercise suggestions."
   },
   "project.3.metric.1.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "8+",
+    "en": "8+"
   },
   "project.3.metric.1.label": {
-    "vi": "[Chỉ số] 1",
-    "en": "[Metric] 1"
+    "vi": "nhóm tính năng sức khỏe",
+    "en": "health feature areas"
   },
   "project.3.metric.2.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "2",
+    "en": "2"
   },
   "project.3.metric.2.label": {
-    "vi": "[Chỉ số] 2",
-    "en": "[Metric] 2"
+    "vi": "thành viên trong nhóm",
+    "en": "team members"
   },
   "project.3.metric.3.value": {
-    "vi": "[00%]",
-    "en": "[00%]"
+    "vi": "3",
+    "en": "3"
   },
   "project.3.metric.3.label": {
-    "vi": "[Chỉ số] 3",
-    "en": "[Metric] 3"
+    "vi": "thời gian thực hiện",
+    "en": "development period"
   },
   "project.3.caption.1": {
-    "vi": "[Chú thích ảnh] 1",
-    "en": "[Image caption] 1"
+    "vi": "Dashboard tổng quan sức khỏe",
+    "en": "Personal health dashboard"
   },
   "project.3.caption.2": {
-    "vi": "[Chú thích ảnh] 2",
-    "en": "[Image caption] 2"
+    "vi": "Theo dõi chỉ số và nhật ký sức khỏe",
+    "en": "Health metrics and daily tracking"
+  },
+
+  "project.4.title": {
+  "vi": "WIIS – Lịch học dành cho sinh viên",
+  "en": "WIIS – A Student Schedule App"
+  },
+  "project.4.summary": {
+    "vi": "Ứng dụng Android giúp sinh viên xem và quản lý lịch học, lịch thi, sự kiện cá nhân và lời nhắc ở một nơi.",
+    "en": "An Android app that helps students manage class schedules, exams, personal events, and reminders in one place."
+  },
+  "project.4.overview": {
+    "vi": "WIIS (Why, It Is Sunday?) là ứng dụng lịch dành cho sinh viên, tập trung thời khóa biểu và các hoạt động cá nhân. Ứng dụng hỗ trợ xem lịch theo ngày hoặc tháng, đồng bộ lịch từ hệ thống đào tạo và thiết bị Android, đồng thời gửi lời nhắc cho lịch học, sự kiện và công việc.",
+    "en": "WIIS (Why, It Is Sunday?) is a calendar app for students that brings class schedules and personal activities together. It supports day and month views, schedule syncing from school systems and Android devices, and reminders for classes, events, and tasks."
+  },
+  "project.4.problem": {
+    "vi": "Lịch học, lịch thi và sự kiện thường nằm rải rác ở nhiều nơi. Sinh viên có thể khó kiểm tra nhanh hôm nay học gì, lịch có thay đổi hay sắp đến hạn công việc nào.",
+    "en": "Class schedules, exams, and personal events are often scattered across different places. Students may have trouble quickly checking what they have today, whether a schedule has changed, or which task is due soon."
+  },
+  "project.4.solution": {
+    "vi": "Phát triển ứng dụng Android bằng Kotlin và Jetpack Compose, áp dụng MVVM và Repository Pattern. WIIS kết nối hệ thống đào tạo, đồng bộ với lịch Android trên thiết bị và cung cấp thông báo nhắc lịch; cấu trúc plugin hỗ trợ mở rộng cho nhiều hệ thống trường học.",
+    "en": "Developed an Android app with Kotlin and Jetpack Compose, using MVVM and the Repository Pattern. WIIS connects to school systems, syncs with the device's Android calendar, and provides schedule reminders; its plugin structure is designed to support additional school systems."
+  },
+  "project.4.result": {
+    "vi": "Xây dựng ứng dụng lịch học với các chức năng xem lịch, quản lý sự kiện, đồng bộ dữ liệu và nhắc lịch. Thiết kế phân tầng tách giao diện, ViewModel, repository và nguồn dữ liệu để thuận tiện phát triển, bảo trì.",
+    "en": "Built a student scheduling app with calendar views, event management, data syncing, and reminders. Its layered design separates the UI, ViewModels, repository, and data sources to support maintainability and further development."
+  },
+  "project.4.role": {
+    "vi": "Tác giả dự án cá nhân — phát triển ứng dụng Android",
+    "en": "Personal project developer — Android app development"
+  },
+  "project.4.duration": {
+    "vi": "Không nêu trong README",
+    "en": "Not specified in the README"
+  },
+  "project.4.team": {
+    "vi": "Dự án cá nhân",
+    "en": "Personal project"
+  },
+  "project.4.highlight.1": {
+    "vi": "Xem lịch theo ngày và tháng, bao gồm lịch học, lịch thi và sự kiện cá nhân.",
+    "en": "View classes, exams, and personal events in day and month calendar views."
+  },
+  "project.4.highlight.2": {
+    "vi": "Đồng bộ thời khóa biểu với hệ thống đào tạo và lịch trên thiết bị Android.",
+    "en": "Sync schedules with school systems and the Android device calendar."
+  },
+  "project.4.highlight.3": {
+    "vi": "Gửi lời nhắc lịch học, sự kiện và công việc; thiết kế plugin hướng đến hỗ trợ nhiều hệ thống trường.",
+    "en": "Send reminders for classes, events, and tasks, with a plugin design intended to support multiple school systems."
+  },
+  "project.4.metric.1.value": {
+    "vi": "4",
+    "en": "4"
+  },
+  "project.4.metric.1.label": {
+    "vi": "nhóm chức năng chính được mô tả",
+    "en": "documented core feature areas"
+  },
+  "project.4.metric.2.value": {
+    "vi": "3",
+    "en": "3"
+  },
+  "project.4.metric.2.label": {
+    "vi": "lớp kiến trúc: UI, ViewModel, Repository",
+    "en": "architecture layers: UI, ViewModel, Repository"
+  },
+  "project.4.metric.3.value": {
+    "vi": "21+",
+    "en": "21+"
+  },
+  "project.4.metric.3.label": {
+    "vi": "Android SDK tối thiểu",
+    "en": "minimum Android SDK"
+  },
+  "project.4.caption.1": {
+    "vi": "Lịch học và sự kiện theo ngày, tháng",
+    "en": "Class and event calendar in day and month views"
+  },
+  "project.4.caption.2": {
+    "vi": "Đồng bộ thời khóa biểu và thiết lập ứng dụng",
+    "en": "Schedule syncing and app settings"
   },
   "_experience": "=== Kinh nghiệm ===",
   "experience.1.period": {
@@ -625,22 +711,22 @@
     "vi": "Trường Đại học Giao thông vận tải TP.HCM",
     "en": "Ho Chi Minh City University of Transport"
   },
-  "_certificates": "=== Chứng chỉ ===",
+  "_certificates": "=== Sở thích ===",
   "certificates.1.name": {
-    "vi": "[Tên chứng chỉ]",
-    "en": "[Certificate name]"
+    "vi": "Công nghệ & AI",
+    "en": "Technology & AI"
   },
   "certificates.1.meta": {
-    "vi": "[Đơn vị cấp] · [Năm]",
-    "en": "[Issuer] · [Year]"
+    "vi": "Khám phá công nghệ mới, thử nghiệm AI và công cụ sáng tạo.",
+    "en": "Exploring new technologies, AI, and creative tools."
   },
   "certificates.2.name": {
-    "vi": "[Tên chứng chỉ]",
-    "en": "[Certificate name]"
+    "vi": "Lập trình & Gaming",
+    "en": "Programming & Gaming"
   },
   "certificates.2.meta": {
-    "vi": "[Đơn vị cấp] · [Năm]",
-    "en": "[Issuer] · [Year]"
+    "vi": "Xây dựng dự án cá nhân và khám phá thế giới game.",
+    "en": "Building personal projects and exploring the world of gaming."
   },
   "_contact": "=== contact ===",
   "contact.lead": {
@@ -880,6 +966,43 @@
   "msg.subject_brief": {
     "vi": "Yêu cầu dự án từ {name}",
     "en": "Project brief from {name}"
+  },
+  "_mail": "=== Gửi email (EmailJS): thông báo lỗi cho khách + nhãn trong email gửi cho chủ site (luôn lấy ngôn ngữ đầu tiên) ===",
+  "msg.fail_config": {
+    "vi": "Biểu mẫu chưa sẵn sàng. Vui lòng gửi email trực tiếp cho mình.",
+    "en": "The form isn't ready yet. Please email me directly."
+  },
+  "msg.fail_network": {
+    "vi": "Không kết nối được. Hãy kiểm tra mạng rồi thử lại.",
+    "en": "Couldn't connect. Check your connection and try again."
+  },
+  "msg.fail_busy": {
+    "vi": "Hệ thống đang nhận quá nhiều yêu cầu. Vui lòng thử lại sau ít phút.",
+    "en": "Too many requests right now. Please try again in a few minutes."
+  },
+  "msg.wait": {
+    "vi": "Bạn vừa gửi xong. Vui lòng đợi {seconds} giây rồi gửi tiếp.",
+    "en": "You just sent a message. Please wait {seconds}s before sending another."
+  },
+  "msg.limit": {
+    "vi": "Bạn đã gửi khá nhiều tin nhắn. Vui lòng thử lại sau hoặc email trực tiếp.",
+    "en": "You've sent several messages already. Please try again later or email directly."
+  },
+  "msg.err_links": {
+    "vi": "Tin nhắn có quá nhiều liên kết (tối đa 5).",
+    "en": "Too many links in the message (5 at most)."
+  },
+  "mail.type": {
+    "vi": "Loại dự án",
+    "en": "Project type"
+  },
+  "mail.budget": {
+    "vi": "Ngân sách dự kiến",
+    "en": "Estimated budget"
+  },
+  "mail.none": {
+    "vi": "Chưa chọn",
+    "en": "Not chosen"
   },
   "chat.greeting": {
     "vi": "Chào bạn! Cứ nhắn mình bất cứ điều gì: một câu hỏi, lời mời hợp tác, hay chỉ là câu chào.",

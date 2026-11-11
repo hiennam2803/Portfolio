@@ -1,777 +1,559 @@
 <!doctype html>
 <html data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <!-- Title + description are filled from languages.json (meta.title, meta.description) -->
-    <title></title>
-    <meta name="description" content="" />
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#eef1f5" />
-    <!-- Set theme + js flag before paint: no flash, no layout shift -->
-    <script>
-      (function () {
-        var d = document.documentElement,
-          t;
-        try {
-          t = localStorage.getItem('theme');
-        } catch (e) {}
-        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        d.dataset.theme = t;
-        d.classList.add('js');
-        try {
-          if (sessionStorage.getItem('seen')) d.classList.add('seen');
-          else sessionStorage.setItem('seen', '1');
-        } catch (e) {}
-        // never leave the page hidden if the content fails to load
-        setTimeout(function () {
-          d.classList.add('ready');
-        }, 3000);
-      })();
-    </script>
-    <link
-      rel="preload"
-      href="fonts/archivo-latin-wdth-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="fonts/jetbrains-mono-latin-wght-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <div class="curtain" aria-hidden="true">
-  <span style="--k: 0" data-t="curtain.1"></span><span style="--k: 1" data-t="curtain.2"></span><span style="--k: 2" data-t="curtain.3"></span
-  ><span style="--k: 3" data-t="curtain.4"></span>
-</div>
-<a class="skip" href="#main" data-t="header.skip"></a>
-<div class="progress" aria-hidden="true"></div>
-<div class="hud" aria-hidden="true">
-  <div class="hud-frame"><i></i><i></i><i></i><i></i></div>
-</div>
-<header data-header>
-  <div class="wrap bar">
-    <a class="logo" href="#top" data-ta="aria-label:site.name"><span data-t="@site.initials"></span><i>.</i></a>
-    <nav class="nav" data-nav data-ta="aria-label:nav.aria">
-      <a href="#about"
-        ><span class="roll"><span data-ta="data-text:nav.about" data-t="nav.about"></span></span></a
-      ><a href="#skills"
-        ><span class="roll"><span data-ta="data-text:nav.skills" data-t="nav.skills"></span></span></a
-      ><a href="#projects"
-        ><span class="roll"><span data-ta="data-text:nav.projects" data-t="nav.projects"></span></span></a
-      ><a href="#experience"
-        ><span class="roll"><span data-ta="data-text:nav.experience" data-t="nav.experience"></span></span></a
-      ><a href="#education"
-        ><span class="roll"><span data-ta="data-text:nav.education" data-t="nav.education"></span></span></a
-      ><a href="#certificates"
-        ><span class="roll"><span data-ta="data-text:nav.certificates" data-t="nav.certificates"></span></span></a
-      ><a href="#contact"
-        ><span class="roll"><span data-ta="data-text:nav.contact" data-t="nav.contact"></span></span></a
-      >
-      <span class="indicator" data-indicator aria-hidden="true"></span>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Title + description are filled from languages.json (meta.title, meta.description) -->
+  <title></title>
+  <meta name="description" content="" />
+  <link rel="icon" href="images/logo_vhdt.png" type="image/png" />
+  <meta name="theme-color" content="#eef1f5" />
+  <!-- Set theme + js flag before paint: no flash, no layout shift -->
+  <script>
+    (function () {
+      var d = document.documentElement,
+        t;
+      try {
+        t = localStorage.getItem('theme');
+      } catch (e) { }
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      d.dataset.theme = t;
+      d.classList.add('js');
+      try {
+        if (sessionStorage.getItem('seen')) d.classList.add('seen');
+        else sessionStorage.setItem('seen', '1');
+      } catch (e) { }
+      // never leave the page hidden if the content fails to load
+      setTimeout(function () {
+        d.classList.add('ready');
+      }, 3000);
+    })();
+  </script>
+  <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/jetbrains-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="curtain" aria-hidden="true">
+    <span style="--k: 0" data-t="curtain.1"></span><span style="--k: 1" data-t="curtain.2"></span><span style="--k: 2"
+      data-t="curtain.3"></span><span style="--k: 3" data-t="curtain.4"></span>
+  </div>
+  <a class="skip" href="#main" data-t="header.skip"></a>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="hud" aria-hidden="true">
+    <div class="hud-frame"><i></i><i></i><i></i><i></i></div>
+  </div>
+  <header data-header>
+    <div class="wrap bar">
+      <a class="logo" href="#top" data-ta="aria-label:site.name"><span data-t="@site.initials"></span><i>.</i></a>
+      <nav class="nav" data-nav data-ta="aria-label:nav.aria">
+        <a href="#about"><span class="roll"><span data-ta="data-text:nav.about" data-t="nav.about"></span></span></a><a
+          href="#skills"><span class="roll"><span data-ta="data-text:nav.skills"
+              data-t="nav.skills"></span></span></a><a href="#projects"><span class="roll"><span
+              data-ta="data-text:nav.projects" data-t="nav.projects"></span></span></a><a href="#experience"><span
+            class="roll"><span data-ta="data-text:nav.experience" data-t="nav.experience"></span></span></a><a
+          href="#education"><span class="roll"><span data-ta="data-text:nav.education"
+              data-t="nav.education"></span></span></a><a href="#certificates"><span class="roll"><span
+              data-ta="data-text:nav.certificates" data-t="nav.certificates"></span></span></a><a href="#contact"><span
+            class="roll"><span data-ta="data-text:nav.contact" data-t="nav.contact"></span></span></a>
+        <span class="indicator" data-indicator aria-hidden="true"></span>
+      </nav>
+      <div class="tools">
+        <button class="pill pill--cta" type="button" data-message-open data-t="common.message_short"></button>
+        <a class="pill" href="?" data-lang-switch></a>
+        <button class="pill theme" type="button" data-theme-toggle data-ta="aria-label:header.theme_aria">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75"
+            stroke-linecap="round" aria-hidden="true">
+            <circle class="core" cx="12" cy="12" r="4.5"></circle>
+            <g class="rays">
+              <path
+                d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4">
+              </path>
+            </g>
+          </svg>
+        </button>
+        <button class="pill menu" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav"
+          data-ta="aria-label:header.menu_aria">
+          <span class="l1"></span><span class="l2"></span>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="mobile" data-mobile-nav data-ta="aria-label:nav.aria">
+      <a href="#about" style="--i: 0" data-t="nav.about"></a><a href="#skills" style="--i: 1" data-t="nav.skills"></a><a
+        href="#projects" style="--i: 2" data-t="nav.projects"></a><a href="#experience" style="--i: 3"
+        data-t="nav.experience"></a><a href="#education" style="--i: 4" data-t="nav.education"></a><a
+        href="#certificates" style="--i: 5" data-t="nav.certificates"></a><a href="#contact" style="--i: 6"
+        data-t="nav.contact"></a>
     </nav>
-    <div class="tools">
-      <button class="pill pill--cta" type="button" data-message-open data-t="common.message_short"></button>
-      <a class="pill" href="?" data-lang-switch></a>
-      <button class="pill theme" type="button" data-theme-toggle data-ta="aria-label:header.theme_aria">
-        <svg
-          viewBox="0 0 24 24"
-          width="18"
-          height="18"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          aria-hidden="true"
-        >
-          <circle class="core" cx="12" cy="12" r="4.5"></circle>
-          <g class="rays">
-            <path
-              d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
-            ></path>
-          </g>
-        </svg>
-      </button>
-      <button
-        class="pill menu"
-        type="button"
-        data-menu-btn
-        aria-expanded="false"
-        aria-controls="mobile-nav"
-        data-ta="aria-label:header.menu_aria"
-      >
-        <span class="l1"></span><span class="l2"></span>
-      </button>
-    </div>
-  </div>
-  <nav id="mobile-nav" class="mobile" data-mobile-nav data-ta="aria-label:nav.aria">
-    <a href="#about" style="--i: 0" data-t="nav.about"></a><a href="#skills" style="--i: 1" data-t="nav.skills"></a
-    ><a href="#projects" style="--i: 2" data-t="nav.projects"></a><a href="#experience" style="--i: 3" data-t="nav.experience"></a
-    ><a href="#education" style="--i: 4" data-t="nav.education"></a><a href="#certificates" style="--i: 5" data-t="nav.certificates"></a
-    ><a href="#contact" style="--i: 6" data-t="nav.contact"></a>
-  </nav>
-</header>
+  </header>
 
-    <main id="main"><section id="top" class="hero" aria-labelledby="hero-h" data-ta="data-title:hero.section_title">
-  <canvas class="field" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <div class="top">
-      <div class="main">
-        <p class="hello" data-t="hero.hello"></p>
-        <h1 id="hero-h">
-          <span class="line"> <span style="--i: 0" data-t="hero.h1_line1"></span> </span
-          ><span class="line"> <span style="--i: 1" data-t="hero.h1_line2"></span> </span>
-        </h1>
-        <p class="role" data-t="hero.role"></p>
-        <p class="intro" data-t="hero.intro"></p>
-        <div class="actions">
-          <a class="btn solid" href="#projects" data-magnetic
-            ><span data-t="hero.view_projects"></span><svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6"></path></svg
-          ></a>
-          <a class="btn" href="#contact" data-magnetic data-t="hero.contact"></a>
+  <main id="main">
+    <section id="top" class="hero" aria-labelledby="hero-h" data-ta="data-title:hero.section_title">
+      <canvas class="field" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <div class="top">
+          <div class="main">
+            <p class="hello" data-t="hero.hello"></p>
+            <h1 id="hero-h">
+              <span class="line"> <span style="--i: 0" data-t="hero.h1_line1"></span> </span><span class="line"> <span
+                  style="--i: 1" data-t="hero.h1_line2"></span> </span>
+            </h1>
+            <p class="role" data-t="hero.role"></p>
+            <p class="intro" data-t="hero.intro"></p>
+            <div class="actions">
+              <a class="btn solid" href="#projects" data-magnetic><span data-t="hero.view_projects"></span><svg
+                  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M13 6l6 6-6 6"></path>
+                </svg></a>
+              <a class="btn" href="#contact" data-magnetic data-t="hero.contact"></a>
+            </div>
+          </div>
+          <figure class="portrait">
+            <div class="photo">
+              <!-- Portrait (4:5): save your photo as images/portrait.webp (or .jpg and change src). Until the file exists, the placeholder shows. -->
+              <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="5" y="8" width="38" height="32" rx="3" />
+                  <circle cx="17" cy="19" r="4" />
+                  <path d="M5 34l11-10 8 8 6-6 13 12" />
+                </svg><small data-t="@images.portrait"></small></span>
+              <img width="640" height="800" fetchpriority="high" decoding="async" onerror="this.remove()"
+                data-ta="alt:hero.alt_portrait;src:@images.portrait" />
+            </div>
+            <button class="badge" type="button" data-message-open data-ta="aria-label:common.send_message">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <path id="badge-path" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" />
+                </defs>
+                <text>
+                  <textPath href="#badge-path" textLength="284" lengthAdjust="spacing" data-t="hero.badge_ring">
+                  </textPath>
+                </text>
+              </svg>
+              <span class="badge__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+                  aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg></span>
+            </button>
+            <figcaption class="chip"><span class="dot" aria-hidden="true"></span><span data-t="hero.available"></span>
+            </figcaption>
+          </figure>
         </div>
+        <dl class="stats">
+          <div>
+            <dd data-count data-stat="years"></dd>
+            <dt data-t="hero.stat_years"></dt>
+          </div>
+          <div>
+            <dd data-count data-stat="projects"></dd>
+            <dt data-t="hero.stat_projects"></dt>
+          </div>
+          <div>
+            <dd data-count data-stat="tech"></dd>
+            <dt data-t="hero.stat_tech"></dt>
+          </div>
+        </dl>
+        <a class="scroll" href="#about" data-ta="aria-label:hero.scroll"><span class="track"><i></i></span><span
+            data-t="hero.scroll"></span></a>
       </div>
-      <figure class="portrait">
-        <div class="photo">
-          <!-- Portrait (4:5): save your photo as images/portrait.webp (or .jpg and change src). Until the file exists, the placeholder shows. -->
-          <span class="ph" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="8" width="38" height="32" rx="3" /><circle cx="17" cy="19" r="4" /><path d="M5 34l11-10 8 8 6-6 13 12" /></svg><small data-t="@images.portrait"></small></span>
-          <img width="640" height="800" fetchpriority="high" decoding="async" onerror="this.remove()" data-ta="alt:hero.alt_portrait;src:@images.portrait" />
-        </div>
-        <button class="badge" type="button" data-message-open data-ta="aria-label:common.send_message">
-          <svg viewBox="0 0 120 120" aria-hidden="true">
-            <defs><path id="badge-path" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" /></defs>
-            <text>
-              <textPath href="#badge-path" textLength="284" lengthAdjust="spacing" data-t="hero.badge_ring"></textPath>
-            </text>
-          </svg>
-          <span class="badge__arrow"
-            ><svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" /></svg
-          ></span>
-        </button>
-        <figcaption class="chip"><span class="dot" aria-hidden="true"></span><span data-t="hero.available"></span></figcaption>
-      </figure>
-    </div>
-    <dl class="stats">
-      <div>
-        <dd data-count data-stat="years"></dd>
-        <dt data-t="hero.stat_years"></dt>
-      </div>
-      <div>
-        <dd data-count data-stat="projects"></dd>
-        <dt data-t="hero.stat_projects"></dt>
-      </div>
-      <div>
-        <dd data-count data-stat="tech"></dd>
-        <dt data-t="hero.stat_tech"></dt>
-      </div>
-    </dl>
-    <a class="scroll" href="#about" data-ta="aria-label:hero.scroll"
-      ><span class="track"><i></i></span><span data-t="hero.scroll"></span></a
-    >
-  </div>
-</section>
+    </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__row">
-    <div class="track">
-      <ul data-marquee></ul>
-      <ul data-marquee></ul>
-    </div>
-  </div>
-  <div class="marquee__row">
-    <div class="track track--rev">
-      <ul data-marquee></ul>
-      <ul data-marquee></ul>
-    </div>
-  </div>
-</div>
-
-<!-- About -->
-<section class="section" id="about" aria-labelledby="about-h">
-  <div class="wrap grid">
-    <h2 id="about-h" class="rail" data-split data-t="nav.about"></h2>
-    <div class="body">
-      <div class="text" data-stagger>
-        <p class="lead" data-scrub data-t="about.lead"></p>
-        <p class data-reveal data-t="about.text"></p>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__row">
+        <div class="track">
+          <ul data-marquee></ul>
+          <ul data-marquee></ul>
+        </div>
       </div>
-      <dl data-stagger>
-        <div data-reveal>
-          <dt data-t="about.location_label"></dt>
-          <dd data-t="site.city"></dd>
-        </div>
-        <div data-reveal>
-          <dt data-t="about.focus_label"></dt>
-          <dd data-t="about.focus_value"></dd>
-        </div>
-        <div data-reveal>
-          <dt data-t="about.languages_label"></dt>
-          <dd data-t="about.languages_value"></dd>
-        </div>
-      </dl>
-    </div>
-  </div>
-</section>
-
-<!-- Skills -->
-<section class="section" id="skills" aria-labelledby="skills-h">
-  <div class="wrap grid">
-    <h2 id="skills-h" class="rail" data-split data-t="nav.skills"></h2>
-    <div class="body">
-      <div class="groups" data-stagger>
-        <div class="group" data-reveal>
-          <h3 data-t="skills.group.lang"></h3>
-          <ul data-list="skills.lang"></ul>
-        </div>
-        <div class="group" data-reveal>
-          <h3 data-t="skills.group.fw"></h3>
-          <ul data-list="skills.fw"></ul>
-        </div>
-        <div class="group" data-reveal>
-          <h3 data-t="skills.group.tools"></h3>
-          <ul data-list="skills.tools"></ul>
+      <div class="marquee__row">
+        <div class="track track--rev">
+          <ul data-marquee></ul>
+          <ul data-marquee></ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Projects: the list is generated from projects.json (data) + project.N.* in languages.json (text), using parts/project.html -->
-<section class="section" id="projects" aria-labelledby="projects-h">
-  <div class="wrap grid">
-    <h2 id="projects-h" class="rail" data-split data-t="nav.projects"></h2>
-    <div class="body">
-      <ul data-stagger data-project-list></ul>
+    <!-- About -->
+    <section class="section" id="about" aria-labelledby="about-h">
+      <div class="wrap grid">
+        <h2 id="about-h" class="rail" data-split data-t="nav.about"></h2>
+        <div class="body">
+          <div class="text" data-stagger>
+            <p class="lead" data-scrub data-t="about.lead"></p>
+            <p class data-reveal data-t="about.text"></p>
+          </div>
+          <dl data-stagger>
+            <div data-reveal>
+              <dt data-t="about.location_label"></dt>
+              <dd data-t="site.city"></dd>
+            </div>
+            <div data-reveal>
+              <dt data-t="about.focus_label"></dt>
+              <dd data-t="about.focus_value"></dd>
+            </div>
+            <div data-reveal>
+              <dt data-t="about.languages_label"></dt>
+              <dd data-t="about.languages_value"></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills" aria-labelledby="skills-h">
+      <div class="wrap grid">
+        <h2 id="skills-h" class="rail" data-split data-t="nav.skills"></h2>
+        <div class="body">
+          <div class="groups" data-stagger>
+            <div class="group" data-reveal>
+              <h3 data-t="skills.group.lang"></h3>
+              <ul data-list="skills.lang"></ul>
+            </div>
+            <div class="group" data-reveal>
+              <h3 data-t="skills.group.fw"></h3>
+              <ul data-list="skills.fw"></ul>
+            </div>
+            <div class="group" data-reveal>
+              <h3 data-t="skills.group.tools"></h3>
+              <ul data-list="skills.tools"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects: the list is generated from projects.json (data) + project.N.* in languages.json (text), using parts/project.html -->
+    <section class="section" id="projects" aria-labelledby="projects-h">
+      <div class="wrap grid">
+        <h2 id="projects-h" class="rail" data-split data-t="nav.projects"></h2>
+        <div class="body">
+          <ul data-stagger data-project-list></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience: generated from experience.N.* keys in languages.json (role, org, period, bullet.K) -->
+    <section class="section" id="experience" aria-labelledby="experience-h">
+      <div class="wrap grid">
+        <h2 id="experience-h" class="rail" data-split data-t="nav.experience"></h2>
+        <div class="body">
+          <ol class="timeline" data-stagger data-draw data-render="experience"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education: generated from education.N.* keys in languages.json (period, degree, school) -->
+    <section class="section" id="education" aria-labelledby="education-h">
+      <div class="wrap grid">
+        <h2 id="education-h" class="rail" data-split data-t="nav.education"></h2>
+        <div class="body">
+          <ol class="timeline" data-stagger data-draw data-render="education"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates: generated from certificates.N.* keys in languages.json (name, meta) -->
+    <section class="section" id="certificates" aria-labelledby="certificates-h">
+      <div class="wrap grid">
+        <h2 id="certificates-h" class="rail" data-split data-t="nav.certificates"></h2>
+        <div class="body">
+          <ul data-stagger data-render="certificates"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section panel" id="contact" aria-labelledby="contact-h">
+      <div class="wrap grid">
+        <h2 id="contact-h" class="rail" data-split data-t="nav.contact"></h2>
+        <div class="body">
+          <p class="lead" data-split data-t="contact.lead"></p>
+          <p class="mail" data-reveal>
+            <a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a><button class="copy" type="button"
+              aria-live="polite" data-ta="data-copy:@links.email;data-copied:contact.copied"
+              data-t="contact.copy"></button>
+          </p>
+          <p class="contact-cta" data-reveal>
+            <button class="btn solid" type="button" data-message-open="chat" data-magnetic>
+              <span data-t="common.send_message"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true" focusable="false">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+            <button class="btn" type="button" data-message-open="brief" data-magnetic>
+              <span data-t="common.project_request"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true" focusable="false">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+          </p>
+          <ul class="social" data-stagger>
+            <li data-reveal>
+              <a rel="noopener" target="_blank" data-ta="href:@links.github">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                  </path>
+                </svg>
+                <span data-t="social.github"></span>
+              </a>
+            </li>
+            <li data-reveal>
+              <a rel="noopener" target="_blank" data-ta="href:@links.facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+                <span data-t="social.facebook"></span>
+              </a>
+            </li>
+            <li data-reveal>
+              <a rel="noopener" target="_blank" data-ta="href:@links.zalo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.2A8 8 0 1 1 21 12z"></path>
+                  <path d="M9.5 9h5l-5 6h5"></path>
+                </svg>
+                <span data-t="social.zalo"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="panel">
+    <div class="wrap">
+      <div class="foot-top">
+        <p class="foot-cta" data-reveal>
+          <span data-t="footer.cta"></span><a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a>
+        </p>
+        <nav class="foot-cols" data-reveal data-ta="aria-label:footer.nav_aria">
+          <div>
+            <h3 data-t="footer.nav_title"></h3>
+            <ul>
+              <li><a class="u" href="#about" data-t="nav.about"></a></li>
+              <li><a class="u" href="#skills" data-t="nav.skills"></a></li>
+              <li><a class="u" href="#projects" data-t="nav.projects"></a></li>
+              <li><a class="u" href="#experience" data-t="nav.experience"></a></li>
+              <li><a class="u" href="#education" data-t="nav.education"></a></li>
+              <li><a class="u" href="#certificates" data-t="nav.certificates"></a></li>
+              <li><a class="u" href="#contact" data-t="nav.contact"></a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 data-t="footer.connect"></h3>
+            <ul>
+              <li>
+                <a class="u" target="_blank" rel="noopener" data-ta="href:@links.github" data-t="social.github"></a>
+              </li>
+              <li>
+                <a class="u" target="_blank" rel="noopener" data-ta="href:@links.linkedin" data-t="social.linkedin"></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <p class="foot-mark" aria-hidden="true" data-reveal data-t="site.name"></p>
+      <div class="foot-bottom">
+        <p data-t="footer.copyright"></p>
+        <a class="up" href="#top"><span data-t="footer.back_to_top"></span><svg width="18" height="18"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 19V5M6 11l6-6 6 6"></path>
+          </svg></a>
+      </div>
     </div>
-  </div>
-</section>
+  </footer> <!-- Message dialog + floating button -->
+  <button class="fab" type="button" data-message-open data-ta="aria-label:common.send_message">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.2A8 8 0 1 1 21 12z" />
+    </svg><span data-t="common.message_short"></span>
+  </button>
 
-<!-- Experience: generated from experience.N.* keys in languages.json (role, org, period, bullet.K) -->
-<section class="section" id="experience" aria-labelledby="experience-h">
-  <div class="wrap grid">
-    <h2 id="experience-h" class="rail" data-split data-t="nav.experience"></h2>
-    <div class="body">
-      <ol class="timeline" data-stagger data-draw data-render="experience"></ol>
-    </div>
-  </div>
-</section>
-
-<!-- Education: generated from education.N.* keys in languages.json (period, degree, school) -->
-<section class="section" id="education" aria-labelledby="education-h">
-  <div class="wrap grid">
-    <h2 id="education-h" class="rail" data-split data-t="nav.education"></h2>
-    <div class="body">
-      <ol class="timeline" data-stagger data-draw data-render="education"></ol>
-    </div>
-  </div>
-</section>
-
-<!-- Certificates: generated from certificates.N.* keys in languages.json (name, meta) -->
-<section class="section" id="certificates" aria-labelledby="certificates-h">
-  <div class="wrap grid">
-    <h2 id="certificates-h" class="rail" data-split data-t="nav.certificates"></h2>
-    <div class="body">
-      <ul data-stagger data-render="certificates"></ul>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section class="section panel" id="contact" aria-labelledby="contact-h">
-  <div class="wrap grid">
-    <h2 id="contact-h" class="rail" data-split data-t="nav.contact"></h2>
-    <div class="body">
-      <p class="lead" data-split data-t="contact.lead"></p>
-      <p class="mail" data-reveal>
-        <a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a
-        ><button
-          class="copy"
-          type="button"
-         
-         
-          aria-live="polite" data-ta="data-copy:@links.email;data-copied:contact.copied" data-t="contact.copy"
-        ></button>
-      </p>
-      <p class="contact-cta" data-reveal>
-        <button class="btn solid" type="button" data-message-open="chat" data-magnetic>
-          <span data-t="common.send_message"></span><svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </button>
-        <button class="btn" type="button" data-message-open="brief" data-magnetic>
-          <span data-t="common.project_request"></span><svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </button>
-      </p>
-      <ul class="social" data-stagger>
-        <li data-reveal>
-          <a rel="noopener" target="_blank" data-ta="href:@links.github">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-              ></path>
-            </svg>
-            <span data-t="social.github"></span>
-          </a>
+  <dialog class="msg" id="message-dialog" data-mode="chat" aria-labelledby="msg-title" data-ta="data-words:msg.words">
+    <aside class="msg__side">
+      <div class="msg__orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="msg__hello" aria-hidden="true"><span data-hello data-t="curtain.1"></span></p>
+      <div class="msg__intro">
+        <h2 id="msg-title" data-t="msg.title"></h2>
+        <p data-for="chat" data-t="msg.intro"></p>
+        <p data-for="brief" data-t="msg.intro_brief"></p>
+      </div>
+      <ul class="msg__meta">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6" />
+          </svg><a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a>
         </li>
-        <li data-reveal>
-          <a rel="noopener" target="_blank" data-ta="href:@links.linkedin">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"
-              ></path>
-            </svg>
-            <span data-t="social.linkedin"></span>
-          </a>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg><span data-t="msg.reply_time"></span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg><span data-t="site.city"></span>
         </li>
       </ul>
-    </div>
-  </div>
-</section></main>
-
-    <!-- Footer -->
-<footer class="panel">
-  <div class="wrap">
-    <div class="foot-top">
-      <p class="foot-cta" data-reveal>
-        <span data-t="footer.cta"></span><a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a>
+      <p class="msg__avatar">
+        <span class="msg__initials"><span data-t="@site.initials"></span><img class="msg__photo" alt="" width="88"
+            height="88" hidden /><i></i></span><span data-t="site.name"></span>
       </p>
-      <nav class="foot-cols" data-reveal data-ta="aria-label:footer.nav_aria">
-        <div>
-          <h3 data-t="footer.nav_title"></h3>
-          <ul>
-            <li><a class="u" href="#about" data-t="nav.about"></a></li>
-            <li><a class="u" href="#skills" data-t="nav.skills"></a></li>
-            <li><a class="u" href="#projects" data-t="nav.projects"></a></li>
-            <li><a class="u" href="#experience" data-t="nav.experience"></a></li>
-            <li><a class="u" href="#education" data-t="nav.education"></a></li>
-            <li><a class="u" href="#certificates" data-t="nav.certificates"></a></li>
-            <li><a class="u" href="#contact" data-t="nav.contact"></a></li>
-          </ul>
+    </aside>
+    <div class="msg__main">
+      <button class="msg__close" type="button" data-msg-close data-ta="aria-label:common.close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+      <div class="msg__tabs" role="tablist" data-ta="aria-label:msg.tabs_aria">
+        <button class="msg__tab" type="button" role="tab" id="msg-tab-chat" aria-controls="msg-panel-chat"
+          aria-selected="true" data-msg-tab="chat" data-t="msg.tab_chat"></button>
+        <button class="msg__tab" type="button" role="tab" id="msg-tab-brief" aria-controls="msg-panel-brief"
+          aria-selected="false" tabindex="-1" data-msg-tab="brief" data-t="msg.tab_brief"></button>
+      </div>
+      <section class="msg__panel msg__panel--chat" id="msg-panel-chat" role="tabpanel" aria-labelledby="msg-tab-chat"
+        data-panel="chat">
+        <div class="chat__thread" data-thread aria-live="polite">
+          <p class="bubble bubble--them" data-t="chat.greeting"></p>
         </div>
-        <div>
-          <h3 data-t="footer.connect"></h3>
-          <ul>
-            <li>
-              <a class="u" target="_blank" rel="noopener" data-ta="href:@links.github" data-t="social.github"></a>
-            </li>
-            <li>
-              <a class="u" target="_blank" rel="noopener" data-ta="href:@links.linkedin"
-                data-t="social.linkedin"></a
-              >
-            </li>
-          </ul>
+        <form class="chat__form" data-chat-form novalidate
+          data-ta="data-email:@links.email;data-subject:chat.subject;data-reply:chat.reply;data-reply-mail:chat.reply_mail;data-fail:msg.fail;data-sending:msg.sending">
+          <div class="chat__who">
+            <label class="chat__field"><span data-t="chat.name_label"></span><input name="name" type="text" required
+                autocomplete="name" data-ta="placeholder:chat.name_placeholder;data-error:msg.step1_error" /></label>
+            <label class="chat__field"><span data-t="chat.email_label"></span><input name="email" type="email" required
+                autocomplete="email" data-ta="placeholder:msg.step2_placeholder;data-error:msg.step2_error" /></label>
+          </div>
+          <div class="chat__compose">
+            <textarea name="message" required rows="2" maxlength="600"
+              data-ta="placeholder:chat.message_placeholder;aria-label:chat.message_label;data-error:chat.err_message"></textarea>
+            <button class="chat__send" type="submit" data-ta="aria-label:chat.send"><svg width="18" height="18"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></button>
+          </div>
+          <p class="msg__error" role="alert" data-chat-error></p>
+          <p class="msg__status" role="status" data-chat-status></p>
+        </form>
+      </section>
+      <section class="msg__panel msg__panel--brief" id="msg-panel-brief" role="tabpanel" aria-labelledby="msg-tab-brief"
+        data-panel="brief" hidden>
+        <div class="msg__top">
+          <div class="msg__progress" aria-hidden="true"></div>
+          <p class="msg__count" aria-live="polite"><span data-t="msg.step_word"></span> <span data-current>1</span>
+            <span data-t="msg.of"></span> <span data-total></span></p>
         </div>
-      </nav>
+        <ul class="msg__trail" data-trail data-ta="aria-label:msg.answers_aria"></ul>
+        <form class="msg__form" data-msg-form novalidate
+          data-ta="data-email:@links.email;data-subject:msg.subject_brief;data-ok:msg.ok;data-ok-mail:msg.ok_mail;data-fail:msg.fail;data-sending:msg.sending;data-done-title:msg.done_title">
+          <div class="msg__steps">
+            <div class="msg__step" data-step data-ta="data-label:msg.step1_label;data-error:msg.step1_error">
+              <h3 class="msg__q" id="mq1" data-t="msg.step1_q"></h3>
+              <div class="msg__field">
+                <input name="name" type="text" required autocomplete="name" aria-labelledby="mq1" aria-describedby="me1"
+                  data-ta="placeholder:msg.step1_placeholder" />
+              </div>
+              <p class="msg__error" id="me1" role="alert"></p>
+            </div>
+            <div class="msg__step" data-step data-ta="data-label:msg.step2_label;data-error:msg.step2_error">
+              <h3 class="msg__q" id="mq2" data-t="msg.step2_q"></h3>
+              <div class="msg__field">
+                <input name="email" type="email" required autocomplete="email" aria-labelledby="mq2"
+                  aria-describedby="me2" data-ta="placeholder:msg.step2_placeholder" />
+              </div>
+              <p class="msg__error" id="me2" role="alert"></p>
+            </div>
+            <fieldset class="msg__step" data-step data-ta="data-label:msg.step3_label">
+              <legend class="msg__q" data-t="msg.step3_q"></legend>
+              <div class="msg__opts">
+                <label class="opt"><input type="checkbox" name="topics" data-ta="value:msg.opt_website" /><span
+                    data-t="msg.opt_website"></span></label><label class="opt"><input type="checkbox" name="topics"
+                    data-ta="value:msg.opt_app" /><span data-t="msg.opt_app"></span></label><label class="opt"><input
+                    type="checkbox" name="topics" data-ta="value:msg.opt_uiux" /><span
+                    data-t="msg.opt_uiux"></span></label><label class="opt"><input type="checkbox" name="topics"
+                    data-ta="value:msg.opt_perf" /><span data-t="msg.opt_perf"></span></label><label class="opt"><input
+                    type="checkbox" name="topics" data-ta="value:msg.opt_other" /><span
+                    data-t="msg.opt_other"></span></label>
+              </div>
+              <p class="msg__note" data-t="msg.step3_hint"></p>
+            </fieldset>
+            <fieldset class="msg__step" data-step data-ta="data-label:msg.step4_label">
+              <legend class="msg__q" data-t="msg.step4_q"></legend>
+              <div class="msg__opts">
+                <label class="opt"><input type="radio" name="budget" data-ta="value:msg.tier_1" /><span
+                    data-t="msg.tier_1"></span></label><label class="opt"><input type="radio" name="budget"
+                    data-ta="value:msg.tier_2" /><span data-t="msg.tier_2"></span></label><label class="opt"><input
+                    type="radio" name="budget" data-ta="value:msg.tier_3" /><span
+                    data-t="msg.tier_3"></span></label><label class="opt"><input type="radio" name="budget"
+                    data-ta="value:msg.opt_unsure" /><span data-t="msg.opt_unsure"></span></label>
+              </div>
+              <p class="msg__note" data-t="msg.optional"></p>
+            </fieldset>
+            <div class="msg__step" data-step data-ta="data-label:msg.step5_label;data-error:msg.step5_error">
+              <h3 class="msg__q" id="mq5" data-t="msg.step5_q"></h3>
+              <div class="msg__field">
+                <textarea name="message" required rows="4" maxlength="600" aria-labelledby="mq5" aria-describedby="me5"
+                  data-ta="placeholder:msg.step5_placeholder"></textarea><span class="msg__counter" data-counter></span>
+              </div>
+              <p class="msg__error" id="me5" role="alert"></p>
+            </div>
+          </div>
+          <div class="msg__actions">
+            <button class="msg__back" type="button" data-msg-back>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M19 12H5M11 6l-6 6 6 6" />
+              </svg><span data-t="msg.back"></span>
+            </button>
+            <span class="msg__hint" data-hint data-ta="data-hint-next:msg.hint_next;data-hint-send:msg.hint_send"
+              data-t="msg.hint_next"></span>
+            <button class="btn solid msg__next" type="submit" data-msg-next
+              data-ta="data-label-next:msg.next;data-label-send:common.project_request">
+              <span data-t="msg.next"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true" focusable="false">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+          <p class="msg__status" role="status" data-status></p>
+        </form>
+      </section>
+      <div class="msg__done" inert>
+        <svg class="msg__check" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r="24" />
+          <path d="M14 27l8 8 16-17" />
+        </svg>
+        <h3 data-done-title></h3>
+        <p data-done-text></p>
+        <button class="btn" type="button" data-msg-again data-t="msg.again"></button>
+        <div class="msg__burst" aria-hidden="true"></div>
+      </div>
     </div>
-    <p class="foot-mark" aria-hidden="true" data-reveal data-t="site.name"></p>
-    <div class="foot-bottom">
-      <p data-t="footer.copyright"></p>
-      <a class="up" href="#top"
-        ><span data-t="footer.back_to_top"></span><svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M12 19V5M6 11l6-6 6 6"></path></svg
-      ></a>
-    </div>
-  </div>
-</footer> <!-- Message dialog + floating button -->
-<button class="fab" type="button" data-message-open data-ta="aria-label:common.send_message">
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.75"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.2A8 8 0 1 1 21 12z" /></svg
-  ><span data-t="common.message_short"></span>
-</button>
+  </dialog>
 
-<dialog
-  class="msg"
-  id="message-dialog"
-  data-mode="chat"
-  aria-labelledby="msg-title" data-ta="data-words:msg.words"
- 
->
-  <aside class="msg__side">
-    <div class="msg__orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p class="msg__hello" aria-hidden="true"><span data-hello data-t="curtain.1"></span></p>
-    <div class="msg__intro">
-      <h2 id="msg-title" data-t="msg.title"></h2>
-      <p data-for="chat" data-t="msg.intro"></p>
-      <p data-for="brief" data-t="msg.intro_brief"></p>
-    </div>
-    <ul class="msg__meta">
-      <li>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6"
-          /></svg
-        ><a class="u" data-ta="href:@links.mailto" data-t="@links.email"></a>
-      </li>
-      <li>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" /></svg
-        ><span data-t="msg.reply_time"></span>
-      </li>
-      <li>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
-          <circle cx="12" cy="10" r="2.5" /></svg
-        ><span data-t="site.city"></span>
-      </li>
-    </ul>
-    <p class="msg__avatar">
-      <span class="msg__initials"><span data-t="@site.initials"></span><img class="msg__photo" alt="" width="88" height="88" hidden /><i></i></span><span data-t="site.name"></span>
-    </p>
-  </aside>
-  <div class="msg__main">
-    <button class="msg__close" type="button" data-msg-close data-ta="aria-label:common.close">
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path d="M6 6l12 12M18 6L6 18" />
-      </svg>
-    </button>
-    <div class="msg__tabs" role="tablist" data-ta="aria-label:msg.tabs_aria">
-      <button class="msg__tab" type="button" role="tab" id="msg-tab-chat" aria-controls="msg-panel-chat" aria-selected="true" data-msg-tab="chat" data-t="msg.tab_chat"></button>
-      <button class="msg__tab" type="button" role="tab" id="msg-tab-brief" aria-controls="msg-panel-brief" aria-selected="false" tabindex="-1" data-msg-tab="brief" data-t="msg.tab_brief"></button>
-    </div>
-    <section class="msg__panel msg__panel--chat" id="msg-panel-chat" role="tabpanel" aria-labelledby="msg-tab-chat" data-panel="chat">
-      <div class="chat__thread" data-thread aria-live="polite">
-        <p class="bubble bubble--them" data-t="chat.greeting"></p>
-      </div>
-      <form
-        class="chat__form"
-        data-chat-form
-        novalidate
-        data-ta="data-email:@links.email;data-subject:chat.subject;data-reply:chat.reply;data-reply-mail:chat.reply_mail;data-fail:msg.fail;data-sending:msg.sending"
-      >
-        <div class="chat__who">
-          <label class="chat__field"
-            ><span data-t="chat.name_label"></span
-            ><input name="name" type="text" required autocomplete="name" data-ta="placeholder:chat.name_placeholder;data-error:msg.step1_error"
-          /></label>
-          <label class="chat__field"
-            ><span data-t="chat.email_label"></span
-            ><input name="email" type="email" required autocomplete="email" data-ta="placeholder:msg.step2_placeholder;data-error:msg.step2_error"
-          /></label>
-        </div>
-        <div class="chat__compose">
-          <textarea
-            name="message"
-            required
-            rows="2"
-            maxlength="600"
-            data-ta="placeholder:chat.message_placeholder;aria-label:chat.message_label;data-error:chat.err_message"
-          ></textarea>
-          <button class="chat__send" type="submit" data-ta="aria-label:chat.send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg></button>
-        </div>
-        <p class="msg__error" role="alert" data-chat-error></p>
-        <p class="msg__status" role="status" data-chat-status></p>
-      </form>
-    </section>
-    <section class="msg__panel msg__panel--brief" id="msg-panel-brief" role="tabpanel" aria-labelledby="msg-tab-brief" data-panel="brief" hidden>
-    <div class="msg__top">
-      <div class="msg__progress" aria-hidden="true"></div>
-      <p class="msg__count" aria-live="polite"><span data-t="msg.step_word"></span> <span data-current>1</span> <span data-t="msg.of"></span> <span data-total></span></p>
-    </div>
-    <ul class="msg__trail" data-trail data-ta="aria-label:msg.answers_aria"></ul>
-    <form
-      class="msg__form"
-      data-msg-form
-      novalidate data-ta="data-email:@links.email;data-subject:msg.subject_brief;data-ok:msg.ok;data-ok-mail:msg.ok_mail;data-fail:msg.fail;data-sending:msg.sending;data-done-title:msg.done_title"
-     
-     
-     
-     
-     
-     
-    >
-      <div class="msg__steps">
-        <div class="msg__step" data-step data-ta="data-label:msg.step1_label;data-error:msg.step1_error">
-          <h3 class="msg__q" id="mq1" data-t="msg.step1_q"></h3>
-          <div class="msg__field">
-            <input
-              name="name"
-              type="text"
-              required
-              autocomplete="name"
-             
-              aria-labelledby="mq1"
-              aria-describedby="me1" data-ta="placeholder:msg.step1_placeholder"
-            />
-          </div>
-          <p class="msg__error" id="me1" role="alert"></p>
-        </div>
-        <div class="msg__step" data-step data-ta="data-label:msg.step2_label;data-error:msg.step2_error">
-          <h3 class="msg__q" id="mq2" data-t="msg.step2_q"></h3>
-          <div class="msg__field">
-            <input
-              name="email"
-              type="email"
-              required
-              autocomplete="email"
-             
-              aria-labelledby="mq2"
-              aria-describedby="me2" data-ta="placeholder:msg.step2_placeholder"
-            />
-          </div>
-          <p class="msg__error" id="me2" role="alert"></p>
-        </div>
-        <fieldset class="msg__step" data-step data-ta="data-label:msg.step3_label">
-          <legend class="msg__q" data-t="msg.step3_q"></legend>
-          <div class="msg__opts">
-            <label class="opt"
-              ><input type="checkbox" name="topics" data-ta="value:msg.opt_website" /><span data-t="msg.opt_website"></span></label
-            ><label class="opt"
-              ><input type="checkbox" name="topics" data-ta="value:msg.opt_app" /><span data-t="msg.opt_app"></span></label
-            ><label class="opt"
-              ><input type="checkbox" name="topics" data-ta="value:msg.opt_uiux" /><span data-t="msg.opt_uiux"
-                ></span
-              ></label
-            ><label class="opt"
-              ><input type="checkbox" name="topics" data-ta="value:msg.opt_perf" /><span data-t="msg.opt_perf"
-                ></span
-              ></label
-            ><label class="opt"><input type="checkbox" name="topics" data-ta="value:msg.opt_other" /><span data-t="msg.opt_other"></span></label>
-          </div>
-          <p class="msg__note" data-t="msg.step3_hint"></p>
-        </fieldset>
-        <fieldset class="msg__step" data-step data-ta="data-label:msg.step4_label">
-          <legend class="msg__q" data-t="msg.step4_q"></legend>
-          <div class="msg__opts">
-            <label class="opt"><input type="radio" name="budget" data-ta="value:msg.tier_1" /><span data-t="msg.tier_1"></span></label
-            ><label class="opt"
-              ><input type="radio" name="budget" data-ta="value:msg.tier_2" /><span data-t="msg.tier_2"></span></label
-            ><label class="opt"
-              ><input type="radio" name="budget" data-ta="value:msg.tier_3" /><span data-t="msg.tier_3"></span></label
-            ><label class="opt"
-              ><input type="radio" name="budget" data-ta="value:msg.opt_unsure" /><span data-t="msg.opt_unsure"></span></label
-            >
-          </div>
-          <p class="msg__note" data-t="msg.optional"></p>
-        </fieldset>
-        <div
-          class="msg__step"
-          data-step data-ta="data-label:msg.step5_label;data-error:msg.step5_error"
-         
-         
-        >
-          <h3 class="msg__q" id="mq5" data-t="msg.step5_q"></h3>
-          <div class="msg__field">
-            <textarea
-              name="message"
-              required
-              rows="4"
-              maxlength="600"
-             
-              aria-labelledby="mq5"
-              aria-describedby="me5" data-ta="placeholder:msg.step5_placeholder"
-            ></textarea
-            ><span class="msg__counter" data-counter></span>
-          </div>
-          <p class="msg__error" id="me5" role="alert"></p>
-        </div>
-      </div>
-      <div class="msg__actions">
-        <button class="msg__back" type="button" data-msg-back>
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M19 12H5M11 6l-6 6 6 6" /></svg
-          ><span data-t="msg.back"></span>
-        </button>
-        <span
-          class="msg__hint"
-          data-hint data-ta="data-hint-next:msg.hint_next;data-hint-send:msg.hint_send" data-t="msg.hint_next"
-         
-         
-          ></span
-        >
-        <button
-          class="btn solid msg__next"
-          type="submit"
-          data-msg-next data-ta="data-label-next:msg.next;data-label-send:common.project_request"
-         
-         
-        >
-          <span data-t="msg.next"></span
-          ><svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </button>
-      </div>
-      <p class="msg__status" role="status" data-status></p>
-    </form>
-    </section>
-    <div class="msg__done" inert>
-      <svg class="msg__check" viewBox="0 0 52 52" aria-hidden="true">
-        <circle cx="26" cy="26" r="24" />
-        <path d="M14 27l8 8 16-17" />
-      </svg>
-      <h3 data-done-title></h3>
-      <p data-done-text></p>
-      <button class="btn" type="button" data-msg-again data-t="msg.again"></button>
-      <div class="msg__burst" aria-hidden="true"></div>
-    </div>
-  </div>
-</dialog>
+  <script src="js/main.js" defer></script>
+</body>
 
-    <script src="js/main.js" defer></script>
-  </body>
 </html>
